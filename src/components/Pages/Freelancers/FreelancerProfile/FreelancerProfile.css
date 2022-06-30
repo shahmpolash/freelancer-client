@@ -1,0 +1,23 @@
+.profile img{
+    width: 200px;
+    height: 220px;
+    border: 10px solid rgb(27, 28, 29);
+    border-radius: 40%;
+}
+.profile{
+    border: 2px solid skyblue;
+}
+.portfolio{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 5px;
+}
+
+.portfolio img{
+    width: 450px;
+    height: 350px;
+}
+.user-services{
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+}

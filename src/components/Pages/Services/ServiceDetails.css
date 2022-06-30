@@ -1,0 +1,26 @@
+.service-details img{
+    width: 750px;
+    max-height: 500px;
+    border: 2px solid skyblue;
+    box-shadow: 5px 5px #e2dfdf;
+}
+
+.price{
+    color: red;
+}
+.user-profile{
+    border: 1px solid black;
+    border-radius: 15px;
+}
+.user-profile img{
+    width: 200px;
+    height: 200px;
+    border-radius: 30px;
+    padding: 20px;
+}
+.review{
+    background-color: #e2dfdf;
+}
+.review p{
+    margin-top: -15px;
+}
