@@ -1,11 +1,10 @@
-.add-service{
+.client{
     margin: 0 auto;
 }
-.add-service input, textarea{
+.client input, textarea, select{
     display: block;
     width: 100%;
     height: 50px;
     font-size: 20px;
     margin-bottom: 10px;
 }
-

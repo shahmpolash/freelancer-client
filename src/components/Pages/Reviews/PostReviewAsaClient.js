@@ -44,9 +44,9 @@ const PostReviewAsaClient = () => {
 
 
     return (
-        <div>
-            <h2>You are Posting Review for: {myOrders.serviceId}</h2>
-            <h2>Provider Email: {myOrders.provideremail}</h2>
+        <div className='container'>
+            <h5>You are Posting Review for: {myOrders.servicename}</h5>
+            <h5>Provider Email: {myOrders.providerName}</h5>
             <form onSubmit={handleReviews}>
                 <input type="number" name="rate" id="" placeholder='rate out of 5' />
                 <input hidden value='done' type="text" name="reviewdone" id="" />

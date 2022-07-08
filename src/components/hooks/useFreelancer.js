@@ -14,7 +14,6 @@ const useFreelancer = () =>{
 
     }, [user]);
     return [myDatas];
-
 }
 
 export default useFreelancer;

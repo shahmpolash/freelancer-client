@@ -13,7 +13,6 @@ const Freelancer = ({freelancer}) => {
 
     return (
         <div className='container'>
-            
             <Button onClick={() => navigateToProfile(_id)}>
                 <div className='freelancer'>
                     <img src={profile} alt="" />

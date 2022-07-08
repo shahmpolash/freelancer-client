@@ -1,13 +1,13 @@
 import React from 'react';
-import { useAuthState } from 'react-firebase-hooks/auth';
-import auth from '../../../firebase.init';
 import './AddService.css';
 import { useForm } from "react-hook-form";
-import useFreelancer from '../../hooks/useFreelancer';
 import { Link, useNavigate } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import auth from '../../../../firebase.init';
+import useFreelancer from '../../../hooks/useFreelancer';
 
-const AddService = () => {
+const Seo = () => {
 
     const [user] = useAuthState(auth);
     const { register, handleSubmit } = useForm();
@@ -28,9 +28,10 @@ const AddService = () => {
                 navigate('/dashboard');
             })
     }
+
     return (
         <div className='container'>
-            <h1>Add Service</h1>
+            <h1>Create SEO Service</h1>
             {myDatas.length === 1 &&
                 <div>
                     <form className='add-service' onSubmit={handleSubmit(onSubmit)}>
@@ -45,12 +46,7 @@ const AddService = () => {
                         {
                             myDatas.map(myData => <><input value={myData.profile} hidden {...register("profileIMG")} /></>)
                         }
-                        <select name="catagory" required>
-                            <option value="seo">SEO</option>
-                            <option value="lead">Lead Generation</option>
-                            <option value="social">Social Media Marketing</option>
-                            <option value="email">Email Marketing</option>
-                        </select>
+                        <input required value='SEO' {...register("catagory")} placeholder='Your Service Title' />
                         <input required {...register("title")} placeholder='Your Service Title' />
                         <input required type="number" {...register("price")} placeholder='Monthly Charge' />
                         <input required {...register("img")} placeholder='Image URL' />
@@ -71,4 +67,4 @@ const AddService = () => {
     );
 };
 
-export default AddService;
+export default Seo;

@@ -14,6 +14,7 @@ const SignUp = () => {
       ] = useCreateUserWithEmailAndPassword(auth, {sendEmailVerification: true});
       const [updateProfile, updating, updateError] = useUpdateProfile(auth);
     const navigate = useNavigate();
+    
 
   
     const navigateToLogin = () => {
@@ -36,14 +37,13 @@ const SignUp = () => {
 
      await createUserWithEmailAndPassword(email, password);
      await updateProfile({ displayName: name });
-     navigate('/update');
+     navigate('/setup');
     }
 
     return (
         <div className='register-form  mx-auto'>
             <h2>Join Now</h2>
             <form onSubmit={handleSignup} className='w-50 mx-auto'>
-                <input type="text" name="name" id="" placeholder='Enter Your Name' required />
                 <input type="email" name="email" id="" placeholder='Enter Your Email' required />
                 <input  type="password" name="password" id="" placeholder='Enter Your Password' required />
                 <input type="submit" value="Join Now" />

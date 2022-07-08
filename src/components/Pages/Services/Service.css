@@ -1,4 +1,4 @@
-.service img{
+.service-image{
     width: 270px;
     height: 200px;
 }
@@ -7,4 +7,19 @@
     border: 2px solid skyblue;
     border-radius: 10px;
     margin: 10px;
+}
+.service:hover{
+    border: 2px solid blue;
+}
+.title{
+    font-weight: bold;
+}
+.profile-image{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+.provider-name{
+    border-bottom: 2px dotted skyblue;
 }

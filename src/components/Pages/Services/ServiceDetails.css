@@ -1,3 +1,8 @@
+.service-details{
+    border: 2px solid black ;
+    margin: 10px;
+    border-radius: 15px;
+}
 .service-details img{
     width: 750px;
     max-height: 500px;
@@ -19,8 +24,48 @@
     padding: 20px;
 }
 .review{
-    background-color: #e2dfdf;
+    border-top: 2px dotted skyblue;
+    border-bottom: 2px dotted skyblue;
 }
 .review p{
     margin-top: -15px;
 }
+
+
+
+@media only screen and (max-width: 600px) {
+    .profile-service{
+        flex-direction: column;
+    
+    }
+    .service-details img{
+        width: 300px;
+      
+    }
+    .service-details{
+        width: auto;
+    }
+    .user-profile img{
+        width: 200px;
+        height: 200px;
+    }
+    
+  }
+@media only screen and (min-width: 601px) and (max-width: 1000px) {
+    .profile-service{
+        flex-direction: column;
+    
+    }
+    .service-details img{
+        width: 550px;
+      
+    }
+    .service-details{
+        width: auto;
+    }
+    .user-profile img{
+        width: 250px;
+        height: 250px;
+    }
+    
+  }

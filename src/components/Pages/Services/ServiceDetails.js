@@ -8,7 +8,6 @@ import auth from '../../../firebase.init';
 import useOrderItem from '../../hooks/useOrderItem';
 import './ServiceDetails.css';
 
-
 const ServiceDetails = () => {
     const navigate = useNavigate();
     const [service] = useOrderItem();
@@ -30,15 +29,20 @@ const ServiceDetails = () => {
 
     const navigateToOrderPage = id => {
         navigate(`/order/${id}`)
-
     }
-
     const navigateTouserProfile = id => {
         navigate(`/freelancer/${id}`)
     }
     return (
         <div>
-            <div className='container d-flex justify-content-center'>
+            <div className='container d-flex justify-content-center profile-service '>
+                <div className='service-details container col-lg-9'>
+                    <h5>{service.title}</h5>
+                    <img src={service.img} alt="" />
+                    <p>{service.details}</p>
+                     {service.publishStatus === 'pending' && <Button>This Service is Not Published</Button>}
+                     {service.publishStatus === 'published' && <Button onClick={() => navigateToOrderPage(service._id)}>Price {service.price}/ Mo</Button>}
+                </div>
                 <div className='col-lg-3'>
                     <div className='user-profile'>
                         {
@@ -49,24 +53,16 @@ const ServiceDetails = () => {
                         }
                     </div>
                 </div>
-                <div className='service-details container'>
-                    <h3>I am {userProfile.name}</h3>
-                    <h2>{service.title}</h2>
-                    <img src={service.img} alt="" />
-                    <p>{service.details}</p>
-                    <Button onClick={() => navigateToOrderPage(service._id)}>Order Now ${service.price}usd</Button>
-                    
-                </div>
             </div>
-            <div className='container'>
-            <h2>Total: {reviews.filter(review => review.reviewStatus === 'done').length} Reviews</h2>
+            <div className='container mt-5'>
+            <h5>Total: {reviews.filter(review => review.reviewStatus === 'done').length} Reviews</h5>
                 {
                     reviews.map(review => <div key={review._id}>
-                        <div className='review col-lg-6 mt-3'>
+                        <div className='col-lg-6 mt-3'>
                             <div>
                             {review.reviewStatus === 'none' && <></>}
                         {review.reviewStatus === 'done' && 
-                        <div> <p>Client: {review.customeremail}</p>
+                        <div className='review'><h6>Client: {review.clientName}: </h6>
                                 <p>Rate: {review.rate} out of 5</p>
                                 <p className='client-review font-italic'>"{review.review}"</p>
                             </div>}

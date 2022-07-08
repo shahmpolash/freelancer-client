@@ -37,6 +37,7 @@ const ReleasePayment = () => {
                 navigate('/dashboard');
             })
     };
+
     return (
         <div>
             <h2>You are Releaseing : {myRelease.serviceprice}</h2>

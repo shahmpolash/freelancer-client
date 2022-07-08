@@ -4,64 +4,91 @@ import Table from 'react-bootstrap/Table';
 import './OrderItem.css';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../../../firebase.init';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import { useEffect } from 'react';
 
 const OrderItem = () => {
     const [user] = useAuthState(auth);
     const [service] = useOrderItem();
     const navigate = useNavigate();
+    const [iamClient, setIamClient] = useState([]);
 
-    const handleOrder = event =>{
+
+    useEffect(() => {
+        fetch(`http://localhost:5000/clientprofile?clientEmail=${user.email}`)
+            .then(res => res.json())
+            .then(data => setIamClient(data))
+    }, [user])
+
+    const handleOrder = event => {
         event.preventDefault();
         const status = event.target.status.value;
         const serviceId = service._id;
+        const providerName = service.providerName;
+        const providerId = service.providerId;
         const customeremail = user.email;
         const provideremail = service.email;
         const servicename = service.title;
         const serviceprice = service.price;
+        const providerReviewStatus = event.target.providerReviewStatus.value;
         const reviewStatus = event.target.reviewStatus.value;
         const releaseAmount = event.target.releaseamount.value;
-        const order = {customeremail, servicename, serviceprice, provideremail, serviceId, status, reviewStatus, releaseAmount};
-    
-    const url = `http://localhost:5000/orders/`;
-    fetch(url, {
-        method: 'POST',
-        headers: {
-            'content-type': 'application/json'
-        },
-        body: JSON.stringify(order)
-    })
-    .then(res=>res.json())
-    .then(result=> {
-        navigate('/dashboard');
-    })
-};
+        const clientName = event.target.clientName.value;
+        const clientId = event.target.clientId.value;
+        const order = { customeremail, servicename, serviceprice, provideremail, serviceId, status, reviewStatus, releaseAmount, providerReviewStatus, clientName, clientId, providerName, providerId };
+
+        const url = `http://localhost:5000/orders/`;
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(order)
+        })
+            .then(res => res.json())
+            .then(result => {
+                navigate('/dashboard');
+            })
+
+    };
+
     return (
         <div className='container mt-5'>
-            <Table striped bordered hover variant="dark">
-                <thead>
-                    <tr>
-                        <th>Service Image</th>
-                        <th>Service Name</th>
-                        <th>Service Price</th>                          
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        
-                        <td><img src={service.img} alt="" /></td>
-                        <td>{service.title}</td>
-                        <td>${service.price}usd/ Mo</td>
-                    </tr>
-                </tbody>
-            </Table>
-            {service._id}
-            <form onSubmit={handleOrder}>
-                <input hidden value="pending" type="text" name="status" id="" />
-                <input hidden value="0" type="number" name="releaseamount" id="" />
-                <input hidden value="none" type="text" name="reviewStatus" id="" />
-                <input type="submit" value="Place Order" />
-            </form>
+            {iamClient.length === 1 && <>
+                <Table striped bordered hover variant="dark">
+                    <thead>
+                        <tr>
+                            <th>Service Image</th>
+                            <th>Service Name</th>
+                            <th>Service Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+
+                            <td><img src={service.img} alt="" /></td>
+                            <td>{service.title}</td>
+                            <td>${service.price}usd/ Mo</td>
+                        </tr>
+                    </tbody>
+                </Table>
+                <form onSubmit={handleOrder}>
+
+                    <input hidden value="pending" type="text" name="status" id="" />
+                    {
+                        iamClient.map(client => <div key={client.clientName}><input hidden value={client.clientName} type="text" name="clientName" id="" /></div>)
+                    }
+                    {
+                        iamClient.map(client => <div key={client._id}><input hidden value={client._id} type="text" name="clientId" id="" /></div>)
+                    }
+                    <input hidden value="none" type="text" name="providerReviewStatus" id="" />
+                    <input hidden value="0" type="number" name="releaseamount" id="" />
+                    <input hidden value="none" type="text" name="reviewStatus" id="" />
+                    <input className='btn btn-primary' type="submit" value="Place Order" />
+                </form>
+            </>}
+            {iamClient.length === 0 && <Link className='btn btn-primary text-white' to={'/updateclient'}>Update As a Client</Link>}
         </div>
     );
 };
