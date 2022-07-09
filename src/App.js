@@ -20,6 +20,7 @@ import AcceptOrReject from './components/Pages/Orders/AcceptOrReject';
 import CancelOrder from './components/Pages/Orders/CancelOrder';
 import OrderItem from './components/Pages/Orders/OrderItem';
 import ReleasePayment from './components/Pages/Orders/ReleasePayment';
+import Requirement from './components/Pages/Orders/Requirement';
 import Dashboard from './components/Pages/Profile/Dashboard';
 import PublishedOrCancelService from './components/Pages/PublishedOrCancelService';
 import PostReviewAsaClient from './components/Pages/Reviews/PostReviewAsaClient';
@@ -44,6 +45,7 @@ function App() {
         <Route path='/service/:serviceId' element={<ServiceDetails></ServiceDetails>}></Route>
         <Route path='/order/:serviceId' element={<RequireAuth><OrderItem></OrderItem></RequireAuth>}></Route>
         <Route path='/acceptorreject/:id' element={<AcceptOrReject></AcceptOrReject>}></Route>
+        <Route path='/requirement/:id' element={<Requirement></Requirement>}></Route>
         <Route path='/cancelorder/:id' element={<CancelOrder></CancelOrder>}></Route>
         <Route path='/reviewasaclient/:id' element={<PostReviewAsaClient></PostReviewAsaClient>}></Route>
         <Route path='/releasepayment/:id' element={<ReleasePayment></ReleasePayment>}></Route>

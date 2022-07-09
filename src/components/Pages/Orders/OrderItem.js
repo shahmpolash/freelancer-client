@@ -36,7 +36,9 @@ const OrderItem = () => {
         const releaseAmount = event.target.releaseamount.value;
         const clientName = event.target.clientName.value;
         const clientId = event.target.clientId.value;
-        const order = { customeremail, servicename, serviceprice, provideremail, serviceId, status, reviewStatus, releaseAmount, providerReviewStatus, clientName, clientId, providerName, providerId };
+        const requirement = event.target.requirement.value;
+        const reqUpdated = event.target.reqUpdated.value;
+        const order = { customeremail, servicename, serviceprice, provideremail, serviceId, status, reviewStatus, releaseAmount, providerReviewStatus, clientName, clientId, providerName, providerId, requirement,reqUpdated };
 
         const url = `http://localhost:5000/orders/`;
         fetch(url, {
@@ -67,7 +69,7 @@ const OrderItem = () => {
                     <tbody>
                         <tr>
 
-                            <td><img src={service.img} alt="" /></td>
+                            <td><img className='order-item-image' src={service.img} alt="" /></td>
                             <td>{service.title}</td>
                             <td>${service.price}usd/ Mo</td>
                         </tr>
@@ -77,7 +79,7 @@ const OrderItem = () => {
 
                     <input hidden value="pending" type="text" name="status" id="" />
                     {
-                        iamClient.map(client => <div key={client.clientName}><input hidden value={client.clientName} type="text" name="clientName" id="" /></div>)
+                        iamClient.map(client => <div key={client._id}><input hidden value={client.clientName} type="text" name="clientName" id="" /></div>)
                     }
                     {
                         iamClient.map(client => <div key={client._id}><input hidden value={client._id} type="text" name="clientId" id="" /></div>)
@@ -85,6 +87,8 @@ const OrderItem = () => {
                     <input hidden value="none" type="text" name="providerReviewStatus" id="" />
                     <input hidden value="0" type="number" name="releaseamount" id="" />
                     <input hidden value="none" type="text" name="reviewStatus" id="" />
+                    <input hidden value="requpdated" type="text" name="reqUpdated" id="" />
+                    <textarea name="requirement" id="" cols="30" rows="10" placeholder='Your Requirement' required></textarea>
                     <input className='btn btn-primary' type="submit" value="Place Order" />
                 </form>
             </>}

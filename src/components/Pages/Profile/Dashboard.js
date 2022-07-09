@@ -69,6 +69,9 @@ const Dashboard = () => {
     const navigateToCancel = id => {
         navigate(`/cancelorder/${id}`)
     };
+    const navigateRequirement = id => {
+        navigate(`/requirement/${id}`)
+    };
 
     return (
         <div className='container'>
@@ -106,7 +109,7 @@ const Dashboard = () => {
                         <thead>
                             <tr>
                                 <th>Service Provider</th>
-                                <th>Service Image</th>
+                                <th>Payment Status</th>
                                 <th>Service Name</th>
                                 <th>Service Price</th>
                                 <th></th>
@@ -144,7 +147,7 @@ const Dashboard = () => {
             {myServiceOrders.length === 0 && <></>}
             {myServiceOrders.length > 0 &&
                 <div>
-                    <h5>My Service Orders</h5>
+                    <h5>Received Orders</h5>
                     {
                         myServiceOrders.map(myServiceOrder =>
                             <div>
@@ -154,13 +157,18 @@ const Dashboard = () => {
                                         <Table striped bordered hover variant="dark">
                                             <thead>
                                                 <tr>
-                                                    <th>Customer</th>
+                                                    <th>Client</th>
                                                     <th>Project Name</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <tr>
-                                                    <td><Link to={`/client/${myServiceOrder.clientId}`}><p className='text-white'>{myServiceOrder.clientName}</p></Link>
+                                                    
+                                                    <td><Link to={`/client/${myServiceOrder.clientId}`}><p className='text-white'>{myServiceOrder.clientName}</p></Link>         
+                                                    <div className='d-flex justify-content-center'>
+                                                    <div><Button  onClick={() => navigateRequirement(myServiceOrder._id)}>See Requirement</Button></div>
+                                                    <div>{myServiceOrder.reqUpdated === 'requpdated' && <p className='updateRequire'>1</p>}</div>
+                                                    </div>
                                                         {myServiceOrder.status === 'pending' &&
                                                             <div><Button onClick={() => navigateToStatus(myServiceOrder._id)}>Accept or Reject</Button></div>
                                                         }
@@ -173,13 +181,13 @@ const Dashboard = () => {
                                     </div>
                                 }
                             </div>
-                        )
+                        ).reverse()
                     }
                     <Table striped bordered hover variant="dark">
                         <thead>
                             <tr>
-                                <th>Customer</th>
-                                <th>Service Image</th>
+                                <th>Client</th>
+                                <th>Payment Status</th>
                                 <th>Service Name</th>
                                 <th>Service Price</th>
                                 <th></th>
@@ -189,11 +197,17 @@ const Dashboard = () => {
                             {
                                 myServiceOrders.map(myServiceOrder => <tr>
                                     <td><Link to={`/client/${myServiceOrder.clientId}`}><p className='text-white'>{myServiceOrder.clientName}</p></Link>
+                                    <p>Email {myServiceOrder.customeremail}</p>
+                                    <div className='d-flex justify-content-center'>
+                                                    <div><Button  onClick={() => navigateRequirement(myServiceOrder._id)}>See Requirement</Button></div>
+                                                    <div>{myServiceOrder.reqUpdated === 'requpdated' && <p className='updateRequire'>1</p>}</div>
+                                                    </div>
+                                    {myServiceOrder.reqUpdated === 'providerrequpdated' && <></>}
                                         {myServiceOrder.status === 'pending' &&
                                             <div><Button onClick={() => navigateToStatus(myServiceOrder._id)}>Accept or Reject</Button></div>
                                         }
                                         {myServiceOrder.status === 'accepted' && <p>Accepted</p>}
-                                        {myServiceOrder.status === 'rejected' && <p>You Have Receiced</p>}
+                                        {myServiceOrder.status === 'rejected' && <p>You Have Rejected</p>}
                                         {myServiceOrder.status === 'cancelled' && <p>Client has Cancelled</p>}
 
                                     </td>
@@ -207,7 +221,7 @@ const Dashboard = () => {
                                         {myServiceOrder.providerReviewStatus === 'done' && <Button disabled>Reviewed</Button>}
                                     </td>
                                 </tr>
-                                )
+                                ).reverse()
                             }
                         </tbody>
                     </Table>

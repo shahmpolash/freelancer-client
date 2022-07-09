@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 
 const Banner = () => {
     return (
-        <div className='banner'>
+        <div className='banner py-5'>
             <div className='container d-flex py-5 banner-container'>
                 <div className='d-flex align-items-center banner-text'>
                     <div>
