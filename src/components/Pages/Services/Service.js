@@ -27,7 +27,7 @@ const Service = ({service}) => {
             </div>
             <div className='d-flex justify-content-between'>
             <p>${price}usd/Mo</p>
-            <p>{serviceReviews.length} Reviews</p>
+            <p>{serviceReviews.filter(review => review.reviewStatus === 'done').length} Reviews</p>
             </div>
             <p className='title'>{title}</p>
             </Button>

@@ -20,8 +20,9 @@ const AcceptOrReject = () => {
     const handleAccept = event =>{
         event.preventDefault();
         const status = event.target.status.value;
+        const runningOrFinished = event.target.runningorfinished.value;
         const release = event.target.release.value;
-        const updateStatus = {status, release};
+        const updateStatus = {status, release, runningOrFinished};
         const url = `http://localhost:5000/myserviceorder/${id}`;
         fetch(url, {
             method: 'PUT',
@@ -60,6 +61,7 @@ const AcceptOrReject = () => {
             <h2>{myServiceorder.servicename}</h2>
             <form onSubmit={handleAccept}>
                 <input hidden value='accepted' type="text" name="status" id="" />
+                <input hidden value='running' type="text" name="runningorfinished" id="" />
                 <input hidden value='none' type="text" name="release" id="" />
                 <input type="submit" value="Accept Now" />
             </form>

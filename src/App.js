@@ -16,8 +16,11 @@ import Home from './components/Pages/Home/Home';
 import Login from './components/Pages/Join/Login';
 import RequireAuth from './components/Pages/Join/RequireAuth';
 import SignUp from './components/Pages/Join/SignUp';
+import Messages from './components/Pages/Messaging/Messages';
+import ProviderMessages from './components/Pages/Messaging/ProviderMessages';
 import AcceptOrReject from './components/Pages/Orders/AcceptOrReject';
 import CancelOrder from './components/Pages/Orders/CancelOrder';
+import CompleteOrder from './components/Pages/Orders/CompleteOrder';
 import OrderItem from './components/Pages/Orders/OrderItem';
 import ReleasePayment from './components/Pages/Orders/ReleasePayment';
 import Requirement from './components/Pages/Orders/Requirement';
@@ -47,15 +50,18 @@ function App() {
         <Route path='/acceptorreject/:id' element={<AcceptOrReject></AcceptOrReject>}></Route>
         <Route path='/requirement/:id' element={<Requirement></Requirement>}></Route>
         <Route path='/cancelorder/:id' element={<CancelOrder></CancelOrder>}></Route>
+        <Route path='/complete/:id' element={<CompleteOrder></CompleteOrder>}></Route>
         <Route path='/reviewasaclient/:id' element={<PostReviewAsaClient></PostReviewAsaClient>}></Route>
         <Route path='/releasepayment/:id' element={<ReleasePayment></ReleasePayment>}></Route>
         <Route path='/reviewasaprovider/:id' element={<PostReviewAsaProvider></PostReviewAsaProvider>}></Route>
         <Route path='/test' element={<Test></Test>}></Route>
         <Route path='/freelancer/:freelancerId' element={<FreelancerProfile></FreelancerProfile>}></Route>
+        <Route path='/message/:serviceId' element={<ProviderMessages></ProviderMessages>}></Route>
         <Route path='/client/:clientId' element={<ClientProfile></ClientProfile>}></Route>
         <Route path='/withdraw/:id' element={<WithdrawFunds></WithdrawFunds>}></Route>
         <Route path='/userservice/:freelancerId' element={<FreelancerProfile></FreelancerProfile>}></Route>
         <Route path='/add-service' element={<RequireAuth><AddService></AddService></RequireAuth>}></Route>
+        <Route path='/messages' element={<RequireAuth><Messages></Messages></RequireAuth>}></Route>
         <Route path='/set-service' element={<RequireAuth><SetService></SetService></RequireAuth>}></Route>
         <Route path='/seo' element={<RequireAuth><Seo></Seo></RequireAuth>}></Route>
         <Route path='/lead' element={<RequireAuth><LeadGeneration></LeadGeneration></RequireAuth>}></Route>

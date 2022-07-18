@@ -29,7 +29,36 @@
 .profile-service-img:hover{
     border: 3px solid green;
 }
+.marketplace{
+    
+    margin-top: 20px;
+}
+.marketplace p{
+    text-align: left;
+    margin-left: 15px;
+    margin-top: -20px;
+}
+.marketplace h5{
+    color: white;
+    font-size: 17px;
+    text-align: left;
+    
+}
+.working{
+    background-color: skyblue;
+    padding: 15px;
+}
+.working h5{
+    text-align: center;
+}
 
+.Verified .fa-solid{
+    color: white;
+    background-color:green;
+    border-radius: 50%;
+    padding: 5px;
+    font-size: 10px;
+}
 @media only screen and (max-width: 1000px) {
     .freelancer-profile{
         flex-direction: column;

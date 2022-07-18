@@ -1,71 +1,127 @@
-.service-details{
-    border: 2px solid black ;
+.service-details {
+    border: 2px solid black;
     margin: 10px;
     border-radius: 15px;
 }
-.service-details img{
+
+.service-details img {
     width: 750px;
     max-height: 500px;
     border: 2px solid skyblue;
     box-shadow: 5px 5px #e2dfdf;
 }
 
-.price{
+.service-details Button {
+    width: 50%;
+}
+.verified .fa-solid{
+    color: white;
+    background-color:green;
+    border-radius: 50%;
+    padding: 5px;
+    font-size: 8px;
+}
+.verified-by-takealancer{
+    margin-top: -15px;
+    font-size: 11px;
+}
+.verify-status{
+    background-color: aliceblue;
+    padding-top: 10px ;
+    padding-bottom: 10px;
+}
+.price {
     color: red;
 }
-.user-profile{
+
+.user-profile {
     border: 1px solid black;
     border-radius: 15px;
+    background-color: aquamarine;
+    margin-top: 10px;
+    
 }
-.user-profile img{
+
+.user-profile Button {
+    width: 50%;
+}
+.user-profile Link {
+    width: 100%;
+}
+
+.user-profile img {
     width: 200px;
     height: 200px;
     border-radius: 30px;
     padding: 20px;
 }
-.review{
+
+.buy-service{
+    background-color: aquamarine;
+    padding: 30px;
+    position: fixed;
+
+}
+.buy-service Button{
+   
+    padding: 15px;
+}
+
+.review {
+    background-color: #e2dfdf;
     border-top: 2px dotted skyblue;
     border-bottom: 2px dotted skyblue;
 }
-.review p{
+
+.review p {
     margin-top: -15px;
 }
 
 
 
 @media only screen and (max-width: 600px) {
-    .profile-service{
+    .profile-service {
         flex-direction: column;
-    
+
     }
-    .service-details img{
+    .verified{
+        flex-direction: column;
+    }
+
+    .service-details img {
         width: 300px;
-      
+
     }
-    .service-details{
+
+    .service-details {
         width: auto;
     }
-    .user-profile img{
+
+    .user-profile img {
         width: 200px;
         height: 200px;
     }
-    
-  }
+
+}
+
 @media only screen and (min-width: 601px) and (max-width: 1000px) {
-    .profile-service{
+    .profile-service {
         flex-direction: column;
-    
+
     }
-    .service-details img{
+
+    .service-details img {
         width: 550px;
-      
+
     }
-    .service-details{
+
+    .service-details {
         width: auto;
     }
-    .user-profile img{
+
+    .user-profile img {
         width: 250px;
         height: 250px;
     }
-    
-  }
+
+}

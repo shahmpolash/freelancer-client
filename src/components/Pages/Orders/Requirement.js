@@ -4,8 +4,11 @@ import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 const Requirement = () => {
+
     const { id } = useParams()
     const [myServiceorder, setmyServiceOrder] = useState([]);
+
+
     const navigate = useNavigate();
 
 
@@ -33,9 +36,11 @@ const Requirement = () => {
             .then(res => res.json())
             .then(result => {
                 alert('Are You Sure You Understood?');
-                navigate(`/requirement/${id}`);
+                navigate(`/dashboard`);
             })
     };
+
+    
 
     return (
         <div className='container'>
@@ -46,15 +51,19 @@ const Requirement = () => {
                     <p>{myServiceorder.requirement}</p>
                 </div>
                 <div>
-                <h5>{myServiceorder.providerName}</h5>
+                    <h5>{myServiceorder.providerName}</h5>
                     <p>{myServiceorder.providerSaid}</p>
                 </div>
+                
             </div>
-            <form onSubmit={confirmRequirement}>
-                <input hidden value='providerrequpdated' type="text" name="reqUpdated" id="" />
-                <textarea name="updateRequirement" id="" cols="30" rows="10"></textarea>
-                <input type="submit" value="Post" />
-            </form>
+            
+                <form onSubmit={confirmRequirement}>
+                    <input hidden value='providerrequpdated' type="text" name="reqUpdated" id="" />
+                    <textarea name="updateRequirement" id="" cols="30" rows="10"></textarea>
+                    <input type="submit" value="Update" />
+                </form>
+                
+        
 
         </div>
     );

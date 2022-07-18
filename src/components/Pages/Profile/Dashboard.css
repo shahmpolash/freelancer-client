@@ -7,6 +7,18 @@
 .dashboard-services{
     border: 1px solid skyblue;
 }
+.profile-image-dashboard{
+    width: 250px;
+    height: 250px;
+    border: 2px solid skyblue;
+    border-radius: 15px;
+}
+
+.balance{
+    background-color: aquamarine;
+    padding: 15px;
+    height: 20%;
+}
 
 .service-img{
     width: 50px;

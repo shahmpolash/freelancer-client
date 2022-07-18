@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Accordion } from 'react-bootstrap';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Accordion, Table } from 'react-bootstrap';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import './FreelancerProfile.css';
 import { Button } from 'react-bootstrap';
 import { useAuthState } from 'react-firebase-hooks/auth';
@@ -63,11 +63,35 @@ const FreelancerProfile = () => {
                     <div className='profile'>
                         <img src={freelancer.profile} alt="" />
                         <h5>{freelancer.name}</h5>
-                        <h5>{freelancer.heading}</h5>
+                        <p>{freelancer.heading}</p>
                         <h5>Total Earned ${total} USD</h5>
+                        <p><i class="fa-solid fa-location-dot"></i> {freelancer.location}</p>
                         <p>Available for work: {freelancer.available}</p>
-
-
+                        <Link to={`/message/${freelancerId}`} className="btn btn-primary">Message Me</Link>
+                        <div className='marketplace'>
+                            <div className='working'><h5>I am working on</h5></div>
+                            <Table className='verified' striped bordered hover variant="dark">
+                                <tbody>
+                                    <tr>
+                                        <td><h5>Marketplace <i class="fa-solid fa-check"></i></h5></td>
+                                        <td>{freelancer.marketplace}</td>
+                                                                      
+                                    </tr>
+                                </tbody>
+                                <tbody>
+                                    <tr>
+                                        <td><h5>Total Reviews <i class="fa-solid fa-check"></i></h5></td>
+                                        <td>{freelancer.totalreviews}</td>
+                                    </tr>
+                                </tbody>
+                                <tbody>
+                                    <tr>
+                                        <td><h5>Project Completed <i class="fa-solid fa-check"></i></h5></td>
+                                        <td>{freelancer.projectcompleted}</td>
+                                    </tr>
+                                </tbody>
+                            </Table>
+                        </div>
                     </div>
 
                     <h5>Social Profile</h5>
@@ -113,14 +137,16 @@ const FreelancerProfile = () => {
             </div>
             <h5>Total: {providerReviews.filter(review => review.reviewStatus === 'done').length} Reviews</h5>
             {
-                providerReviews.map(providerReview => <div key={providerReview._id}>
-                    <div className='review col-lg-6 mt-3'>
-                        {providerReview.reviewStatus === 'none' && <></>}
-                        {providerReview.reviewStatus === 'done' &&
-                            <div> <h6>Client: {providerReview.clientName}</h6>
-                                <p>Rate: {providerReview.rate} out of 5</p>
-                                <p className='client-review font-italic'>"{providerReview.review}"</p>
-                            </div>}
+                providerReviews.map(review => <div key={review._id}>
+                    <div className='col-lg-6 mt-3'>
+                        <div>
+                            {review.reviewStatus === 'none' && <></>}
+                            {review.reviewStatus === 'done' &&
+                                <div className='review'><h6>Client: {review.clientName}: </h6>
+                                    <p>Rate: {review.rate} out of 5</p>
+                                    <p className='client-review font-italic'>"{review.review}"</p>
+                                </div>}
+                        </div>
                     </div>
                 </div>)
             }

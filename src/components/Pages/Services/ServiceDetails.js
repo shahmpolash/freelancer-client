@@ -3,13 +3,14 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import auth from '../../../firebase.init';
 import useOrderItem from '../../hooks/useOrderItem';
 import './ServiceDetails.css';
 
 const ServiceDetails = () => {
     const navigate = useNavigate();
+    const {serviceId} = useParams();
     const [service] = useOrderItem();
     const [userProfile, setUserProfile] = useState([]);
     const [reviews, setReviews] = useState([]);
@@ -35,23 +36,37 @@ const ServiceDetails = () => {
     }
     return (
         <div>
-            <div className='container d-flex justify-content-center profile-service '>
+            <div className='container d-flex justify-content-center profile-service'>
                 <div className='service-details container col-lg-9'>
                     <h5>{service.title}</h5>
                     <img src={service.img} alt="" />
+                    <h5 className='mt-3'>About My Service:</h5>
+                    <div className='verify-status'>
+                    <div className='d-flex justify-content-center verified'>
+                        <p className='mx-2'>Verified Provider <i class="fa-solid fa-check"></i></p>
+                        <p className='mx-2'>Verified Service <i class="fa-solid fa-check"></i></p>
+                    </div>
+                    <p className='verified-by-takealancer'>(Verified by TakeALancer Team)</p>
+                    </div>
+                    {service.publishStatus === 'published' && <Button onClick={() => navigateToOrderPage(service._id)}>Price ${service.price}usd/ Mo</Button>}
                     <p>{service.details}</p>
                      {service.publishStatus === 'pending' && <Button>This Service is Not Published</Button>}
-                     {service.publishStatus === 'published' && <Button onClick={() => navigateToOrderPage(service._id)}>Price {service.price}/ Mo</Button>}
+                     
+                     
                 </div>
                 <div className='col-lg-3'>
                     <div className='user-profile'>
                         {
                             userProfile.map(u => <div key={u._id}><img src={u.profile} alt="" />
-                                <p>{u.name}</p>
-                                <Button onClick={() => navigateTouserProfile(u._id)}>View Profile</Button>
+                                <h5>{u.name}</h5>
+                                <p><i class="fa-solid fa-location-dot"></i> {u.location}</p>
+                                <Button className='mx-5' onClick={() => navigateTouserProfile(u._id)}><i class="fa-solid fa-user"></i> View Profile</Button>
+                                
                             </div>)
                         }
+                                <Link  to={`/message/${service._id}`} className="btn btn-primary mt-2"><i class="fa-solid fa-message"></i> Message Me</Link>
                     </div>
+                    <div className='buy-service mt-3'>{service.publishStatus === 'published' && <Button onClick={() => navigateToOrderPage(service._id)}><i class="fa-solid fa-basket-shopping"></i> Buy this service ${service.price}usd/ Mo</Button>}</div>
                 </div>
             </div>
             <div className='container mt-5'>

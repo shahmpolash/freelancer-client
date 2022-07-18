@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
-const CancelOrder = () => {
+const CompleteOrder = () => {
     const { id } = useParams();
     const [cancel, setCancel] = useState([]);
     const navigate = useNavigate();
@@ -13,10 +13,10 @@ const CancelOrder = () => {
             .then(result => setCancel(result))
     }, [])
 
-    const handleCancel = event => {
+    const handleComplete = event => {
         event.preventDefault();
-        const status = event.target.status.value;
-        const updateStatus = { status };
+        const runningOrFinished = event.target.runningorfinished.value;
+        const updateStatus = { runningOrFinished };
         const url = `http://localhost:5000/myorder/${id}`;
         fetch(url, {
             method: 'PUT',
@@ -27,27 +27,23 @@ const CancelOrder = () => {
         })
             .then(res => res.json())
             .then(result => {
-                alert('Are You Sure You Want to Cancel?');
+                alert('Are You Sure You Want to Complete?');
                 navigate('/dashboard');
             })
     };
 
     return (
         <div>
-            {cancel.status === 'pending' && <div>
-                <h2>You are Cancelling This Service: {cancel.servicename}</h2>
-                <form onSubmit={handleCancel}>
-                    <input hidden value='cancelled' type="text" name="status" id="" />
-                    <input type="submit" value="Cancell Now" />
+            {cancel.status === 'accepted' && <div>
+                <h2>You are Completing This Service: {cancel.servicename}</h2>
+
+                <form onSubmit={handleComplete}>
+                    <input hidden value='completed' type="text" name="runningorfinished" id="" />
+                    <input type="submit" value="Complete This project Now" />
                 </form>
             </div>}
-            {cancel.status === 'approved' && cancel.status === 'rejected' && 
-            <div>
-               <h2>Sorry. You can not take any action!</h2>
-            </div>}
-
         </div>
     );
 };
 
-export default CancelOrder;
+export default CompleteOrder;
