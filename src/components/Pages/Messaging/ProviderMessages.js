@@ -31,7 +31,7 @@ const ProviderMessages = () => {
         const clientEmail = event.target.clientEmail.value;
         const clientId = event.target.clientId.value;
         const clientMessage = event.target.clientMessage.value;
-        const messageStatus = event.target.unRead.value;
+        const messageStatus = event.target.messageStatus.value;
         const whoSent = event.target.whoSent.value;
         const clientSentMessage = { serviceName, providerName, providerEmail, providerId, clientName, clientEmail, clientId, messageStatus, clientMessage, whoSent };
 
@@ -64,19 +64,19 @@ const ProviderMessages = () => {
                 <input value="unRead" type="text" name="messageStatus" id="" />
                 <input value="clientSent" type="text" name="whoSent" id="" />
                 {
-                    client.map(c=> <>
+                    client.map(c=> <div key={c._id}>
                     <input value={c.clientName} type="text" name="clientName" id="" />
-                    </>)
+                    </div>)
                 }
                 {
-                    client.map(c=> <>
+                    client.map(c=> <div key={c._id}>
                     <input value={c.clientEmail} type="text" name="clientEmail" id="" />
-                    </>)
+                    </div>)
                 }
                 {
-                    client.map(c=> <>
+                    client.map(c=> <div key={c._id}>
                     <input value={c._id} type="text" name="clientId" id="" />
-                    </>)
+                    </div>)
                 }
                 <textarea name="clientMessage" id="" cols="30" rows="10"></textarea>
 
