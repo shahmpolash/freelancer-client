@@ -4,3 +4,11 @@
     padding: 10px;
     margin-bottom: 5px;
 }
+.unread{
+    background-color: red;
+    padding-left: 2px;
+    padding-right: 2px;
+    color: white;
+    border-radius: 30px;
+    font-size: 10px;
+}

@@ -16,8 +16,11 @@ import Home from './components/Pages/Home/Home';
 import Login from './components/Pages/Join/Login';
 import RequireAuth from './components/Pages/Join/RequireAuth';
 import SignUp from './components/Pages/Join/SignUp';
+import ClientSentMessageToProvider from './components/Pages/Messaging/ClientSentMessageToProvider';
+import MessageDetails from './components/Pages/Messaging/MessageDetails';
 import Messages from './components/Pages/Messaging/Messages';
 import ProviderMessages from './components/Pages/Messaging/ProviderMessages';
+import SentMessages from './components/Pages/Messaging/SentMessages';
 import AcceptOrReject from './components/Pages/Orders/AcceptOrReject';
 import CancelOrder from './components/Pages/Orders/CancelOrder';
 import CompleteOrder from './components/Pages/Orders/CompleteOrder';
@@ -56,12 +59,14 @@ function App() {
         <Route path='/reviewasaprovider/:id' element={<PostReviewAsaProvider></PostReviewAsaProvider>}></Route>
         <Route path='/test' element={<Test></Test>}></Route>
         <Route path='/freelancer/:freelancerId' element={<FreelancerProfile></FreelancerProfile>}></Route>
-        <Route path='/message/:serviceId' element={<ProviderMessages></ProviderMessages>}></Route>
+        <Route path='/message/:serviceId' element={<ClientSentMessageToProvider></ClientSentMessageToProvider>}></Route>
         <Route path='/client/:clientId' element={<ClientProfile></ClientProfile>}></Route>
         <Route path='/withdraw/:id' element={<WithdrawFunds></WithdrawFunds>}></Route>
         <Route path='/userservice/:freelancerId' element={<FreelancerProfile></FreelancerProfile>}></Route>
         <Route path='/add-service' element={<RequireAuth><AddService></AddService></RequireAuth>}></Route>
         <Route path='/messages' element={<RequireAuth><Messages></Messages></RequireAuth>}></Route>
+        <Route path='/sentmessages' element={<RequireAuth><SentMessages></SentMessages></RequireAuth>}></Route>
+        <Route path='/inbox/:messageId' element={<MessageDetails></MessageDetails>}></Route>
         <Route path='/set-service' element={<RequireAuth><SetService></SetService></RequireAuth>}></Route>
         <Route path='/seo' element={<RequireAuth><Seo></Seo></RequireAuth>}></Route>
         <Route path='/lead' element={<RequireAuth><LeadGeneration></LeadGeneration></RequireAuth>}></Route>

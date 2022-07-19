@@ -33,7 +33,6 @@ const Header = () => {
                            {
                                user ?
                                <NavDropdown title={<i class="fa-solid fa-user-tie"></i>} id="collasible-nav-dropdown">
-                               
                                 <NavDropdown.Item as={Link} to="/dashboard"><i class="fa-solid fa-database"></i> Dashboard</NavDropdown.Item>
                                </NavDropdown>
          
