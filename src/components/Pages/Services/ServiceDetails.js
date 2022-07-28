@@ -48,6 +48,7 @@ const ServiceDetails = () => {
                     </div>
                     <p className='verified-by-takealancer'>(Verified by TakeALancer Team)</p>
                     </div>
+                  
                     {service.publishStatus === 'published' && <Button onClick={() => navigateToOrderPage(service._id)}>Price ${service.price}usd/ Mo</Button>}
                     <p>{service.details}</p>
                      {service.publishStatus === 'pending' && <Button>This Service is Not Published</Button>}

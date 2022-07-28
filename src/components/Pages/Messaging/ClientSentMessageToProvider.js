@@ -11,6 +11,8 @@ const ClientSentMessageToProvider = () => {
     const [user] = useAuthState(auth);
     const [service] = useOrderItem();
     const [client, setClient] = useState([]);
+    const [provider, setProvider] = useState([]);
+    const [orders, setorders] = useState([]);
     const navigate = useNavigate();
 
 
@@ -19,6 +21,20 @@ const ClientSentMessageToProvider = () => {
             .then(res => res.json())
             .then(data => setClient(data))
     }, [user])
+
+    useEffect(() => {
+        fetch(`http://localhost:5000/freelancerprofile?email=${user.email}`)
+            .then(res => res.json())
+            .then(data => setProvider(data))
+    }, [user])
+
+    useEffect(() => {
+        fetch(`http://localhost:5000/orders`)
+            .then(res => res.json())
+            .then(result => setorders(result))
+    }, [])
+
+
 
 
     const handleClientMessage = event => {
@@ -51,39 +67,49 @@ const ClientSentMessageToProvider = () => {
 
     };
 
+
     return (
         <div className='send-message container'>
-            <h5>Send Message</h5>
-            <h5>Service Name: {service.title}</h5>
-            <h5>Provider Name: {service.providerName}</h5>
-            
-            <form onSubmit={handleClientMessage}>
-                <input value={service.title} type="text" name="serviceName" id="" />
-                <input value={service._id} type="text" name="serviceId" id="" />
-                <input value={service.providerName} type="text" name="providerName" id="" />
-                <input value={service.email} type="text" name="providerEmail" id="" />
-                <input value={service.providerId} type="text" name="providerId" id="" />
-                <input value="unRead" type="text" name="messageStatus" id="" />
-                <input value="clientSent" type="text" name="whoSent" id="" />
-                {
-                    client.map(c=> <div key={c._id}>
-                    <input value={c.clientName} type="text" name="clientName" id="" />
-                    </div>)
-                }
-                {
-                    client.map(c=> <div key={c._id}>
-                    <input value={c.clientEmail} type="text" name="clientEmail" id="" />
-                    </div>)
-                }
-                {
-                    client.map(c=> <div key={c._id}>
-                    <input value={c._id} type="text" name="clientId" id="" />
-                    </div>)
-                }
-                <textarea name="clientMessage" id="" cols="30" rows="10"></textarea>
+            {
+                client.filter(c => c.clientEmail === user.email).length === 1 && <>
 
-                <input className='btn btn-primary' type="submit" value="Send Message" />
-            </form>
+                    <h5>Send Message</h5>
+                    <h5>Service Name: {service.title}</h5>
+                    <h5>Provider Name: {service.providerName}</h5>
+
+                    <form onSubmit={handleClientMessage}>
+                        <input value={service.title} type="text" name="serviceName" id="" />
+                        <input value={service._id} type="text" name="serviceId" id="" />
+                        <input value={service.providerName} type="text" name="providerName" id="" />
+                        <input value={service.email} type="text" name="providerEmail" id="" />
+                        <input value={service.providerId} type="text" name="providerId" id="" />
+                        <input value="unRead" type="text" name="messageStatus" id="" />
+                        <input value="clientSent" type="text" name="whoSent" id="" />
+                        {
+                            client.map(c => <div key={c._id}>
+                                <input value={c.clientName} type="text" name="clientName" id="" />
+                            </div>)
+                        }
+                        {
+                            client.map(c => <div key={c._id}>
+                                <input value={c.clientEmail} type="text" name="clientEmail" id="" />
+                            </div>)
+                        }
+                        {
+                            client.map(c => <div key={c._id}>
+                                <input value={c._id} type="text" name="clientId" id="" />
+                            </div>)
+                        }
+                        <textarea name="clientMessage" id="" cols="30" rows="10"></textarea>
+
+                        <input className='btn btn-primary' type="submit" value="Send Message" />
+                    </form>
+
+                </>
+            }
+
+           
+
         </div>
     );
 };

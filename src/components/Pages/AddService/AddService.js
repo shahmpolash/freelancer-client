@@ -6,12 +6,14 @@ import { useForm } from "react-hook-form";
 import useFreelancer from '../../hooks/useFreelancer';
 import { Link, useNavigate } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
+import useClient from '../../hooks/useClient';
 
 const AddService = () => {
 
     const [user] = useAuthState(auth);
     const { register, handleSubmit } = useForm();
     const [myDatas] = useFreelancer();
+    const [clients] = useClient();
     const navigate = useNavigate();
 
     const onSubmit = data => {
@@ -64,6 +66,13 @@ const AddService = () => {
             {myDatas.length === 0 &&
                 <div>
                     <Button><Link className='text-white' to={'/update'}>Please Update Your Provider Account</Link></Button>
+                </div>
+            }
+
+            {
+                clients.length === 1 && 
+                <div>
+                    <Button>Sorry. Buyer can not add any service.</Button>
                 </div>
             }
 

@@ -9,6 +9,13 @@ const Messages = () => {
     const [user] = useAuthState(auth);
     const [providers, setProviders] = useState([]);
     const [providerMessages, setProviderMessages] = useState([]);
+    const [replies, setReplies] = useState([]);
+
+    useEffect(() => {
+        fetch(`http://localhost:5000/replies`)
+            .then(res => res.json())
+            .then(result => setReplies(result))
+    }, []);
 
 
     useEffect(() => {
@@ -31,28 +38,42 @@ const Messages = () => {
                     <h5 className='mx-3'><i class="fa-solid fa-envelope"></i> Inbox {providerMessages.length}</h5>
                     <h5><Link as to={'/sentmessages'}>Sent Messages</Link></h5>
                 </div>
-                {providerMessages.filter(providerMessage => providerMessage.providerEmail === user.email).length > 0 &&
-
-                    <>
-                        {
-                            providerMessages.map(pm => <>
-                                <div className='single-message-card d-flex'>
-                                    <h5>Sender: {pm.clientName}</h5>
-                                        <div className='mx-3'>
+                {providerMessages.map(providerMessage => providerMessage.providerEmail === user.email && <>
+                
+                    <div className='single-message-card d-flex'>
+                                    <p>With: <Link className='text-black client-profile-name' to={`/client/${providerMessage.clientId}`}>{providerMessage.clientName}</Link></p>
+                                    <div className='mx-3'>
                                         <div className='d-flex'>
-                                        <h5><Link to={`/inbox/${pm._id}`}>{pm.serviceName}</Link></h5>
-                                        <p>{pm.messageStatus === 'unRead' && <div className='unread'>New</div>}</p>
+                                            <h5><Link to={`/inbox/${providerMessage._id}`}>{providerMessage.serviceName}</Link></h5>
+                                            <p>{providerMessage.whoSent === 'clientSent' & providerMessage.messageStatus === 'unRead' && <div className='unread'>New</div>}
+                                                <p className='unread'>
+                                                    {replies.filter(reply => reply.messageId === providerMessage._id & reply.replied === 'clientReplied' & reply.messageStatus === "unRead").length > 0 && <div className='unread'>New</div>}
+                                                </p>
+                                            </p>
+
                                         </div>
-                                        <p>{(pm.clientMessage).slice(0, 50)}</p>
-                                    </div>                                  
+                                    </div>
                                 </div>
-                            </>).reverse()
-                        }
-                    </>
+                </>).reverse()}
+               
+                {providerMessages.map(providerMessage => providerMessage.clientEmail === user.email && <>
+                    <div className='single-message-card d-flex'>
+                                    <p>With: <Link className='text-black client-profile-name' to={`/freelancer/${providerMessage.providerId}`}>{providerMessage.providerName}</Link></p>
+                                    <div className='mx-3'>
+                                        <div className='d-flex'>
+                                            <h5><Link to={`/inbox/${providerMessage._id}`}>{providerMessage.serviceName}</Link></h5>
+                                            <p>{providerMessage.whoSent === 'providerSent' & providerMessage.messageStatus === 'unRead' && <div className='unread'>New</div>} 
+                                            <p className='unread'>
+                                                    {replies.filter(reply => reply.messageId === providerMessage._id & reply.replied === 'providerReplied' & reply.messageStatus === "unRead").length > 0 && <div className='unread'>New</div>}
+                                                </p>
+                                            </p>
 
-                }
+                                        </div>
 
-
+                                    </div>
+                                </div>
+                
+                </>).reverse()}
             </div>
         </div>
     );

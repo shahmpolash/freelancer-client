@@ -1,9 +1,11 @@
 import React from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
+import { Button } from 'react-bootstrap';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useNavigate } from 'react-router-dom';
 import auth from '../../../../firebase.init';
+import useClient from '../../../hooks/useClient';
 import './UpdateProfile.css';
 
 
@@ -11,6 +13,7 @@ const UpdateProfile = () => {
     const navigate = useNavigate();
     const [user, loading, error] = useAuthState(auth);
     const [myFreelancer, setMyFreelancer] = useState([]);
+    const [clients] = useClient();
 
     const handleUpdate = event => {
         event.preventDefault();
@@ -52,28 +55,32 @@ const UpdateProfile = () => {
 
             })
     }
-    useEffect( () =>{
+    useEffect(() => {
         fetch(`http://localhost:5000/freelancerprofile?email=${user.email}`)
-        .then(res=>res.json())
-        .then(data=>setMyFreelancer(data))
-    },[])
+            .then(res => res.json())
+            .then(data => setMyFreelancer(data))
+    }, [])
 
     return (
         <div className='container'>
-            <h2>Update Your Profile</h2>
             {
-               myFreelancer.length === 1 && <h2>You have already Updated Profile</h2> 
+                clients.length === 0 &&
+
+                <>
+                <h2>Update Your Profile</h2>
+            {
+                myFreelancer.length === 1 && <h2>You have already Updated Profile</h2>
             }
 
-{
-               myFreelancer.length === 0 && <div>
-                <form className='freelancer' onSubmit={handleUpdate}>
-                <input type="text" name="name" id="" placeholder='Your Full Name' required />
-                <input type="text" name="heading" id="" placeholder='Headling Of You' required />
-                <input type="text" name="profile" id="" placeholder='Your Profile Picture' required />
-                <textarea name="about" id="" cols="30" rows="10" placeholder='About You' required />
-                <label className='mt-3'><h5>Select Your Country</h5></label><br></br>
-                <select  name="country" id="" >
+            {
+                myFreelancer.length === 0 && <div>
+                    <form className='freelancer' onSubmit={handleUpdate}>
+                        <input type="text" name="name" id="" placeholder='Your Full Name' required />
+                        <input type="text" name="heading" id="" placeholder='Headling Of You' required />
+                        <input type="text" name="profile" id="" placeholder='Your Profile Picture' required />
+                        <textarea name="about" id="" cols="30" rows="10" placeholder='About You' required />
+                        <label className='mt-3'><h5>Select Your Country</h5></label><br></br>
+                        <select name="country" id="" >
                             <option value="Afghanistan">Afghanistan</option>
                             <option value="Albania">Albania</option>
                             <option value="Algeria">Algeria</option>
@@ -314,47 +321,56 @@ const UpdateProfile = () => {
                             <option value="Zambia">Zambia</option>
                             <option value="Zimbabwe">Zimbabwe</option>
 
-                </select>
-                <label><h5>Select Your Skills</h5></label><br></br>
-                <input type="checkbox" name="onpageseo" value="Onpage SEO" />
-                <label> OnPage SEO</label><br></br>
-                <input type="checkbox" name="offpageseo" value="OffPage SEO" />
-                <label> OffPage SEO</label><br></br>
-                <input type="checkbox" name="technicalseo" value="Technical SEO" />
-                <label>Technical SEO</label><br></br>
-                <input type="checkbox" name="lead" value="Lead Generation" />
-                <label>Lead Generation</label><br></br>
-                <input type="checkbox" name="social" value="Social Media Marketing" />
-                <label>Social Media Marketing</label><br></br>
-                
-                <label className='mt-3'><h5>Your Experience</h5></label><br></br>
-                <select name="experience" id="">
-                    <option>Under 1 Year</option>
-                    <option>1 Year + </option>
-                    <option>2 Years +</option>
-                    <option>3 Years +</option>
-                    <option>5 Years +</option>
-                </select>
-                <label className='mt-3'> <h5>Are you available for work?</h5></label><br></br>
-                <select name="available">
-                    <option>Yes</option>
-                    <option>No</option>
-                </select>
-                <input type="text" name="fb" id="" placeholder='FB Link' required />
-                <input type="text" name="twitter" id="" placeholder='Twitter Link' required />
-                <input type="text" name="linkedin" id="" placeholder='Linkedin Link' required />
-                <label className='mt-3'><h5><i class="fa-solid fa-money-bill-trend-up"></i> The marketplace you work in</h5>
-                <p>(We will not approve you if you dont have enough reviews from other marketplaces)</p>
-                </label><br></br>
-                <input type="text" name="marketplace" id="" placeholder='Marketplace Name. e.g: UpWork, Fiverr' />
-                <input type="number" name="projectcompleted" id="" placeholder='Total Project Comleted' />
-                <input type="number" name="totalreviews" id="" placeholder='Total Reviews' />
-                <input type="text" name="profilelink" id="" placeholder='Profile URL' />
-                <input className='btn btn-primary' type="submit" value="Update Profile and Next" />
-            </form>
-               </div> 
+                        </select>
+                        <label><h5>Select Your Skills</h5></label><br></br>
+                        <input type="checkbox" name="onpageseo" value="Onpage SEO" />
+                        <label> OnPage SEO</label><br></br>
+                        <input type="checkbox" name="offpageseo" value="OffPage SEO" />
+                        <label> OffPage SEO</label><br></br>
+                        <input type="checkbox" name="technicalseo" value="Technical SEO" />
+                        <label>Technical SEO</label><br></br>
+                        <input type="checkbox" name="lead" value="Lead Generation" />
+                        <label>Lead Generation</label><br></br>
+                        <input type="checkbox" name="social" value="Social Media Marketing" />
+                        <label>Social Media Marketing</label><br></br>
+
+                        <label className='mt-3'><h5>Your Experience</h5></label><br></br>
+                        <select name="experience" id="">
+                            <option>Under 1 Year</option>
+                            <option>1 Year + </option>
+                            <option>2 Years +</option>
+                            <option>3 Years +</option>
+                            <option>5 Years +</option>
+                        </select>
+                        <label className='mt-3'> <h5>Are you available for work?</h5></label><br></br>
+                        <select name="available">
+                            <option>Yes</option>
+                            <option>No</option>
+                        </select>
+                        <input type="text" name="fb" id="" placeholder='FB Link' required />
+                        <input type="text" name="twitter" id="" placeholder='Twitter Link' required />
+                        <input type="text" name="linkedin" id="" placeholder='Linkedin Link' required />
+                        <label className='mt-3'><h5><i class="fa-solid fa-money-bill-trend-up"></i> The marketplace you work in</h5>
+                            <p>(We will not approve you if you dont have enough reviews from other marketplaces)</p>
+                        </label><br></br>
+                        <input type="text" name="marketplace" id="" placeholder='Marketplace Name. e.g: UpWork, Fiverr' />
+                        <input type="number" name="projectcompleted" id="" placeholder='Total Project Comleted' />
+                        <input type="number" name="totalreviews" id="" placeholder='Total Reviews' />
+                        <input type="text" name="profilelink" id="" placeholder='Profile URL' />
+                        <input className='btn btn-primary' type="submit" value="Update Profile and Next" />
+                    </form>
+                </div>
+            }
+                </>
             }
             
+            {
+                clients.length === 1 && 
+                <>
+                <Button>Sorry. Client can not Update Provider Profile</Button>
+                </>
+            }
+
         </div>
     );
 };

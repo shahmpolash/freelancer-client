@@ -8,6 +8,7 @@ import Table from 'react-bootstrap/Table';
 import useFreelancer from '../../hooks/useFreelancer';
 
 
+
 const Dashboard = () => {
     const navigate = useNavigate();
     const [user] = useAuthState(auth);
@@ -18,6 +19,8 @@ const Dashboard = () => {
     const [withdraws, setWithdraws] = useState([]);
     const [providerName, setProviderName] = useState([]);
     const [clientName, setClientName] = useState([]);
+    const [messages, setMessages] = useState([])
+
 
 
     let total = 0;
@@ -73,6 +76,12 @@ const Dashboard = () => {
             .then(res => res.json())
             .then(info => setMyServiceOrders(info));
     }, [user]);
+
+    useEffect(() => {
+        fetch(`http://localhost:5000/messages`)
+            .then(res => res.json())
+            .then(result => setMessages(result))
+    }, [])
 
     const navigateToDetails = id => {
         navigate(`/service/${id}`)
@@ -151,6 +160,7 @@ const Dashboard = () => {
 
                                     <th>Provider Name</th>
                                     <th>Project Name</th>
+                                    <th>Message</th>
 
                                 </tr>
                             </thead>
@@ -167,11 +177,26 @@ const Dashboard = () => {
                                                 }
                                                 <div className='d-flex justify-content-center'>
                                                     <div><Button onClick={() => navigateRequirement(myOrder._id)}>See Requirement</Button></div>
-                                                    <div>{myOrder.reqUpdated === 'providerrequpdated' && <p className='updateRequire'>1</p>}</div>
+
 
                                                 </div>
                                             </td>
                                             <td><Button onClick={() => navigateToDetails(myOrder.serviceId)}>{myOrder.servicename}</Button></td>
+                                            <td>
+                                            {
+                                                        messages.filter(message => message.orderId === myOrder._id & message.serviceId === myOrder.serviceId).length === 0 && <>
+                                                            <Link to={`/clientmessage/${myOrder._id}`} className="mt-2"><i class="fa-solid fa-message"></i>Send Message</Link>
+                                                        </>
+                                                    }
+                                                    {
+                                                        messages.filter(message => message.orderId === myOrder._id & message.serviceId === myOrder.serviceId).length > 0 && <>
+                                                            {
+                                                                messages.map(message => message.orderId === myOrder._id && <Link to={`/inbox/${message._id}`} className="mt-2 inbox"><i class="fa-solid fa-envelope"></i></Link>)
+                                                            }
+
+                                                        </>
+                                                    }
+                                                </td>
 
                                         </tr>)
                                 }
@@ -191,6 +216,7 @@ const Dashboard = () => {
                                             <th>Service Name</th>
                                             <th>Service Price</th>
                                             <th></th>
+                                            <th>Message</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -207,7 +233,7 @@ const Dashboard = () => {
                                                         {myOrder.status === 'rejected' && <p>Provider is Rejected</p>}
                                                         <div className='d-flex justify-content-center'>
                                                             <div><Button onClick={() => navigateRequirement(myOrder._id)}>See Requirement</Button></div>
-                                                            <div>{myOrder.reqUpdated === 'providerrequpdated' && <p className='updateRequire'>1</p>}</div>
+
 
                                                         </div>
                                                         <div>{myOrder.reqUpdated === 'requpdated' && <></>}</div>
@@ -224,6 +250,21 @@ const Dashboard = () => {
                                                         {myOrder.status === 'pending' && <div></div>}
                                                         {myOrder.status === 'accepted' && myOrder.reviewStatus === 'none' && <Link to={`/reviewasaclient/${myOrder._id}`}><Button>Post Review</Button></Link>}
                                                         {myOrder.reviewStatus === 'done' && <Button disabled>Reviewed</Button>}
+                                                    </td>
+                                                    <td>
+                                                    {
+                                                        messages.filter(message => message.orderId === myOrder._id & message.serviceId === myOrder.serviceId).length === 0 && <>
+                                                            <Link to={`/clientmessage/${myOrder._id}`} className="mt-2"><i class="fa-solid fa-message"></i>Send Message</Link>
+                                                        </>
+                                                    }
+                                                    {
+                                                        messages.filter(message => message.orderId === myOrder._id & message.serviceId === myOrder.serviceId).length > 0 && <>
+                                                            {
+                                                                messages.map(message => message.orderId === myOrder._id && <Link to={`/inbox/${message._id}`} className="mt-2 inbox"><i class="fa-solid fa-envelope"></i></Link>)
+                                                            }
+
+                                                        </>
+                                                    }
                                                     </td>
                                                 </tr>)
 
@@ -244,6 +285,7 @@ const Dashboard = () => {
                                             <th>Service Name</th>
                                             <th>Service Price</th>
                                             <th></th>
+                                            <th>Message</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -259,7 +301,7 @@ const Dashboard = () => {
                                                     {myOrder.status === 'rejected' && <p>Provider is Rejected</p>}
                                                     <div className='d-flex justify-content-center'>
                                                         <div><Button onClick={() => navigateRequirement(myOrder._id)}>See Requirement</Button></div>
-                                                        <div>{myOrder.reqUpdated === 'providerrequpdated' && <p className='updateRequire'>1</p>}</div>
+
 
                                                     </div>
                                                     <div>{myOrder.reqUpdated === 'requpdated' && <></>}</div>
@@ -272,6 +314,21 @@ const Dashboard = () => {
                                                     {myOrder.status === 'pending' && <div></div>}
                                                     {myOrder.status === 'accepted' && myOrder.reviewStatus === 'none' && <Link to={`/reviewasaclient/${myOrder._id}`}><Button>Post Review</Button></Link>}
                                                     {myOrder.reviewStatus === 'done' && <Button disabled>Reviewed</Button>}
+                                                </td>
+                                                <td>
+                                                {
+                                                        messages.filter(message => message.orderId === myOrder._id & message.serviceId === myOrder.serviceId).length === 0 && <>
+                                                            <Link to={`/clientmessage/${myOrder._id}`} className="mt-2"><i class="fa-solid fa-message"></i>Send Message</Link>
+                                                        </>
+                                                    }
+                                                    {
+                                                        messages.filter(message => message.orderId === myOrder._id & message.serviceId === myOrder.serviceId).length > 0 && <>
+                                                            {
+                                                                messages.map(message => message.orderId === myOrder._id && <Link to={`/inbox/${message._id}`} className="mt-2 inbox"><i class="fa-solid fa-envelope"></i></Link>)
+                                                            }
+
+                                                        </>
+                                                    }
                                                 </td>
                                             </tr>)
 
@@ -298,6 +355,7 @@ const Dashboard = () => {
 
                                         <th>Provider Name</th>
                                         <th>Project Name</th>
+                                        <th>Message</th>
 
                                     </tr>
                                 </thead>
@@ -306,7 +364,6 @@ const Dashboard = () => {
                                     {
                                         myServiceOrders.map(myServiceOrder => myServiceOrder.status === 'pending' &&
                                             <tr>
-
                                                 <td><Link to={`/client/${myServiceOrder.clientId}`}><p className='text-white'>{myServiceOrder.clientName}</p></Link>
                                                     <div className='d-flex justify-content-center'>
                                                         <div><Button onClick={() => navigateRequirement(myServiceOrder._id)}>See Requirement</Button></div>
@@ -317,6 +374,23 @@ const Dashboard = () => {
                                                     }
                                                 </td>
                                                 <td><Button onClick={() => navigateToDetails(myServiceOrder.serviceId)}>{myServiceOrder.servicename}</Button></td>
+                                                <td>
+
+                                                    {
+                                                        messages.filter(message => message.orderId === myServiceOrder._id & message.serviceId === myServiceOrder.serviceId).length === 0 && <>
+                                                            <Link to={`/providermessage/${myServiceOrder._id}`} className="mt-2"><i class="fa-solid fa-message"></i>Send Message</Link>
+                                                        </>
+                                                    }
+                                                    {
+                                                        messages.filter(message => message.orderId === myServiceOrder._id & message.serviceId === myServiceOrder.serviceId).length > 0 && <>
+                                                            {
+                                                                messages.map(message => message.orderId === myServiceOrder._id && <Link to={`/inbox/${message._id}`} className="mt-2 inbox"><i class="fa-solid fa-envelope"></i></Link>)
+                                                            }
+
+                                                        </>
+                                                    }
+
+                                                </td>
 
                                             </tr>).reverse()
                                     }
@@ -339,6 +413,7 @@ const Dashboard = () => {
                                             <th>Service Name</th>
                                             <th>Service Price</th>
                                             <th></th>
+                                            <th>Message</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -370,6 +445,20 @@ const Dashboard = () => {
                                                         {myServiceOrder.status === 'accepted' && myServiceOrder.providerReviewStatus === 'none' && <Link to={`/reviewasaprovider/${myServiceOrder._id}`}><Button>Post Review</Button></Link>}
                                                         {myServiceOrder.providerReviewStatus === 'done' && <Button disabled>Reviewed</Button>}
                                                     </td>
+                                                    <td> {
+                                                        messages.filter(message => message.orderId === myServiceOrder._id & message.serviceId === myServiceOrder.serviceId).length === 0 && <>
+                                                            <Link to={`/providermessage/${myServiceOrder._id}`} className="mt-2"><i class="fa-solid fa-message"></i>Send Message</Link>
+                                                        </>
+                                                    }
+                                                        {
+                                                            messages.filter(message => message.orderId === myServiceOrder._id & message.serviceId === myServiceOrder.serviceId).length > 0 && <>
+                                                                {
+                                                                    messages.map(message => message.orderId === myServiceOrder._id && <Link to={`/inbox/${message._id}`} className="mt-2 inbox"><i class="fa-solid fa-envelope"></i></Link>)
+                                                                }
+
+                                                            </>
+                                                        }
+                                                    </td>
                                                 </tr>
                                             ).reverse()
                                         }
@@ -388,6 +477,7 @@ const Dashboard = () => {
                                             <th>Service Name</th>
                                             <th>Service Price</th>
                                             <th></th>
+                                            <th>Message</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -418,6 +508,22 @@ const Dashboard = () => {
                                                         {myServiceOrder.status === 'pending' && <div></div>}
                                                         {myServiceOrder.status === 'accepted' && myServiceOrder.providerReviewStatus === 'none' && <Link to={`/reviewasaprovider/${myServiceOrder._id}`}><Button>Post Review</Button></Link>}
                                                         {myServiceOrder.providerReviewStatus === 'done' && <Button disabled>Reviewed</Button>}
+                                                    </td>
+                                                    <td>
+
+                                                        {
+                                                            messages.filter(message => message.orderId === myServiceOrder._id & message.serviceId === myServiceOrder.serviceId).length === 0 && <>
+                                                                <Link to={`/providermessage/${myServiceOrder._id}`} className="mt-2"><i class="fa-solid fa-message"></i>Send Message</Link>
+                                                            </>
+                                                        }
+                                                        {
+                                                            messages.filter(message => message.orderId === myServiceOrder._id & message.serviceId === myServiceOrder.serviceId).length > 0 && <>
+                                                                {
+                                                                    messages.map(message => message.orderId === myServiceOrder._id && <Link to={`/inbox/${message._id}`} className="mt-2 inbox"><i class="fa-solid fa-envelope"></i></Link>)
+                                                                }
+
+                                                            </>
+                                                        }
                                                     </td>
                                                 </tr>
                                             ).reverse()
@@ -459,6 +565,7 @@ const Dashboard = () => {
                                             <th>Service Name</th>
                                             <th>Service Price</th>
                                             <th></th>
+                                            <th>Message</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -487,6 +594,22 @@ const Dashboard = () => {
                                                     {myServiceOrder.status === 'pending' && <div></div>}
                                                     {myServiceOrder.status === 'accepted' && myServiceOrder.providerReviewStatus === 'none' && <Link to={`/reviewasaprovider/${myServiceOrder._id}`}><Button>Post Review</Button></Link>}
                                                     {myServiceOrder.providerReviewStatus === 'done' && <Button disabled>Reviewed</Button>}
+                                                </td>
+                                                <td>
+                                                    {
+                                                        messages.filter(message => message.orderId === myServiceOrder._id & message.serviceId === myServiceOrder.serviceId).length === 0 && <>
+                                                            <Link to={`/providermessage/${myServiceOrder._id}`} className="mt-2"><i class="fa-solid fa-message"></i>Send Message</Link>
+                                                        </>
+                                                    }
+                                                    {
+                                                        messages.filter(message => message.orderId === myServiceOrder._id & message.serviceId === myServiceOrder.serviceId).length > 0 && <>
+                                                            {
+                                                                messages.map(message => message.orderId === myServiceOrder._id && <Link to={`/inbox/${message._id}`} className="mt-2 inbox"><i class="fa-solid fa-envelope"></i></Link>)
+                                                            }
+
+                                                        </>
+                                                    }
+
                                                 </td>
                                             </tr>
                                             ).reverse()

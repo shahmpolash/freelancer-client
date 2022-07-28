@@ -31,6 +31,9 @@
     padding: 5px 5px;
 
 }
+.inbox{
+    font-size: 30px;
+}
 
 @media only screen and (min-width: 300px) and (max-width: 600px) {
     .my-service{

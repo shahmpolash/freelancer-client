@@ -17,9 +17,11 @@ import Login from './components/Pages/Join/Login';
 import RequireAuth from './components/Pages/Join/RequireAuth';
 import SignUp from './components/Pages/Join/SignUp';
 import ClientSentMessageToProvider from './components/Pages/Messaging/ClientSentMessageToProvider';
+import ClientSentMessageToProviderAfterOrder from './components/Pages/Messaging/ClientSentMessageToProviderAfterOrder';
 import MessageDetails from './components/Pages/Messaging/MessageDetails';
 import Messages from './components/Pages/Messaging/Messages';
 import ProviderMessages from './components/Pages/Messaging/ProviderMessages';
+import ProviderSentMessageToClient from './components/Pages/Messaging/ProviderSentMessageToClient';
 import SentMessages from './components/Pages/Messaging/SentMessages';
 import AcceptOrReject from './components/Pages/Orders/AcceptOrReject';
 import CancelOrder from './components/Pages/Orders/CancelOrder';
@@ -60,6 +62,8 @@ function App() {
         <Route path='/test' element={<Test></Test>}></Route>
         <Route path='/freelancer/:freelancerId' element={<FreelancerProfile></FreelancerProfile>}></Route>
         <Route path='/message/:serviceId' element={<ClientSentMessageToProvider></ClientSentMessageToProvider>}></Route>
+        <Route path='/providermessage/:orderId' element={<ProviderSentMessageToClient></ProviderSentMessageToClient>}></Route>
+        <Route path='/clientmessage/:orderId' element={<ClientSentMessageToProviderAfterOrder></ClientSentMessageToProviderAfterOrder>}></Route>
         <Route path='/client/:clientId' element={<ClientProfile></ClientProfile>}></Route>
         <Route path='/withdraw/:id' element={<WithdrawFunds></WithdrawFunds>}></Route>
         <Route path='/userservice/:freelancerId' element={<FreelancerProfile></FreelancerProfile>}></Route>
