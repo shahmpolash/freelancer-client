@@ -10,6 +10,7 @@ const Header = () => {
     const [user] = useAuthState(auth);
     const [providerMessages, setProviderMessages] = useState([]);
     const [replies, setReplies] = useState([]);
+    const [myServiceOrders, setMyServiceOrders] = useState([]);
 
     const handleSignout = () => {
         signOut(auth);
@@ -26,6 +27,13 @@ const Header = () => {
             .then(res => res.json())
             .then(result => setReplies(result))
     }, []);
+
+    useEffect(() => {
+        const url = `http://localhost:5000/myserviceorder?email=${user?.email}`
+        fetch(url)
+            .then(res => res.json())
+            .then(info => setMyServiceOrders(info));
+    }, [user]);
 
     return (
         <header>
@@ -55,6 +63,24 @@ const Header = () => {
                                     <></>
                             }
                         </Nav>
+                        <Nav>
+                        {
+                                user ?
+                                    <div>
+                                        <Nav.Link className='notify' as={Link} to="/dashboard">
+                                         <i class="fa-solid fa-bell"></i>
+                                        {
+                                            myServiceOrders.filter(order => order.provideremail === user?.email & order.reqUpdated === 'requpdated').length > 0 && <><span className='notify-count'>{
+                                                myServiceOrders.filter(order => order.provideremail === user?.email & order.reqUpdated === 'requpdated').length
+                                            }</span></>
+                                        }
+                                        
+                                    </Nav.Link>
+                                    </div>
+                                    :
+                                    <></>
+                            }
+                        </Nav>
 
                         <Nav>
                             {
@@ -69,7 +95,7 @@ const Header = () => {
                                                     {replies.filter(reply => reply.providerEmail === user.email & reply.replied === 'clientReplied' & reply.messageStatus === "unRead").length > 0 && <>{replies.filter(reply => reply.providerEmail === user.email & reply.replied === 'clientReplied' & reply.messageStatus === "unRead").length}</>}
 
                                                     {providerMessages.filter(providerMessage => providerMessage.whoSent === 'clientSent' & providerMessage.providerEmail === user.email & providerMessage.messageStatus === 'unRead').length === 0 && <></>}
-                                                    {providerMessages.filter(providerMessage => providerMessage.whoSent === 'clientSent' &  providerMessage.providerEmail === user.email & providerMessage.messageStatus === 'unRead').length > 0 && <>+{providerMessages.filter(providerMessage => providerMessage.whoSent === 'clientSent' &  providerMessage.providerEmail === user.email & providerMessage.messageStatus === 'unRead').length}</>}
+                                                    {providerMessages.filter(providerMessage => providerMessage.whoSent === 'clientSent' & providerMessage.providerEmail === user.email & providerMessage.messageStatus === 'unRead').length > 0 && <>+{providerMessages.filter(providerMessage => providerMessage.whoSent === 'clientSent' & providerMessage.providerEmail === user.email & providerMessage.messageStatus === 'unRead').length}</>}
                                                 </p>
                                             }
 
@@ -85,11 +111,13 @@ const Header = () => {
 
 
                                         </div>
+                                        
                                     </div>
-
                                     :
                                     <></>
                             }
+                         
+                           
                             {
                                 user ?
                                     <Nav.Link as={Link} to="/set-service"><i class="fa-solid fa-plus"></i> Add Service</Nav.Link>

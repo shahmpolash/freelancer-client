@@ -23,6 +23,7 @@ const Dashboard = () => {
 
 
 
+
     let total = 0;
     let totalWithdraw = 0;
 
@@ -97,7 +98,9 @@ const Dashboard = () => {
     };
 
     return (
-        <div className='container'>
+        <div>
+            
+            <div className='container'>
             <div className='d-flex justify-content-between'>
                 <div className='col-lg-6'>
                     {
@@ -122,10 +125,33 @@ const Dashboard = () => {
                     }
                     <h5>My Email : {user.email}</h5>
                 </div>
-                <div className='col-lg-6 mt-5 balance'>
-                    <h5>My Balance ${total} usd</h5> {total > 99 && myDatas.map(w => <Link to={`/withdraw/${w._id}`}><Button>Withdraw</Button></Link>)
-                    }
-                </div>
+                {
+                    providerName.filter(provider => provider.email === user?.email).length === 1 &&
+                    <div className='col-lg-6 mt-5'>
+                        <div className='balance'><h5>My Balance ${total} usd</h5> {total > 99 && myDatas.map(w => <Link to={`/withdraw/${w._id}`}><Button>Withdraw</Button></Link>)
+                        }</div>
+                        <div className='dashboard-icons'>
+                            {
+                                providerName.map(p=><Link to={`/updateprovider/${p._id}`}><i class="fa-solid fa-screwdriver-wrench"></i></Link>)
+                            }
+                            <i class="fa-solid fa-id-card-clip"></i>
+                            <i class="fa-solid fa-plus"></i>
+                        </div>
+                    </div>
+                }
+                {
+                    clientName.filter(client => client.clientEmail === user?.email).length === 1 &&
+                    <div className='col-lg-6 mt-5'>
+                        <div className='dashboard-icons'>
+                        {
+                                clientName.map(c=><Link to={`/updateclientprofile/${c._id}`}><i class="fa-solid fa-screwdriver-wrench"></i></Link>)
+                            }
+                            <div><i class="fa-solid fa-id-card-clip"></i> Buyer</div>
+                            <div><i class="fa-solid fa-plus"></i> Buyer</div>
+                        </div>
+                    </div>
+                }
+                
             </div>
 
             {myServices.length === 0 && <></>}
@@ -183,20 +209,20 @@ const Dashboard = () => {
                                             </td>
                                             <td><Button onClick={() => navigateToDetails(myOrder.serviceId)}>{myOrder.servicename}</Button></td>
                                             <td>
-                                            {
-                                                        messages.filter(message => message.orderId === myOrder._id & message.serviceId === myOrder.serviceId).length === 0 && <>
-                                                            <Link to={`/clientmessage/${myOrder._id}`} className="mt-2"><i class="fa-solid fa-message"></i>Send Message</Link>
-                                                        </>
-                                                    }
-                                                    {
-                                                        messages.filter(message => message.orderId === myOrder._id & message.serviceId === myOrder.serviceId).length > 0 && <>
-                                                            {
-                                                                messages.map(message => message.orderId === myOrder._id && <Link to={`/inbox/${message._id}`} className="mt-2 inbox"><i class="fa-solid fa-envelope"></i></Link>)
-                                                            }
+                                                {
+                                                    messages.filter(message => message.orderId === myOrder._id & message.serviceId === myOrder.serviceId).length === 0 && <>
+                                                        <Link to={`/clientmessage/${myOrder._id}`} className="mt-2"><i class="fa-solid fa-message"></i>Send Message</Link>
+                                                    </>
+                                                }
+                                                {
+                                                    messages.filter(message => message.orderId === myOrder._id & message.serviceId === myOrder.serviceId).length > 0 && <>
+                                                        {
+                                                            messages.map(message => message.orderId === myOrder._id && <Link to={`/inbox/${message._id}`} className="mt-2 inbox"><i class="fa-solid fa-envelope"></i></Link>)
+                                                        }
 
-                                                        </>
-                                                    }
-                                                </td>
+                                                    </>
+                                                }
+                                            </td>
 
                                         </tr>)
                                 }
@@ -252,19 +278,19 @@ const Dashboard = () => {
                                                         {myOrder.reviewStatus === 'done' && <Button disabled>Reviewed</Button>}
                                                     </td>
                                                     <td>
-                                                    {
-                                                        messages.filter(message => message.orderId === myOrder._id & message.serviceId === myOrder.serviceId).length === 0 && <>
-                                                            <Link to={`/clientmessage/${myOrder._id}`} className="mt-2"><i class="fa-solid fa-message"></i>Send Message</Link>
-                                                        </>
-                                                    }
-                                                    {
-                                                        messages.filter(message => message.orderId === myOrder._id & message.serviceId === myOrder.serviceId).length > 0 && <>
-                                                            {
-                                                                messages.map(message => message.orderId === myOrder._id && <Link to={`/inbox/${message._id}`} className="mt-2 inbox"><i class="fa-solid fa-envelope"></i></Link>)
-                                                            }
+                                                        {
+                                                            messages.filter(message => message.orderId === myOrder._id & message.serviceId === myOrder.serviceId).length === 0 && <>
+                                                                <Link to={`/clientmessage/${myOrder._id}`} className="mt-2"><i class="fa-solid fa-message"></i>Send Message</Link>
+                                                            </>
+                                                        }
+                                                        {
+                                                            messages.filter(message => message.orderId === myOrder._id & message.serviceId === myOrder.serviceId).length > 0 && <>
+                                                                {
+                                                                    messages.map(message => message.orderId === myOrder._id && <Link to={`/inbox/${message._id}`} className="mt-2 inbox"><i class="fa-solid fa-envelope"></i></Link>)
+                                                                }
 
-                                                        </>
-                                                    }
+                                                            </>
+                                                        }
                                                     </td>
                                                 </tr>)
 
@@ -316,7 +342,7 @@ const Dashboard = () => {
                                                     {myOrder.reviewStatus === 'done' && <Button disabled>Reviewed</Button>}
                                                 </td>
                                                 <td>
-                                                {
+                                                    {
                                                         messages.filter(message => message.orderId === myOrder._id & message.serviceId === myOrder.serviceId).length === 0 && <>
                                                             <Link to={`/clientmessage/${myOrder._id}`} className="mt-2"><i class="fa-solid fa-message"></i>Send Message</Link>
                                                         </>
@@ -651,6 +677,17 @@ const Dashboard = () => {
                 </Table>
             }
 
+        </div>
+        {
+                clientName.filter(client=> client.clientEmail === user?.email).length === 0 && <>
+                {
+                    providerName.filter(provider => provider.email === user?.email).length === 0 &&
+                    <div>
+                        <Link className='btn btn-primary' to={'/setup'}><i class="fa-solid fa-id-card-clip"></i> Update Your Profile</Link>
+                    </div>
+                }
+                </>
+            }
         </div>
 
     );

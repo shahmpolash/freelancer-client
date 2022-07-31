@@ -2,33 +2,42 @@ import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import auth from '../../../firebase.init';
 import useFreelancer from '../../hooks/useFreelancer';
 import './UpdateProfileAsClient.css';
 
-const UpdateProfileAsClient = () => {
+const UpdateClientProfile = () => {
 
     const [myClient, setMyClient] = useState([]);
     const [user, loading, error] = useAuthState(auth);
     const navigate = useNavigate();
     const [myDatas] = useFreelancer();
+    const [client, setClient] = useState([]);
+    const {clientId} = useParams();
+
+    useEffect(() => {
+        fetch(`http://localhost:5000/client/${clientId}`)
+            .then(res => res.json())
+            .then(result => setClient(result))
+    }, [client]);
+
+
 
     const handleUpdate = event => {
         event.preventDefault();
-        const client = {
-            clientEmail: user.email,
-            clientName: event.target.clientname.value,
-            clientProfile: event.target.clientprofile.value,
-            cLientAbout: event.target.clientabout.value,
-            clientFB: event.target.clientfb.value,
-            clientTwitter: event.target.clienttwitter.value,
-            clientLinkedin: event.target.clientlinkedin.value,
-            ClientLocation: event.target.country.value,
-        }
-        const url = `http://localhost:5000/clients/`;
+        const clientName = event.target.clientname.value;
+        const clientLocation = event.target.country.value;
+        const clientAbout = event.target.clientabout.value;
+        const clientProfile = event.target.clientprofile.value;
+        const clientFB = event.target.clientfb.value;
+        const clientTwitter = event.target.clienttwitter.value;
+        const clientLinkedin = event.target.clientlinkedin.value;
+        const client = {clientName, clientLocation, clientAbout, clientProfile, clientFB, clientTwitter, clientLinkedin}
+        
+        const url = `http://localhost:5000/client/${clientId}`;
         fetch(url, {
-            method: 'POST',
+            method: 'PUT',
             headers: {
                 'content-type': 'application/json'
             },
@@ -37,7 +46,7 @@ const UpdateProfileAsClient = () => {
             .then(res => res.json())
             .then(result => {
                 console.log(result);
-                navigate('/');
+                navigate('/dashboard');
             })
     }
     useEffect(() => {
@@ -48,19 +57,12 @@ const UpdateProfileAsClient = () => {
 
     return (
         <div className='container'>
-            {
-                myDatas.length === 0 &&
-                <>
-                  {
-                myClient.length === 1 && <h2>You have already Updated Profile</h2>
-            }
-
-            {
-                myClient.length === 0 && <div>
+          
+                <h5>{client._id}</h5>
                     <h5>Update Profile as a Client</h5>
                     <form className='client' onSubmit={handleUpdate}>
-                        <input type="text" name="clientname" id="" placeholder='Your Full Name' required />
-                        <select name="country" id="" >
+                        <input defaultValue={client.clientName} type="text" name="clientname" id="" placeholder='Your Full Name' required />
+                        <select defaultValue={client.clientLocation} name="country" id="" >
                             <option value="Afghanistan">Afghanistan</option>
                             <option value="Albania">Albania</option>
                             <option value="Algeria">Algeria</option>
@@ -302,23 +304,17 @@ const UpdateProfileAsClient = () => {
                             <option value="Zimbabwe">Zimbabwe</option>
 
                         </select>
-                        <textarea name="clientabout" id="" cols="30" rows="10" placeholder='Write about you'></textarea>
-                        <input type="text" name="clientprofile" id="" placeholder='Your Profile Picture' required />
-                        <input type="text" name="clientfb" id="" placeholder='FB Link' required />
-                        <input type="text" name="clienttwitter" id="" placeholder='Twitter Link' required />
-                        <input type="text" name="clientlinkedin" id="" placeholder='Linkedin Link' required />
+                        <textarea defaultValue={client.clientName} name="clientabout" id="" cols="30" rows="10" placeholder='Write about you'></textarea>
+                        <input defaultValue={client.clientProfile} type="text" name="clientprofile" id="" placeholder='Your Profile Picture' required />
+                        <input defaultValue={client.clientFB} type="text" name="clientfb" id="" placeholder='FB Link' required />
+                        <input defaultValue={client.clientTwitter} type="text" name="clienttwitter" id="" placeholder='Twitter Link' required />
+                        <input defaultValue={client.clientLinkedin} type="text" name="clientlinkedin" id="" placeholder='Linkedin Link' required />
                         <input className='btn btn-primary' type="submit" value="Update Profile" />
                     </form>
                 </div>
-            }
-                </>
-            }
-            {
-                myDatas.length === 1 &&
-                <Button>Sorry. Provider Can not Set Client Profile</Button>
-            }
-        </div>
+            
+        
     );
 };
 
-export default UpdateProfileAsClient;
+export default UpdateClientProfile;

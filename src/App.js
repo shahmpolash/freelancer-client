@@ -8,9 +8,11 @@ import Seo from './components/Pages/AddService/AddServices/Seo';
 import SocialMediaMarketing from './components/Pages/AddService/AddServices/SocialMediaMarketing';
 import SetService from './components/Pages/AddService/SetService';
 import ClientProfile from './components/Pages/Clients/ClientProfile';
+import UpdateClientProfile from './components/Pages/Clients/UpdateClientProfile';
 import UpdateProfileAsClient from './components/Pages/Clients/UpdateProfileAsClient';
 import ConfirmPublishOrCancel from './components/Pages/ConfirmPublishOrCancel';
 import FreelancerProfile from './components/Pages/Freelancers/FreelancerProfile/FreelancerProfile';
+import UpdateProviderProfile from './components/Pages/Freelancers/FreelancerProfile/UpdateProviderProfile';
 import UpdateProfile from './components/Pages/Freelancers/UpdateProfile/UpdateProfile';
 import Home from './components/Pages/Home/Home';
 import Login from './components/Pages/Join/Login';
@@ -52,25 +54,27 @@ function App() {
         <Route path='/' element={<Home></Home>}></Route>
         <Route path='/service/:serviceId' element={<ServiceDetails></ServiceDetails>}></Route>
         <Route path='/order/:serviceId' element={<RequireAuth><OrderItem></OrderItem></RequireAuth>}></Route>
-        <Route path='/acceptorreject/:id' element={<AcceptOrReject></AcceptOrReject>}></Route>
-        <Route path='/requirement/:id' element={<Requirement></Requirement>}></Route>
-        <Route path='/cancelorder/:id' element={<CancelOrder></CancelOrder>}></Route>
-        <Route path='/complete/:id' element={<CompleteOrder></CompleteOrder>}></Route>
-        <Route path='/reviewasaclient/:id' element={<PostReviewAsaClient></PostReviewAsaClient>}></Route>
-        <Route path='/releasepayment/:id' element={<ReleasePayment></ReleasePayment>}></Route>
-        <Route path='/reviewasaprovider/:id' element={<PostReviewAsaProvider></PostReviewAsaProvider>}></Route>
+        <Route path='/acceptorreject/:id' element={<RequireAuth><AcceptOrReject></AcceptOrReject></RequireAuth>}></Route>
+        <Route path='/requirement/:id' element={<RequireAuth><Requirement></Requirement></RequireAuth>}></Route>
+        <Route path='/cancelorder/:id' element={<RequireAuth><CancelOrder></CancelOrder></RequireAuth>}></Route>
+        <Route path='/complete/:id' element={<RequireAuth><CompleteOrder></CompleteOrder></RequireAuth>}></Route>
+        <Route path='/reviewasaclient/:id' element={<RequireAuth><PostReviewAsaClient></PostReviewAsaClient></RequireAuth>}></Route>
+        <Route path='/releasepayment/:id' element={<RequireAuth><ReleasePayment></ReleasePayment></RequireAuth>}></Route>
+        <Route path='/reviewasaprovider/:id' element={<RequireAuth><PostReviewAsaProvider></PostReviewAsaProvider></RequireAuth>}></Route>
         <Route path='/test' element={<Test></Test>}></Route>
         <Route path='/freelancer/:freelancerId' element={<FreelancerProfile></FreelancerProfile>}></Route>
-        <Route path='/message/:serviceId' element={<ClientSentMessageToProvider></ClientSentMessageToProvider>}></Route>
-        <Route path='/providermessage/:orderId' element={<ProviderSentMessageToClient></ProviderSentMessageToClient>}></Route>
-        <Route path='/clientmessage/:orderId' element={<ClientSentMessageToProviderAfterOrder></ClientSentMessageToProviderAfterOrder>}></Route>
+        <Route path='/updateprovider/:id' element={<UpdateProviderProfile></UpdateProviderProfile>}></Route>
+        <Route path='/message/:serviceId' element={<RequireAuth><ClientSentMessageToProvider></ClientSentMessageToProvider></RequireAuth>}></Route>
+        <Route path='/providermessage/:orderId' element={<RequireAuth><ProviderSentMessageToClient></ProviderSentMessageToClient></RequireAuth>}></Route>
+        <Route path='/clientmessage/:orderId' element={<RequireAuth><ClientSentMessageToProviderAfterOrder></ClientSentMessageToProviderAfterOrder></RequireAuth>}></Route>
         <Route path='/client/:clientId' element={<ClientProfile></ClientProfile>}></Route>
-        <Route path='/withdraw/:id' element={<WithdrawFunds></WithdrawFunds>}></Route>
+        <Route path='/updateclientprofile/:clientId' element={<UpdateClientProfile></UpdateClientProfile>}></Route>
+        <Route path='/withdraw/:id' element={<RequireAuth><WithdrawFunds></WithdrawFunds></RequireAuth>}></Route>
         <Route path='/userservice/:freelancerId' element={<FreelancerProfile></FreelancerProfile>}></Route>
         <Route path='/add-service' element={<RequireAuth><AddService></AddService></RequireAuth>}></Route>
         <Route path='/messages' element={<RequireAuth><Messages></Messages></RequireAuth>}></Route>
         <Route path='/sentmessages' element={<RequireAuth><SentMessages></SentMessages></RequireAuth>}></Route>
-        <Route path='/inbox/:messageId' element={<MessageDetails></MessageDetails>}></Route>
+        <Route path='/inbox/:messageId' element={<RequireAuth><MessageDetails></MessageDetails></RequireAuth>}></Route>
         <Route path='/set-service' element={<RequireAuth><SetService></SetService></RequireAuth>}></Route>
         <Route path='/seo' element={<RequireAuth><Seo></Seo></RequireAuth>}></Route>
         <Route path='/lead' element={<RequireAuth><LeadGeneration></LeadGeneration></RequireAuth>}></Route>
@@ -82,7 +86,7 @@ function App() {
         <Route path='/withdrawal' element={<AcceptOrRejectWithdrawRequest></AcceptOrRejectWithdrawRequest>}></Route>
         <Route path='/servicepublish' element={<PublishedOrCancelService></PublishedOrCancelService>}></Route>
         <Route path='/confirmpublish/:serviceId' element={<ConfirmPublishOrCancel></ConfirmPublishOrCancel>}></Route>
-        <Route path='/withdrawacceptorcancel/:id' element={<WithdrawAcceptOrCancel></WithdrawAcceptOrCancel>}></Route>
+        <Route path='/withdrawacceptorcancel/:id' element={<RequireAuth><WithdrawAcceptOrCancel></WithdrawAcceptOrCancel></RequireAuth>}></Route>
         <Route path='/transactions/' element={<Transactions></Transactions>}></Route>
         <Route path='/seo-services' element={<SeoServices></SeoServices>}></Route>
         <Route path='/lead-generation-services' element={<LeadGenerationServices></LeadGenerationServices>}></Route>

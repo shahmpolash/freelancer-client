@@ -67,7 +67,6 @@ const FreelancerProfile = () => {
                         <h5>Total Earned ${total} USD</h5>
                         <p><i class="fa-solid fa-location-dot"></i> {freelancer.location}</p>
                         <p>Available for work: {freelancer.available}</p>
-                        <Link to={`/message/${freelancerId}`} className="btn btn-primary">Message Me</Link>
                         <div className='marketplace'>
                             <div className='working'><h5>I am working on</h5></div>
                             <Table className='verified' striped bordered hover variant="dark">
@@ -103,7 +102,7 @@ const FreelancerProfile = () => {
                     <div className='profile'>
                         <p>Experience: {freelancer.experience}</p>
                         <h5>Skills</h5>
-                        <button>{freelancer.onpageseo}</button> <button>{freelancer.offpageseo}</button> <button>{freelancer.technicalseo}</button>
+                        <button>{freelancer.onpageseo}</button> <button>{freelancer.offpageseo}</button> <button>{freelancer.technicalseo}</button><button>{freelancer.lead}</button><button>{freelancer.social}</button>
                     </div>
                 </div>
                 <div className='col-lg-9'>

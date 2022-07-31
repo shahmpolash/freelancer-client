@@ -16,6 +16,8 @@ const ServiceDetails = () => {
     const [reviews, setReviews] = useState([]);
     const [user] = useAuthState(auth);
 
+
+
     useEffect(() => {
         fetch(`http://localhost:5000/freelancerprofile?email=${service.email}`)
             .then(res => res.json())
@@ -48,12 +50,10 @@ const ServiceDetails = () => {
                     </div>
                     <p className='verified-by-takealancer'>(Verified by TakeALancer Team)</p>
                     </div>
-                  
                     {service.publishStatus === 'published' && <Button onClick={() => navigateToOrderPage(service._id)}>Price ${service.price}usd/ Mo</Button>}
                     <p>{service.details}</p>
                      {service.publishStatus === 'pending' && <Button>This Service is Not Published</Button>}
-                     
-                     
+            
                 </div>
                 <div className='col-lg-3'>
                     <div className='user-profile'>
@@ -67,7 +67,13 @@ const ServiceDetails = () => {
                         }
                                 <Link  to={`/message/${service._id}`} className="btn btn-primary mt-2"><i class="fa-solid fa-message"></i> Message Me</Link>
                     </div>
-                    <div className='buy-service mt-3'>{service.publishStatus === 'published' && <Button onClick={() => navigateToOrderPage(service._id)}><i class="fa-solid fa-basket-shopping"></i> Buy this service ${service.price}usd/ Mo</Button>}</div>
+                    <div className='buy-service mt-3'>
+                   
+                    {service.publishStatus === 'published' && <Button onClick={() => navigateToOrderPage(service._id)}>Buy this service ${service.price}usd/ Mo</Button>}
+                    
+                     {service.publishStatus === 'pending' && <Button>This Service is Not Published</Button>}
+                       
+                        </div>
                 </div>
             </div>
             <div className='container mt-5'>

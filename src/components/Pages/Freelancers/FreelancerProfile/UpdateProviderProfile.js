@@ -1,66 +1,110 @@
-import React, { useEffect } from 'react';
+import React from 'react';
+import { useEffect } from 'react';
 import { useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { useNavigate } from 'react-router-dom';
-import auth from '../../../firebase.init';
-import useFreelancer from '../../hooks/useFreelancer';
-import './UpdateProfileAsClient.css';
+import { useNavigate, useParams } from 'react-router-dom';
+import auth from '../../../../firebase.init';
+import useClient from '../../../hooks/useClient';
+import './UpdateProviderProfile.css';
 
-const UpdateProfileAsClient = () => {
 
-    const [myClient, setMyClient] = useState([]);
-    const [user, loading, error] = useAuthState(auth);
+const UpdateProviderProfile = () => {
     const navigate = useNavigate();
-    const [myDatas] = useFreelancer();
+    const [user, loading, error] = useAuthState(auth);
+    const [myFreelancer, setMyFreelancer] = useState([]);
+    const [clients] = useClient();
+    const {id} = useParams();
+    const [provider, setProvider] = useState([]);
+
+    useEffect(() => {
+        fetch(`http://localhost:5000/freelancer/${id}`)
+            .then(res => res.json())
+            .then(result => setProvider(result))
+    }, [provider])
+
+
 
     const handleUpdate = event => {
         event.preventDefault();
-        const client = {
-            clientEmail: user.email,
-            clientName: event.target.clientname.value,
-            clientProfile: event.target.clientprofile.value,
-            cLientAbout: event.target.clientabout.value,
-            clientFB: event.target.clientfb.value,
-            clientTwitter: event.target.clienttwitter.value,
-            clientLinkedin: event.target.clientlinkedin.value,
-            ClientLocation: event.target.country.value,
-        }
-        const url = `http://localhost:5000/clients/`;
+        const name = event.target.name.value;
+        const heading = event.target.heading.value;
+        const profile = event.target.profile.value;
+        const about = event.target.about.value;
+        const location = event.target.location.value;
+        const onpageseo = event.target.onpageseo.value;
+        const offpageseo = event.target.offpageseo.value;
+        const technicalseo = event.target.technicalseo.value;
+        const lead = event.target.lead.value;
+        const social = event.target.social.value;
+        const experience = event.target.experience.value;
+        const available = event.target.available.value;
+        const fb = event.target.fb.value;
+        const twitter = event.target.twitter.value;
+        const linkedin = event.target.linkedin.value;
+        const marketplace = event.target.marketplace.value;
+        const projectcompleted = event.target.projectcompleted.value;
+        const totalreviews = event.target.totalreviews.value;
+        const profilelink = event.target.profilelink.value;
+        const freelancer = {name, heading, profile, about, location, onpageseo, offpageseo, technicalseo, lead, social, experience, available, fb, twitter, linkedin, marketplace, projectcompleted, totalreviews, profilelink }
+
+        const url = `http://localhost:5000/freelancer/${id}`;
         fetch(url, {
-            method: 'POST',
+            method: 'PUT',
             headers: {
                 'content-type': 'application/json'
             },
-            body: JSON.stringify(client)
+            body: JSON.stringify(freelancer)
         })
             .then(res => res.json())
             .then(result => {
                 console.log(result);
-                navigate('/');
+                navigate('/dashboard');
+
             })
     }
+
     useEffect(() => {
-        fetch(`http://localhost:5000/clientprofilereview?customeremail=${user.email}`)
+        fetch(`http://localhost:5000/freelancerprofile?email=${user.email}`)
             .then(res => res.json())
-            .then(result => setMyClient(result))
-    }, []);
+            .then(data => setMyFreelancer(data))
+    }, [])
 
     return (
         <div className='container'>
             {
-                myDatas.length === 0 &&
+                myFreelancer.filter(f=> f.email === user?.email).length === 1 && 
                 <>
-                  {
-                myClient.length === 1 && <h2>You have already Updated Profile</h2>
-            }
+                <h5>Update Your Profile</h5>
+            <form className='freelancer' onSubmit={handleUpdate}>
+                {
+                    myFreelancer.map(f => <div key={f._id}>
+                        <input defaultValue={f.name} type="text" name="name" id="" placeholder='Your Full Name' required />
+                    </div>)
+                }
 
-            {
-                myClient.length === 0 && <div>
-                    <h5>Update Profile as a Client</h5>
-                    <form className='client' onSubmit={handleUpdate}>
-                        <input type="text" name="clientname" id="" placeholder='Your Full Name' required />
-                        <select name="country" id="" >
+                {
+                    myFreelancer.map(f => <div key={f._id}>
+                        <input defaultValue={f.heading} type="text" name="heading" id="" placeholder='Headling Of You' required />
+                    </div>)
+                }
+                {
+                    myFreelancer.map(f => <div key={f._id}>
+                        <input defaultValue={f.profile} type="text" name="profile" id="" placeholder='Your Profile Picture' required />
+
+                    </div>)
+                }
+                {
+                    myFreelancer.map(f => <div key={f._id}>
+                        <textarea defaultValue={f.about} name="about" id="" cols="30" rows="10" placeholder='About You' required />
+
+                    </div>)
+                }
+
+                <label className='mt-3'><h5>Select Your Country</h5></label><br></br>
+                {
+                    myFreelancer.map(f => <div key={f._id}>
+                        <select defaultValue={f.location} name="location" id="" >
                             <option value="Afghanistan">Afghanistan</option>
                             <option value="Albania">Albania</option>
                             <option value="Algeria">Algeria</option>
@@ -302,23 +346,113 @@ const UpdateProfileAsClient = () => {
                             <option value="Zimbabwe">Zimbabwe</option>
 
                         </select>
-                        <textarea name="clientabout" id="" cols="30" rows="10" placeholder='Write about you'></textarea>
-                        <input type="text" name="clientprofile" id="" placeholder='Your Profile Picture' required />
-                        <input type="text" name="clientfb" id="" placeholder='FB Link' required />
-                        <input type="text" name="clienttwitter" id="" placeholder='Twitter Link' required />
-                        <input type="text" name="clientlinkedin" id="" placeholder='Linkedin Link' required />
-                        <input className='btn btn-primary' type="submit" value="Update Profile" />
-                    </form>
-                </div>
-            }
+                    </div>)
+                }
+                <label><h5>Select Your Skills</h5></label><br></br>
+                {
+                    myFreelancer.map(f => <div key={f._id}>
+                        <input defaultValue={f.onpageseo} type="checkbox" name="onpageseo" value="Onpage SEO" />
+
+                    </div>)
+                }
+                <label> OnPage SEO</label><br></br>
+                {
+                    myFreelancer.map(f => <div key={f._id}>
+                        <input defaultValue={f.offpageseo} type="checkbox" name="offpageseo" value="Offpage SEO" />
+
+                    </div>)
+                }
+                <label> OffPage SEO</label><br></br>
+                {
+                    myFreelancer.map(f => <div key={f._id}>
+                        <input defaultValue={f.technicalseo} type="checkbox" name="technicalseo" value="Technical SEO" />
+
+                    </div>)
+                }
+                <label>Technical SEO</label><br></br>
+                {
+                    myFreelancer.map(f => <div key={f._id}>
+                        <input defaultValue={f.lead} type="checkbox" name="lead" value="Lead Generation" />
+
+                    </div>)
+                }
+                <label>Lead Generation</label><br></br>
+                {
+                    myFreelancer.map(f => <div key={f._id}>
+                        <input defaultValue={f.social} type="checkbox" name="social" value="Social Media Marketing" />
+
+                    </div>)
+                }
+                <label>Social Media Marketing</label><br></br>
+
+                <label className='mt-3'><h5>Your Experience</h5></label><br></br>
+                {
+                    myFreelancer.map(f => <div key={f._id}>
+                        <select defaultValue={f.experience} name="experience" id="">
+                            <option>Under 1 Year</option>
+                            <option>1 Year + </option>
+                            <option>2 Years +</option>
+                            <option>3 Years +</option>
+                            <option>5 Years +</option>
+                        </select>
+
+                    </div>)
+                }
+
+                <label className='mt-3'> <h5>Are you available for work?</h5></label><br></br>
+                <select name="available">
+                    <option>Yes</option>
+                    <option>No</option>
+                </select>
+                {
+                    myFreelancer.map(f => <div key={f._id}>
+                        <input defaultValue={f.fb} type="text" name="fb" id="" placeholder='FB Link' required />
+                    </div>)
+                }
+                {
+                    myFreelancer.map(f => <div key={f._id}>
+                        <input defaultValue={f.twitter} type="text" name="twitter" id="" placeholder='Twitter Link' required />
+                    </div>)
+                }
+
+                {
+                    myFreelancer.map(f => <div key={f._id}>
+                        <input defaultValue={f.linkedin} type="text" name="linkedin" id="" placeholder='Linkedin Link' required />
+                    </div>)
+                }
+                <label className='mt-3'><h5><i class="fa-solid fa-money-bill-trend-up"></i> The marketplace you work in</h5>
+                    <p>(We will not approve you if you dont have enough reviews from other marketplaces)</p>
+                </label><br></br>
+                {
+                    myFreelancer.map(f => <div key={f._id}>
+                        <input defaultValue={f.marketplace} type="text" name="marketplace" id="" placeholder='Marketplace Name. e.g: UpWork, Fiverr' />
+                        
+                    </div>)
+                }
+                {
+                    myFreelancer.map(f => <div key={f._id}>
+                        <input defaultValue={f.projectcompleted} type="text" name="projectcompleted" id="" placeholder='Total Project Comleted' />
+                    </div>)
+                }
+                {
+                    myFreelancer.map(f => <div key={f._id}>
+                        <input defaultValue={f.totalreviews} type="text" name="totalreviews" id="" placeholder='Total Reviews' />
+                    </div>)
+                }
+                {
+                    myFreelancer.map(f => <div key={f._id}>
+                        <input defaultValue={f.profilelink} type="text" name="profilelink" id="" placeholder='Profile URL' />
+                    </div>)
+                }
+                <input className='btn btn-primary' type="submit" value="Update Profile" />
+            </form>
                 </>
             }
-            {
-                myDatas.length === 1 &&
-                <Button>Sorry. Provider Can not Set Client Profile</Button>
-            }
         </div>
+
+
+
     );
 };
 
-export default UpdateProfileAsClient;
+export default UpdateProviderProfile;

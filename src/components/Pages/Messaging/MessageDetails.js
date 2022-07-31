@@ -142,6 +142,7 @@ const MessageDetails = () => {
                 <div>
                     <div className='d-flex'>
                         <h5 className='col-lg-2'>
+                           
                             {message.clientName} Says
                         </h5>
                         <p className='mx-3'>
@@ -192,15 +193,15 @@ const MessageDetails = () => {
                     {
                         providers.length === 1 &&
                         <form onSubmit={handleReply}>
-                            <input value={message._id} type="text" name="messageId" id="" />
-                            <input value={message.providerName} type="text" name="providerName" id="" />
-                            <input value={message.providerId} type="text" name="providerId" id="" />
-                            <input value={message.providerEmail} type="text" name="providerEmail" id="" />
-                            <input value={message.clientName} type="text" name="clientName" id="" />
-                            <input value={message.clientEmail} type="text" name="clientEmail" id="" />
-                            <input value={message.clientId} type="text" name="clientId" id="" />
-                            <input value="unRead" type="text" name="messageStatus" id="" />
-                            <input value='providerReplied' type="text" name="replied" id="" />
+                            <input hidden value={message._id} type="text" name="messageId" id="" />
+                            <input hidden value={message.providerName} type="text" name="providerName" id="" />
+                            <input hidden value={message.providerId} type="text" name="providerId" id="" />
+                            <input hidden value={message.providerEmail} type="text" name="providerEmail" id="" />
+                            <input hidden value={message.clientName} type="text" name="clientName" id="" />
+                            <input hidden value={message.clientEmail} type="text" name="clientEmail" id="" />
+                            <input hidden value={message.clientId} type="text" name="clientId" id="" />
+                            <input hidden value="unRead" type="text" name="messageStatus" id="" />
+                            <input hidden value='providerReplied' type="text" name="replied" id="" />
                             <textarea name="providerMessage" id="" cols="30" rows="10"></textarea>
                             <input className='btn btn-primary' type="submit" value="Send Message" />
                         </form>
@@ -209,15 +210,15 @@ const MessageDetails = () => {
                     {
                         client.length === 1 &&
                         <form onSubmit={handleClientReply}>
-                            <input value={message._id} type="text" name="messageId" id="" />
-                            <input value={message.providerName} type="text" name="provider" id="" />
-                            <input value={message.providerId} type="text" name="providerId" id="" />
-                            <input value={message.providerEmail} type="text" name="providerEmail" id="" />
-                            <input value={message.clientName} type="text" name="client" id="" />
-                            <input value={message.clientEmail} type="text" name="clientEmail" id="" />
-                            <input value={message.clientId} type="text" name="clientId" id="" />
-                            <input value="unRead" type="text" name="messageStatus" id="" />
-                            <input value='clientReplied' type="text" name="replied" id="" />
+                            <input hidden value={message._id} type="text" name="messageId" id="" />
+                            <input hidden value={message.providerName} type="text" name="provider" id="" />
+                            <input hidden value={message.providerId} type="text" name="providerId" id="" />
+                            <input hidden value={message.providerEmail} type="text" name="providerEmail" id="" />
+                            <input hidden value={message.clientName} type="text" name="client" id="" />
+                            <input hidden value={message.clientEmail} type="text" name="clientEmail" id="" />
+                            <input hidden value={message.clientId} type="text" name="clientId" id="" />
+                            <input hidden value="unRead" type="text" name="messageStatus" id="" />
+                            <input hidden value='clientReplied' type="text" name="replied" id="" />
                             <textarea name="clientMessage" id="" cols="30" rows="10"></textarea>
                             <input className='btn btn-primary' type="submit" value="Send Message" />
                         </form>
@@ -283,15 +284,15 @@ const MessageDetails = () => {
                     {
                         providers.length === 1 &&
                         <form onSubmit={handleReply}>
-                            <input value={message._id} type="text" name="messageId" id="" />
-                            <input value={message.providerName} type="text" name="providerName" id="" />
-                            <input value={message.providerId} type="text" name="providerId" id="" />
-                            <input value={message.providerEmail} type="text" name="providerEmail" id="" />
-                            <input value={message.clientName} type="text" name="clientName" id="" />
-                            <input value={message.clientEmail} type="text" name="clientEmail" id="" />
-                            <input value={message.clientId} type="text" name="clientId" id="" />
-                            <input value="unRead" type="text" name="messageStatus" id="" />
-                            <input value='providerReplied' type="text" name="replied" id="" />
+                            <input hidden value={message._id} type="text" name="messageId" id="" />
+                            <input hidden value={message.providerName} type="text" name="providerName" id="" />
+                            <input hidden value={message.providerId} type="text" name="providerId" id="" />
+                            <input hidden value={message.providerEmail} type="text" name="providerEmail" id="" />
+                            <input hidden value={message.clientName} type="text" name="clientName" id="" />
+                            <input hidden value={message.clientEmail} type="text" name="clientEmail" id="" />
+                            <input hidden value={message.clientId} type="text" name="clientId" id="" />
+                            <input hidden value="unRead" type="text" name="messageStatus" id="" />
+                            <input hidden value='providerReplied' type="text" name="replied" id="" />
                             <textarea name="providerMessage" id="" cols="30" rows="10"></textarea>
                             <input className='btn btn-primary' type="submit" value="Send Message" />
                         </form>
@@ -300,15 +301,15 @@ const MessageDetails = () => {
                     {
                         client.length === 1 &&
                         <form onSubmit={handleClientReply}>
-                            <input value={message._id} type="text" name="messageId" id="" />
-                            <input value={message.providerName} type="text" name="provider" id="" />
-                            <input value={message.providerId} type="text" name="providerId" id="" />
-                            <input value={message.providerEmail} type="text" name="providerEmail" id="" />
-                            <input value={message.clientName} type="text" name="client" id="" />
-                            <input value={message.clientEmail} type="text" name="clientEmail" id="" />
-                            <input value={message.clientId} type="text" name="clientId" id="" />
-                            <input value="unRead" type="text" name="messageStatus" id="" />
-                            <input value='clientReplied' type="text" name="replied" id="" />
+                            <input hidden value={message._id} type="text" name="messageId" id="" />
+                            <input hidden value={message.providerName} type="text" name="provider" id="" />
+                            <input hidden value={message.providerId} type="text" name="providerId" id="" />
+                            <input hidden value={message.providerEmail} type="text" name="providerEmail" id="" />
+                            <input hidden value={message.clientName} type="text" name="client" id="" />
+                            <input hidden value={message.clientEmail} type="text" name="clientEmail" id="" />
+                            <input hidden value={message.clientId} type="text" name="clientId" id="" />
+                            <input hidden value="unRead" type="text" name="messageStatus" id="" />
+                            <input hidden value='clientReplied' type="text" name="replied" id="" />
                             <textarea name="clientMessage" id="" cols="30" rows="10"></textarea>
                             <input className='btn btn-primary' type="submit" value="Send Message" />
                         </form>

@@ -50,8 +50,7 @@ const ProviderSentMessageToClient = () => {
 
     return (
         <div className='container'>
-            <h2>Hello</h2>
-            {serviceOrders._id}
+
             {
                 serviceOrders.provideremail === user.email &&
                 <>
@@ -60,17 +59,17 @@ const ProviderSentMessageToClient = () => {
 
 
                     <form onSubmit={handleSendMessageToClient}>
-                        <input value={serviceOrders.servicename} type="text" name="serviceName" id="" />
-                        <input value={serviceOrders.serviceId} type="text" name="serviceId" id="" />
-                        <input value={serviceOrders.providerName} type="text" name="providerName" id="" />
-                        <input value={serviceOrders.provideremail} type="text" name="providerEmail" id="" />
-                        <input value={serviceOrders.providerId} type="text" name="providerId" id="" />
-                        <input value={serviceOrders._id} type="text" name="orderId" id="" />
-                        <input value="unRead" type="text" name="messageStatus" id="" />
-                        <input value="providerSent" type="text" name="whoSent" id="" />
-                        <input value={serviceOrders.clientName} type="text" name="clientName" id="" />
-                         <input value={serviceOrders.customeremail} type="text" name="clientEmail" id="" />
-                        <input value={serviceOrders.clientId} type="text" name="clientId" id="" />
+                        <input hidden value={serviceOrders.servicename} type="text" name="serviceName" id="" />
+                        <input hidden value={serviceOrders.serviceId} type="text" name="serviceId" id="" />
+                        <input hidden value={serviceOrders.providerName} type="text" name="providerName" id="" />
+                        <input hidden value={serviceOrders.provideremail} type="text" name="providerEmail" id="" />
+                        <input hidden value={serviceOrders.providerId} type="text" name="providerId" id="" />
+                        <input hidden value={serviceOrders._id} type="text" name="orderId" id="" />
+                        <input hidden value="unRead" type="text" name="messageStatus" id="" />
+                        <input hidden value="providerSent" type="text" name="whoSent" id="" />
+                        <input hidden value={serviceOrders.clientName} type="text" name="clientName" id="" />
+                        <input hidden value={serviceOrders.customeremail} type="text" name="clientEmail" id="" />
+                        <input hidden value={serviceOrders.clientId} type="text" name="clientId" id="" />
                           
                         <textarea name="providerMessage" id="" cols="30" rows="10"></textarea>
 

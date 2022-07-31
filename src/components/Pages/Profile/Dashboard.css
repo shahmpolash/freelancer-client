@@ -17,7 +17,21 @@
 .balance{
     background-color: aquamarine;
     padding: 15px;
-    height: 20%;
+   
+}
+.dashboard-icons{
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+.dashboard-icons .fa-solid{
+    font-size: 200px;
+    border: 1px solid skyblue;
+    color: skyblue;
+}
+.dashboard-icons .fa-solid:hover{
+    color: pink;
 }
 
 .service-img{
