@@ -1,8 +1,15 @@
+
+.provider-profile{
+    background-color:antiquewhite;
+}
 .profile img{
     width: 200px;
     height: 220px;
     border: 10px solid rgb(27, 28, 29);
     border-radius: 40%;
+}
+.profile-info{
+    margin-left: 20px;
 }
 .profile{
     border: 2px solid skyblue;
@@ -19,12 +26,12 @@
 }
 .user-services{
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
 }
 .profile-service-img{
     width: 200px;
     height: 170px;
-    border: 2px solid skyblue;
+
 }
 .profile-service-img:hover{
     border: 3px solid green;

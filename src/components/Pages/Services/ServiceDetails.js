@@ -37,9 +37,9 @@ const ServiceDetails = () => {
         navigate(`/freelancer/${id}`)
     }
     return (
-        <div>
+        <div className='service-details-page'>
             <div className='container d-flex justify-content-center profile-service'>
-                <div className='service-details container col-lg-9'>
+                <div className='service-details container col-lg-9 shadow p-3 mb-5 bg-body rounded-5'>
                     <h5>{service.title}</h5>
                     <img src={service.img} alt="" />
                     <h5 className='mt-3'>About My Service:</h5>
@@ -50,13 +50,13 @@ const ServiceDetails = () => {
                     </div>
                     <p className='verified-by-takealancer'>(Verified by TakeALancer Team)</p>
                     </div>
-                    {service.publishStatus === 'published' && <Button onClick={() => navigateToOrderPage(service._id)}>Price ${service.price}usd/ Mo</Button>}
+                    {service.publishStatus === 'Published' && <Button onClick={() => navigateToOrderPage(service._id)}>Price ${service.price}usd/ Mo</Button>}
                     <p>{service.details}</p>
-                     {service.publishStatus === 'pending' && <Button>This Service is Not Published</Button>}
+                     {service.publishStatus === 'Pending' && <Button>This Service is Not Published</Button>}
             
                 </div>
                 <div className='col-lg-3'>
-                    <div className='user-profile'>
+                    <div className='user-profile shadow p-3 mb-5 bg-body rounded-5'>
                         {
                             userProfile.map(u => <div key={u._id}><img src={u.profile} alt="" />
                                 <h5>{u.name}</h5>
@@ -69,9 +69,9 @@ const ServiceDetails = () => {
                     </div>
                     <div className='buy-service mt-3'>
                    
-                    {service.publishStatus === 'published' && <Button onClick={() => navigateToOrderPage(service._id)}>Buy this service ${service.price}usd/ Mo</Button>}
+                    {service.publishStatus === 'Published' && <Button onClick={() => navigateToOrderPage(service._id)}>Buy this service ${service.price}usd/ Mo</Button>}
                     
-                     {service.publishStatus === 'pending' && <Button>This Service is Not Published</Button>}
+                     {service.publishStatus === 'Pending' && <Button>This Service is Not Published</Button>}
                        
                         </div>
                 </div>

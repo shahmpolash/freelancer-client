@@ -50,7 +50,7 @@ const UpdateClientProfile = () => {
             })
     }
     useEffect(() => {
-        fetch(`http://localhost:5000/clientprofilereview?customeremail=${user.email}`)
+        fetch(`http://localhost:5000/clientprofilereview?customeremail=${user?.email}`)
             .then(res => res.json())
             .then(result => setMyClient(result))
     }, []);
@@ -58,7 +58,7 @@ const UpdateClientProfile = () => {
     return (
         <div className='container'>
           
-                <h5>{client._id}</h5>
+          {client.clientLocation}
                     <h5>Update Profile as a Client</h5>
                     <form className='client' onSubmit={handleUpdate}>
                         <input defaultValue={client.clientName} type="text" name="clientname" id="" placeholder='Your Full Name' required />

@@ -1,3 +1,30 @@
+.dashboard{
+    background-color:antiquewhite;
+}
+.profile-card{
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 2px 2px;
+}
+.dashboard-view-profile{
+    text-decoration: none;
+    border: 2px solid skyblue;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 25px;
+    padding-right: 25px;
+    border-radius: 15px;
+}
+
+.update-info{
+    text-decoration: none;
+}
+.reply-unread , .message-unread{
+    color: red;
+}
+.client-dashboard{
+    background-image: linear-gradient(to right, #7299fe , #b57aff);
+}
 .my-service{
     display: grid;
     grid-template-columns: repeat(5, 1fr);
@@ -8,16 +35,20 @@
     border: 1px solid skyblue;
 }
 .profile-image-dashboard{
-    width: 250px;
-    height: 250px;
+    margin-top: 50px;
+    width: 200px;
+    height: 200px;
     border: 2px solid skyblue;
     border-radius: 15px;
 }
 
 .balance{
-    background-color: aquamarine;
+    background-image: linear-gradient(to right, #7299fe , #b57aff);
     padding: 15px;
    
+}
+.balance h3{
+    color: white;
 }
 .dashboard-icons{
     margin-top: 10px;
@@ -26,12 +57,27 @@
     margin-bottom: 10px;
 }
 .dashboard-icons .fa-solid{
-    font-size: 200px;
+    font-size: 100px;
     border: 1px solid skyblue;
     color: skyblue;
 }
 .dashboard-icons .fa-solid:hover{
     color: pink;
+}
+.box-message{
+    margin-left: -50px;
+    margin-top: 5px;
+    height: 30%;
+}
+.box-message p{
+    font-size: 20px;
+    border-radius: 30%;
+    background-color: red;
+    padding-left: 5px;
+    padding-right: 5px;
+    color: white;
+    padding-top: 2px;
+    padding-bottom: 2px;
 }
 
 .service-img{

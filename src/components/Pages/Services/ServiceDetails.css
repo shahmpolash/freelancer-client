@@ -1,5 +1,8 @@
+.service-details-page{
+    background-color: antiquewhite;
+}
 .service-details {
-    border: 2px solid black;
+
     margin: 10px;
     border-radius: 15px;
 }
@@ -35,7 +38,7 @@
 }
 
 .user-profile {
-    border: 1px solid black;
+
     border-radius: 15px;
     background-color: aquamarine;
     margin-top: 10px;

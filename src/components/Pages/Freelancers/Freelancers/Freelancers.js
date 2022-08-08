@@ -5,25 +5,28 @@ import './Freelancers.css';
 const Freelancers = () => {
     const [freelancers, setFreelancers] = useState([]);
 
-    useEffect(() =>{
+    useEffect(() => {
         fetch('http://localhost:5000/freelancers')
-        .then(res=>res.json())
-        .then(data=>setFreelancers(data))
-    } ,[])
+            .then(res => res.json())
+            .then(data => setFreelancers(data))
+    }, [])
 
 
     return (
         <div className='container'>
-            
+
             <div className='freelancers'>
-            {
-                freelancers.map(freelancer => <Freelancer
-                key={freelancer._id}
-                freelancer={freelancer}>
- </Freelancer>)
-            }
+                {
+                    freelancers.map(freelancer =>
+                        <>{freelancer.status === 'Approved' && <Freelancer
+                            key={freelancer._id}
+                            freelancer={freelancer}>
+                        </Freelancer>}</>
+
+                    )
+                }
             </div>
-            
+
         </div>
     );
 };

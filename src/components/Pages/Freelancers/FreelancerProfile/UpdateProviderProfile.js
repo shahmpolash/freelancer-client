@@ -46,7 +46,9 @@ const UpdateProviderProfile = () => {
         const projectcompleted = event.target.projectcompleted.value;
         const totalreviews = event.target.totalreviews.value;
         const profilelink = event.target.profilelink.value;
-        const freelancer = {name, heading, profile, about, location, onpageseo, offpageseo, technicalseo, lead, social, experience, available, fb, twitter, linkedin, marketplace, projectcompleted, totalreviews, profilelink }
+        const status = event.target.status.value;
+        const verifiedStatus = event.target.verifiedStatus.value;
+        const freelancer = {name, heading, profile, about, location, onpageseo, offpageseo, technicalseo, lead, social, experience, available, fb, twitter, linkedin, marketplace, projectcompleted, totalreviews, profilelink, status, verifiedStatus }
 
         const url = `http://localhost:5000/freelancer/${id}`;
         fetch(url, {
@@ -444,6 +446,8 @@ const UpdateProviderProfile = () => {
                         <input defaultValue={f.profilelink} type="text" name="profilelink" id="" placeholder='Profile URL' />
                     </div>)
                 }
+                <input value="Unapproved" hidden type="text" name="status" id="" />
+                <input value="Unverified" hidden type="text" name="verifiedStatus" id="" />
                 <input className='btn btn-primary' type="submit" value="Update Profile" />
             </form>
                 </>

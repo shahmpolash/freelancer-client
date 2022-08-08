@@ -1,6 +1,18 @@
 
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
+import Admin from './components/AdminPanel/Admin';
+import AdminSetup from './components/AdminPanel/AdminSetup';
+import ProviderApprove from './components/AdminPanel/ProviderApprove';
+import ProviderEdit from './components/AdminPanel/ProviderEdit';
+import Providers from './components/AdminPanel/Providers';
+import ProviderUnapprove from './components/AdminPanel/ProviderUnapprove';
+import ProviderUnverify from './components/AdminPanel/ProviderUnverify';
+import ProviderVerify from './components/AdminPanel/ProviderVerify';
+import ServiceEdit from './components/AdminPanel/ServiceEdit';
+import ServicePublish from './components/AdminPanel/ServicePublish';
+import Services from './components/AdminPanel/Services';
+import ServiceUnpublish from './components/AdminPanel/ServiceUnpublish';
 import AcceptOrRejectWithdrawRequest from './components/Pages/AcceptOrRejectWithdrawRequest';
 import AddService from './components/Pages/AddService/AddService';
 import LeadGeneration from './components/Pages/AddService/AddServices/LeadGeneration';
@@ -31,6 +43,8 @@ import CompleteOrder from './components/Pages/Orders/CompleteOrder';
 import OrderItem from './components/Pages/Orders/OrderItem';
 import ReleasePayment from './components/Pages/Orders/ReleasePayment';
 import Requirement from './components/Pages/Orders/Requirement';
+import Cart from './components/Pages/Payment/Cart';
+import Payment from './components/Pages/Payment/Payment';
 import Dashboard from './components/Pages/Profile/Dashboard';
 import PublishedOrCancelService from './components/Pages/PublishedOrCancelService';
 import PostReviewAsaClient from './components/Pages/Reviews/PostReviewAsaClient';
@@ -54,6 +68,24 @@ function App() {
         <Route path='/' element={<Home></Home>}></Route>
         <Route path='/service/:serviceId' element={<ServiceDetails></ServiceDetails>}></Route>
         <Route path='/order/:serviceId' element={<RequireAuth><OrderItem></OrderItem></RequireAuth>}></Route>
+        <Route path='/cart' element={<RequireAuth><Cart></Cart></RequireAuth>}></Route>
+        <Route path='/payment/:orderId' element={<RequireAuth><Payment></Payment></RequireAuth>}></Route>
+
+        
+        <Route path='/admin' element={<RequireAuth><Admin></Admin></RequireAuth>}></Route>
+        <Route path='/admin/admin-setup' element={<RequireAuth><AdminSetup></AdminSetup></RequireAuth>}></Route>
+        <Route path='/admin/providers' element={<RequireAuth><Providers></Providers></RequireAuth>}></Route>
+        <Route path='/admin/provider/:id' element={<RequireAuth><ProviderEdit></ProviderEdit></RequireAuth>}></Route>
+        <Route path='/admin/provider/approve/:id' element={<RequireAuth><ProviderApprove></ProviderApprove></RequireAuth>}></Route>
+        <Route path='/admin/provider/unapprove/:id' element={<RequireAuth><ProviderUnapprove></ProviderUnapprove></RequireAuth>}></Route>
+        <Route path='/admin/provider/verify/:id' element={<RequireAuth><ProviderVerify></ProviderVerify></RequireAuth>}></Route>
+        <Route path='/admin/provider/unverify/:id' element={<RequireAuth><ProviderUnverify></ProviderUnverify></RequireAuth>}></Route>
+        <Route path='/admin/services' element={<RequireAuth><Services></Services></RequireAuth>}></Route>
+        <Route path='/admin/service/publish/:id' element={<RequireAuth><ServicePublish></ServicePublish></RequireAuth>}></Route>
+        <Route path='/admin/service/unpublish/:id' element={<RequireAuth><ServiceUnpublish></ServiceUnpublish></RequireAuth>}></Route>
+        <Route path='/admin/service/:id' element={<RequireAuth><ServiceEdit></ServiceEdit></RequireAuth>}></Route>
+
+
         <Route path='/acceptorreject/:id' element={<RequireAuth><AcceptOrReject></AcceptOrReject></RequireAuth>}></Route>
         <Route path='/requirement/:id' element={<RequireAuth><Requirement></Requirement></RequireAuth>}></Route>
         <Route path='/cancelorder/:id' element={<RequireAuth><CancelOrder></CancelOrder></RequireAuth>}></Route>

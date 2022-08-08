@@ -8,14 +8,14 @@ const SeoServices = () => {
     return (
         <div className='services container'>
             {
-                services.map(service => <div key={service._id}>
-                    {service.catagory === 'SEO' && <div>
-                    {service.publishStatus === 'published'  && <Service
+                services.map(service => <>
+                    {service.catagory === 'SEO' && <>
+                    {service.publishStatus === 'Published'  && <Service
                         key={service._id}
                         service={service}
                     ></Service>}
-                    </div>}
-                </div>)
+                    </>}
+                </>)
             }
         </div>
     );

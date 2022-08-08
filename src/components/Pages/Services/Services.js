@@ -9,13 +9,13 @@ const Services = () => {
         <div className='services container mt-5'>
 
             {
-                services.map(service => <div>
-                    {service.publishStatus === 'published' && <Service
+                services.map(service => <>
+                    {service.publishStatus === 'Published' && <Service
                         key={service._id}
                         service={service}
                     ></Service>}
 
-                </div>)
+</> )
             }
         </div>
     );

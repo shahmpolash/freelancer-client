@@ -37,7 +37,7 @@ const AddService = () => {
                 <div>
                     <form className='add-service' onSubmit={handleSubmit(onSubmit)}>
                         <input value={user.email} type="hidden" {...register("email")} />
-                        <input value='pending' hidden {...register("publishStatus")} />
+                        <input value='Pending' hidden {...register("publishStatus")} />
                         {
                             myDatas.map(myData => <><input value={myData.name} hidden {...register("providerName")} /></>)
                         }

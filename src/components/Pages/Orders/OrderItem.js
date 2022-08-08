@@ -15,6 +15,7 @@ const OrderItem = () => {
     const [iamClient, setIamClient] = useState([]);
 
 
+
     useEffect(() => {
         fetch(`http://localhost:5000/clientprofile?clientEmail=${user.email}`)
             .then(res => res.json())
@@ -38,7 +39,8 @@ const OrderItem = () => {
         const clientId = event.target.clientId.value;
         const requirement = event.target.requirement.value;
         const reqUpdated = event.target.reqUpdated.value;
-        const order = { customeremail, servicename, serviceprice, provideremail, serviceId, status, reviewStatus, releaseAmount, providerReviewStatus, clientName, clientId, providerName, providerId, requirement,reqUpdated };
+        const depositStatus = event.target.depositStatus.value;
+        const order = { customeremail, servicename, serviceprice, provideremail, serviceId, status, reviewStatus, releaseAmount, providerReviewStatus, clientName, clientId, providerName, providerId, requirement,reqUpdated, depositStatus };
 
         const url = `http://localhost:5000/orders/`;
         fetch(url, {
@@ -50,7 +52,7 @@ const OrderItem = () => {
         })
             .then(res => res.json())
             .then(result => {
-                navigate('/dashboard');
+                navigate('/cart');
             })
 
     };
@@ -88,6 +90,7 @@ const OrderItem = () => {
                     <input hidden value="0" type="number" name="releaseamount" id="" />
                     <input hidden value="none" type="text" name="reviewStatus" id="" />
                     <input hidden value="requpdated" type="text" name="reqUpdated" id="" />
+                    <input hidden value="notDeposit" type="text" name="depositStatus" id="" />
                     <textarea name="requirement" id="" cols="30" rows="10" placeholder='Your Requirement' required></textarea>
                     <input className='btn btn-primary' type="submit" value="Place Order" />
                 </form>

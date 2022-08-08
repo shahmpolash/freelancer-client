@@ -15,7 +15,8 @@ const SetService = () => {
         <div>
             {clients.length === 0 &&
                 <>
-                    {myDatas.length === 1 &&
+                    {
+                        myDatas.filter(data => data.status === "Approved").length === 1 &&
                         <div className='container'>
                             <div className='d-flex justify-content-center marketing-methods'>
                                 <div><Link to="/seo"><img src={seo} alt="" /></Link>
@@ -28,6 +29,11 @@ const SetService = () => {
                                     <p>Social Metia Marketing</p>
                                 </div>
                             </div>
+                        </div>
+                    }
+                    {
+                        myDatas.filter(data => data.status === "Unapproved").length === 1 &&
+                        <div className='container balance py-5 shadow p-3 mb-5 rounded-5'><h3>Sorry! Your Account is Not Approved. You can touch us at: </h3>
                         </div>
                     }
 
