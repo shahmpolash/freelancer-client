@@ -13,7 +13,7 @@ const MessageDetails = () => {
     const [message, setMessage] = useState([]);
     const [replies, setReplies] = useState([]);
     const navigate = useNavigate();
-    
+
 
     useEffect(() => {
         fetch(`http://localhost:5000/freelancerprofile?email=${user.email}`)
@@ -74,7 +74,7 @@ const MessageDetails = () => {
                 navigate(`/inbox/${messageId}`);
             })
     };
- 
+
 
     const handleReply = event => {
         event.preventDefault();
@@ -136,13 +136,13 @@ const MessageDetails = () => {
         <div className='container mt-5'>
             <h5 className='float-left'><Link as to={'/messages'}><i class="fa-solid fa-circle-arrow-left"></i> Back to inbox</Link></h5>
             <Link to={`/service/${message.serviceId}`}><h5>{message.serviceName}</h5></Link>
-            
+
             {
                 message.whoSent === 'clientSent' &&
                 <div>
                     <div className='d-flex'>
                         <h5 className='col-lg-2'>
-                           
+
                             {message.clientName} Says
                         </h5>
                         <p className='mx-3'>
@@ -156,6 +156,7 @@ const MessageDetails = () => {
                                 <form onSubmit={handleRead}>
                                     <input hidden value="read" type="text" name="messageStatus" id="" />
                                     <input type="submit" value="Mark Read" />
+                                    
                                 </form>
                                 <form onSubmit={handleUnRead}>
                                     <input hidden value="unRead" type="text" name="messageStatus" id="" />
@@ -229,7 +230,7 @@ const MessageDetails = () => {
             }
 
 
-{
+            {
                 message.whoSent === 'providerSent' &&
                 <div>
                     <div className='d-flex'>

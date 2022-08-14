@@ -19,7 +19,8 @@ const WithdrawAcceptOrCancel = () => {
     const handleAcceptWithdraw = event => {
         event.preventDefault();
         const status = event.target.status.value;
-        const withdrawStatus = { status };
+        const withdrawnAmount = event.target.withdrawnAmount.value;
+        const withdrawStatus = { status, withdrawnAmount };
         const url = `http://localhost:5000/withdraw/${id}`;
         fetch(url, {
             method: 'PUT',
@@ -42,6 +43,7 @@ const WithdrawAcceptOrCancel = () => {
             <h2>User Name {withdrawal.name}</h2>
             <h2>User PayPal {withdrawal.method}</h2>
             <form onSubmit={handleAcceptWithdraw}>
+                <input value={withdrawal.amount} type="number" name="withdrawnAmount" id="" />
                 <select name="status" id="">
                     <option value="accepted">Accept</option>
                     <option value="cancelled">Cancel</option>

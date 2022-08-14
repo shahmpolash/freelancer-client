@@ -41,6 +41,10 @@
     border: 2px solid skyblue;
     border-radius: 15px;
 }
+.dashboard-responsive{
+    display: flex;
+    justify-content: space-between;
+}
 
 .balance{
     background-image: linear-gradient(to right, #7299fe , #b57aff);
@@ -97,6 +101,12 @@
 
 @media only screen and (min-width: 300px) and (max-width: 600px) {
     .my-service{
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        justify-content: center;
+        gap: 0;
+    }
+    .dashboard-responsive{
         display: grid;
         grid-template-columns: repeat(1, 1fr);
         justify-content: center;

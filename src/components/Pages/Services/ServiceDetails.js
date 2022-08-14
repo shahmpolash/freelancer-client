@@ -51,6 +51,7 @@ const ServiceDetails = () => {
                     <p className='verified-by-takealancer'>(Verified by TakeALancer Team)</p>
                     </div>
                     {service.publishStatus === 'Published' && <Button onClick={() => navigateToOrderPage(service._id)}>Price ${service.price}usd/ Mo</Button>}
+                    {service.publishStatus === 'Unpublished' && <Button>This Service is Not Published</Button>}
                     <p>{service.details}</p>
                      {service.publishStatus === 'Pending' && <Button>This Service is Not Published</Button>}
             
@@ -70,6 +71,7 @@ const ServiceDetails = () => {
                     <div className='buy-service mt-3'>
                    
                     {service.publishStatus === 'Published' && <Button onClick={() => navigateToOrderPage(service._id)}>Buy this service ${service.price}usd/ Mo</Button>}
+                    {service.publishStatus === 'Unpublished' && <Button>This Service is Not Published</Button>}
                     
                      {service.publishStatus === 'Pending' && <Button>This Service is Not Published</Button>}
                        

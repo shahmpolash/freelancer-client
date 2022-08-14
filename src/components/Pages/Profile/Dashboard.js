@@ -22,21 +22,33 @@ const Dashboard = () => {
     const [messages, setMessages] = useState([])
     const [providerMessages, setProviderMessages] = useState([]);
     const [replies, setReplies] = useState([]);
+    const [paymentSettings, setPaymentSettings] = useState([]);
 
 
 
 
     let total = 0;
     let totalWithdraw = 0;
+    let commissions = 0;
 
     for (const w of withdraws) {
-        totalWithdraw = totalWithdraw + parseFloat(w.amount);
+        totalWithdraw = totalWithdraw + parseFloat(w.withdrawnAmount);
     }
     for (const balance of myServiceOrders) {
         total = total + parseFloat(balance.releaseAmount);
     };
+    for (const commission of paymentSettings) {
+        commissions = total * (commission.commission) / 100;
+    };
 
-    total = total - totalWithdraw;
+    total = total - totalWithdraw - commissions;
+
+    useEffect(() => {
+        const url = `http://localhost:5000/payment-setting`
+        fetch(url)
+            .then(res => res.json())
+            .then(data => setPaymentSettings(data));
+    }, []);
 
     useEffect(() => {
         fetch(`http://localhost:5000/clientprofile?clientEmail=${user.email}`)
@@ -108,7 +120,7 @@ const Dashboard = () => {
         <div className='dashboard'>
 
             <div className='container'>
-                <div className='d-flex justify-content-between'>
+                <div className='dashboard-responsive'>
                     <div className='col-lg-3 profile-card my-5 shadow p-3 mb-5 bg-body rounded-5'>
                         {
                             providerName.length === 1 &&
@@ -132,6 +144,7 @@ const Dashboard = () => {
                                         providerName.map(p => <Link className='update-info' to={`/updateprovider/${p._id}`}><i class="fa-solid fa-screwdriver-wrench"></i> Account Setting</Link>)
                                     }
                                 </div>
+                                
                                 <div className='d-flex justify-content-start my-3'>
                                     <div className='d-flex'>
                                         <Link className='update-info' as={Link} to="/messages"><i class="fa-solid fa-envelope"></i> Inbox</Link>
@@ -146,12 +159,12 @@ const Dashboard = () => {
                                                 </>
                                             }
 
-
-
                                         </div>
 
                                     </div>
+                                    
                                 </div>
+                                <div className='d-flex justify-content-start my-3'><Link className='update-info' to={'/provider-transactions'}><i class="fa-solid fa-clock-rotate-left"></i> Transaction History</Link></div>
                             </>
                         }
                         {
@@ -204,7 +217,7 @@ const Dashboard = () => {
                             <div className='mt-5 shadow p-3 bg-body rounded-5'>
                                 <h5>For Support Email Us</h5>
                             </div>
-                            <div className='shadow p-3 mb-5 bg-body rounded-5'>
+                            <div className='shadow p-3 mb-5 mt-2 bg-body rounded-5'>
                                 <h5>Dispute Order</h5>
                             </div>
                         </div>
@@ -213,8 +226,41 @@ const Dashboard = () => {
                         clientName.filter(client => client.clientEmail === user?.email).length > 0 &&
                         <div className='col-lg-6'>
                             <div className='my-5 shadow p-3 mb-5 bg-body rounded-5 client-dashboard'>
-                                <h5 className='text-white'>Recent Orders</h5>
+                                
+                                {
+                                    myOrders.filter(order => order.releaseStatus === 'requested').length > 0 &&
+                                    <>
+                                    <h5 className='text-white'>Payment Request</h5>
+                                        <Table>
+                                            <thead>
+                                                <tr>
+                                                    <th className='text-white'>Provider Name</th>
+                                                    <th className='text-white'>Service Name</th>
+                                                    <th></th>
 
+                                                </tr>
+                                            </thead>
+                                            {
+                                                myOrders.map(order => order.releaseStatus === 'requested' &&  
+                                                <tbody>
+                                                <tr>
+                                                    <td className='text-white'>{order.providerName}</td>
+                                                    <td className='text-white'>{order.servicename}</td>
+                                                    <td><Link className='text-white' to={`/releasepayment/${order._id}`}>Release Payment</Link></td>
+                                                </tr>
+                                            </tbody>
+                                                )
+                                            }
+                                            {
+                                                myOrders.filter(order => order.releaseStatus === 'requested').length === 0 &&
+                                                <>
+                                                <h5 className='text-white'>You have not received any payment request</h5>
+                                                </>
+                                            }
+                                        </Table>
+                                    </>
+                                    
+                                }
                             </div>
 
                         </div>
@@ -225,7 +271,7 @@ const Dashboard = () => {
                         <div className='col-lg-6 mt-5'>
                             {
                                 providerName.filter(provider => provider.status === "Approved").length === 1 &&
-                                <div className='balance py-5 shadow p-3 mb-5 rounded-5'><h3>My Balance ${total} usd</h3> {total > 99 && myDatas.map(w => <Link to={`/withdraw/${w._id}`}><Button>Withdraw</Button></Link>)
+                                <div className='balance py-5 shadow p-3 mb-5 rounded-5'><h3>My Balance ${parseInt(total)} usd</h3> {total > 99 && myDatas.map(w => <Link to={`/withdraw/${w._id}`}><Button>Withdraw</Button></Link>)
                                 }</div>
                             }
                             {
@@ -248,6 +294,7 @@ const Dashboard = () => {
                                             <tr>
                                                 <th>Image</th>
                                                 <th>Service Name</th>
+                                                <th>Edit</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -256,8 +303,9 @@ const Dashboard = () => {
                                                     <tr>
                                                         <td><img className='service-img' src={myService.img} alt="" /></td>
                                                         <td><Link to={`/service/${myService._id}`}>{myService.title}</Link>
-                                                            {myService.publishStatus === 'pending' && <p>Your Service is Pending</p>}
+                                                            {myService.publishStatus === 'Pending' && <p>Your Service is Pending</p>}
                                                         </td>
+                                                        <td><Link to={`/editservice/${myService._id}`}>Edit</Link></td>
                                                     </tr>)}
                                         </tbody>
                                     </Table>
@@ -360,6 +408,7 @@ const Dashboard = () => {
                                                             <div>{myOrder.reqUpdated === 'requpdated' && <></>}</div>
                                                         </td>
                                                         <td>{myOrder.releaseStatus === 'none' && <Link to={`/releasepayment/${myOrder._id}`}><Button>Release Payment</Button></Link>}
+                                                            {myOrder.releaseStatus === 'requested' && <Link to={`/releasepayment/${myOrder._id}`}><Button>Release Payment</Button></Link>}
                                                             {myOrder.releaseStatus === 'released' && <div>Payment Released</div>}</td>
                                                         <td>
                                                             <Button className='mb-2' onClick={() => navigateToDetails(myOrder.serviceId)}>{myOrder.servicename}</Button>
@@ -387,8 +436,7 @@ const Dashboard = () => {
                                                                 </>
                                                             }
                                                         </td>
-                                                    </tr>)
-
+                                                    </tr>).reverse()
                                             }
 
                                         </tbody>
@@ -428,6 +476,7 @@ const Dashboard = () => {
                                                         <div>{myOrder.reqUpdated === 'requpdated' && <></>}</div>
                                                     </td>
                                                     <td>{myOrder.releaseStatus === 'none' && <Link to={`/releasepayment/${myOrder._id}`}><Button>Release Payment</Button></Link>}
+                                                        {myOrder.releaseStatus === 'requested' && <Link to={`/releasepayment/${myOrder._id}`}><Button>Release Payment</Button></Link>}
                                                         {myOrder.releaseStatus === 'released' && <div>Payment Released</div>}</td>
                                                     <td><Button onClick={() => navigateToDetails(myOrder.serviceId)}>{myOrder.servicename}</Button></td>
                                                     <td>${myOrder.serviceprice}usd/ Mo</td>
@@ -451,7 +500,7 @@ const Dashboard = () => {
                                                             </>
                                                         }
                                                     </td>
-                                                </tr>)
+                                                </tr>).reverse()
 
                                             }
                                         </tbody>
@@ -557,8 +606,10 @@ const Dashboard = () => {
                                                             {myServiceOrder.status === 'cancelled' && <p>Client has Cancelled</p>}
 
                                                         </td>
-                                                        <td>{myServiceOrder.releaseStatus === 'none' && <div>Payment is Not Released</div>}
-                                                            {myServiceOrder.releaseStatus === 'released' && <div>Payment is Released</div>}</td>
+                                                        <td>{myServiceOrder.releaseStatus === 'none' && <div>Payment is Not Released <Link to={`/requestpayment/${myServiceOrder._id}`}>Request Now</Link></div>}
+                                                            {myServiceOrder.releaseStatus === 'released' && <div>Payment is Released</div>}
+                                                            {myServiceOrder.releaseStatus === 'requested' && <div>You have Requested</div>}
+                                                            </td>
                                                         <td><Button onClick={() => navigateToDetails(myServiceOrder.serviceId)}>{myServiceOrder.servicename}</Button></td>
                                                         <td>${myServiceOrder.serviceprice} usd/ Mo</td>
                                                         <td>{myServiceOrder.status === 'cancelled' && <div></div>}
@@ -622,7 +673,9 @@ const Dashboard = () => {
 
                                                         </td>
                                                         <td>{myServiceOrder.releaseStatus === 'none' && <div>Payment is Not Released</div>}
-                                                            {myServiceOrder.releaseStatus === 'released' && <div>Payment is Released</div>}</td>
+                                                            {myServiceOrder.releaseStatus === 'released' && <div>Payment is Released</div>}
+                                                            {myServiceOrder.releaseStatus === 'requested' && <div>You have Requested</div>}
+                                                            </td>
                                                         <td><Button onClick={() => navigateToDetails(myServiceOrder.serviceId)}>{myServiceOrder.servicename}</Button></td>
                                                         <td>${myServiceOrder.serviceprice} usd/ Mo</td>
                                                         <td>{myServiceOrder.status === 'cancelled' && <div></div>}
@@ -752,21 +805,25 @@ const Dashboard = () => {
                                 <th>Amounts</th>
                                 <th>PayPal Email</th>
                                 <th>Status</th>
+                                <th>Note</th>
+                                <th>TRansaction ID</th>
 
                             </tr>
                         </thead>
                         <tbody>
                             {withdraws.map(withdraw => <tr>
                                 <td> - </td>
-                                <td>{withdraw.amount} </td>
+                                <td>${withdraw.amount} USD</td>
                                 <td>{withdraw.method}</td>
                                 <td>
                                     {withdraw.status === 'pending' && <p>Pending...</p>}
                                     {withdraw.status === 'accepted' && <p>Accepted</p>}
                                     {withdraw.status === 'cancelled' && <p>Cancelled</p>}
                                 </td>
+                                <td>{withdraw.note}</td>
+                                <td>{withdraw.transactionId}</td>
 
-                            </tr>)}
+                            </tr>).reverse()}
 
                         </tbody>
                     </Table>

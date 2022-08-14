@@ -16,7 +16,8 @@ const CancelOrder = () => {
     const handleCancel = event => {
         event.preventDefault();
         const status = event.target.status.value;
-        const updateStatus = { status };
+        const cancelledBy = event.target.cancelledBy.value;
+        const updateStatus = { status, cancelledBy };
         const url = `http://localhost:5000/myorder/${id}`;
         fetch(url, {
             method: 'PUT',
@@ -38,6 +39,7 @@ const CancelOrder = () => {
                 <h2>You are Cancelling This Service: {cancel.servicename}</h2>
                 <form onSubmit={handleCancel}>
                     <input hidden value='cancelled' type="text" name="status" id="" />
+                    <input hidden value='client' type="text" name="cancelledBy" id="" />
                     <input type="submit" value="Cancell Now" />
                 </form>
             </div>}
