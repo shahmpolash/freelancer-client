@@ -1,3 +1,7 @@
+.setting{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
 .setting-account-card{
     background-image: linear-gradient(to right, #7299fe , #b57aff);
 }
@@ -6,4 +10,13 @@
 }
 .setting-contact-card{
     background-image: linear-gradient(to right, #f3740d , #a2f71a);
+}
+.setting-logo-card{
+    background-image: linear-gradient(to right, #0df346 , #1af77d);
+}
+.setting-banner-card{
+    background-image: linear-gradient(to right, #0d11f3 , #811af7);
+}
+.setting-footer-card{
+    background-image: linear-gradient(to right, #f30d0d , #c31af7);
 }

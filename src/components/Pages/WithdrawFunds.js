@@ -49,9 +49,9 @@ const WithdrawFunds = () => {
         const amount = event.target.amount.value;
         const withdrawnAmount = event.target.withdrawnAmount.value;
         const method = event.target.method.value;
-        const date = event.target.date.value;
+        const withdrawalDate = event.target.withdrawalDate.value;
 
-        const order = { userId, status, name, email, amount, method, withdrawnAmount, date };
+        const order = { userId, status, name, email, amount, method, withdrawnAmount, withdrawalDate };
 
         const url = `http://localhost:5000/withdraw/`;
         fetch(url, {
@@ -73,7 +73,7 @@ const WithdrawFunds = () => {
             <h2>{withdraw.email}</h2>
             <h5>Your Current Balance: ${total} USD</h5>
             <form onSubmit={handleWithdraw}>
-                <input hidden value={date} type="text" name="date" id="" />
+                <input hidden value={date} type="text" name="withdrawalDate" id="" />
                 <input hidden value={withdraw._id} type="text" name="userId" id="" />
                 <input hidden value={withdraw.name} type="text" name="name" id="" />
                 <input type="number" name="amount" id="" placeholder='Amount' max={total} />

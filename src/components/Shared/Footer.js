@@ -5,6 +5,15 @@ import './Footer.css';
 
 const Footer = () => {
     const [footers, setFooters] = useState([]);
+    const [categoris, setCategoris] = useState([]);
+
+    useEffect(() => {
+        const url = `http://localhost:5000/categoris`
+        fetch(url)
+            .then(res => res.json())
+            .then(data => setCategoris(data));
+    }, []);
+
     useEffect(() => {
         const url = `http://localhost:5000/footer`
         fetch(url)
@@ -16,22 +25,28 @@ const Footer = () => {
             {
                 footers.map(f =>
                     <>
-                        <h2 className='text-white'>{f.footerLogo}</h2>
-                        <div className='d-flex justify-content-center container'>
+                        <img className='footer-logo' src={f.footerLogo} alt="" />
+                        <div className='d-flex justify-content-between container footer-container'>
                             <div className=' col-lg-4'>
                                 <p className='text-white'>{f.footerText}</p>
                                 <p className='text-white'><i class="fa-solid fa-at"></i> {f.footerEmail}</p>
                             </div>
-                            <div className='col-lg-4'>
-                                <li className='text-white'>Home</li>
-                                <li className='text-white'><Link to={'/about'}>About</Link></li>
-                                <li className='text-white'>Link</li>
-                                <li className='text-white'>Provider</li>
-                                <li className='text-white'><Link to={'/contact'}>Contact Us</Link></li>
+                            <div className='col-lg-4 menu-list'>
+                                <li><Link className='text-white text-left' to={'/'}>Home</Link></li>
+                                <li><Link className='text-white text-left' to={'/about'}>About</Link></li>
+                                <li><Link className='text-white text-left' to={'/contact'}>Contact Us</Link></li>
+                                {
+                                    categoris.map(category => 
+                                        <li><Link className='text-white text-left' to={`/category/${category.slug}`}>{category.categoryName}</Link></li>
+                                        )
+                                }
+                               
                             </div>
-                            <div className='d-flex col-lg-4'>
-                                <input type="text" name="" id="" />
-                                <input type="submit" value="Submit" />
+                            <div className='d-flex justify-content-center col-lg-4 social-icons'>
+                                <a href={f.facebookURL}><i class="fa-brands fa-facebook"></i></a>
+                                <a href={f.twitterURL}><i class="fa-brands fa-twitter"></i></a>
+                                <a href={f.youtubeURL}><i class="fa-brands fa-youtube"></i></a>
+                                <a href={f.liniedInURL}><i class="fa-brands fa-linkedin"></i></a>
                             </div>
                         </div>
                     </>

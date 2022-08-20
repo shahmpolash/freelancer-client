@@ -7,7 +7,7 @@ import auth from '../../../firebase.init';
 const EditService = () => {
     const [user] = useAuthState(auth);
     const navigate = useNavigate();
-    const { id } = useParams();
+    const {id} = useParams();
     const [service, setService] = useState([]);
     const [myServices, setMyServices] = useState([])
     useEffect(() => {

@@ -19,7 +19,7 @@ const ClientProfile = () => {
             .then(result => setClientReviews(result))
     }, [clientReviews]);
     return (
-        <div className='container'>
+        <div className='container mt-5'>
             <div>
                 <img src={client.clientProfile} alt="" />
                 <div>
@@ -30,9 +30,10 @@ const ClientProfile = () => {
             <h2>Total: {clientReviews.filter(clientReview => clientReview.providerReviewStatus === 'done').length} Reviews</h2>
             {
                 clientReviews.map(clientReview =>
-                 <div className='client-review col-lg-4' key={clientReview._id}>
-                     {clientReview.providerReviewStatus === 'done' && <p>Rating {clientReview.providerRate} Out of 5</p>}
-                     {clientReview.providerReviewStatus === 'done' && <p className='mt-0'>Review {clientReview.providerReview}</p>}
+                 <div className='client-review my-2 col-lg-4' key={clientReview._id}>
+                     {clientReview.providerReviewStatus === 'done' && <div>Provider <h5>{clientReview.providerName}</h5></div>}
+                     {clientReview.providerReviewStatus === 'done' && <p >Rating {clientReview.providerRate} Out of 5</p>}
+                     {clientReview.providerReviewStatus === 'done' && <p className='client-review'>Review {clientReview.providerReview}</p>}
                 </div>)
             }
         </div>

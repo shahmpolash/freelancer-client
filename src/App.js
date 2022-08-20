@@ -94,6 +94,24 @@ import FooterUpdate from './components/AdminPanel/FooterUpdate';
 import AboutSetup from './components/AdminPanel/AboutSetup';
 import AboutPageUpdate from './components/AdminPanel/AboutPageUpdate';
 import AboutUs from './components/Pages/AboutUs/AboutUs';
+import AcceptPayment from './components/Pages/Freelancers/Freelancers/AcceptPayment';
+import AddFundstoBalance from './components/Pages/Freelancers/Freelancers/AddFundstoBalance';
+import Categories from './components/AdminPanel/Categories';
+import Category from './components/Pages/Services/Category';
+import CreateService from './components/Pages/AddService/AddServices/CreateService';
+import UpdateUserBalanceAfterWithdraw from './components/AdminPanel/UpdateUserBalanceAfterWithdraw';
+import ClientDispute from './components/Pages/Clients/ClientDispute';
+import ClientDisputeDetails from './components/Pages/Clients/ClientDisputeDetails';
+import ProviderDispute from './components/Pages/Freelancers/Freelancers/ProviderDispute';
+import ProviderDisputeDetails from './components/Pages/Freelancers/Freelancers/ProviderDisputeDetails';
+import DisputeList from './components/AdminPanel/DisputeList';
+import DisputeSolution from './components/AdminPanel/DisputeSolution';
+import RefundRequest from './components/AdminPanel/RefundRequest';
+import RefundedProcess from './components/AdminPanel/RefundedProcess';
+import LogoSetting from './components/AdminPanel/LogoSetting';
+import LogoUpdate from './components/AdminPanel/LogoUpdate';
+import BannerSetting from './components/AdminPanel/BannerSetting';
+import UpdateBanner from './components/AdminPanel/UpdateBanner';
 
 function App() {
   return (
@@ -102,9 +120,11 @@ function App() {
       <Routes>
         <Route path='/' element={<Home></Home>}></Route>
         <Route path='/service/:serviceId' element={<ServiceDetails></ServiceDetails>}></Route>
+        <Route path='/category/:slug' element={<Category></Category>}></Route>
         <Route path='/order/:serviceId' element={<RequireAuth><OrderItem></OrderItem></RequireAuth>}></Route>
         <Route path='/cart' element={<RequireAuth><Cart></Cart></RequireAuth>}></Route>
         <Route path='/payment/:orderId' element={<RequireAuth><Payment></Payment></RequireAuth>}></Route>
+        <Route path='/acceptpayment/:id' element={<RequireAuth><AcceptPayment></AcceptPayment></RequireAuth>}></Route>
 
         
         <Route path='/admin/login' element={<AdminLogin></AdminLogin>}></Route>
@@ -119,6 +139,7 @@ function App() {
         <Route path='/admin/provider/verify/:id' element={<AdminRequireAuth><ProviderVerify></ProviderVerify></AdminRequireAuth>}></Route>
         <Route path='/admin/provider/unverify/:id' element={<AdminRequireAuth><ProviderUnverify></ProviderUnverify></AdminRequireAuth>}></Route>
         <Route path='/admin/services' element={<AdminRequireAuth><Services></Services></AdminRequireAuth>}></Route>
+        <Route path='/admin/categoris' element={<AdminRequireAuth><Categories></Categories></AdminRequireAuth>}></Route>
         <Route path='/admin/services/pending' element={<AdminRequireAuth><PendingServices></PendingServices></AdminRequireAuth>}></Route>
         <Route path='/admin/services/published' element={<AdminRequireAuth><PublishedServices></PublishedServices></AdminRequireAuth>}></Route>
         <Route path='/admin/services/unpublished' element={<AdminRequireAuth><UnpublishedServices></UnpublishedServices></AdminRequireAuth>}></Route>
@@ -137,6 +158,9 @@ function App() {
         <Route path='/admin/withdraws/accepted' element={<AdminRequireAuth><AcceptedWithdraws></AcceptedWithdraws></AdminRequireAuth>}></Route>
         <Route path='/admin/withdraws/cancelled' element={<AdminRequireAuth><CancelledWithdraws></CancelledWithdraws></AdminRequireAuth>}></Route>
         <Route path='/admin/withdraw/update/:id' element={<AdminRequireAuth><WithdrawalUpdate></WithdrawalUpdate></AdminRequireAuth>}></Route>
+        <Route path='/admin/withdraw/updatebalance/:id' element={<AdminRequireAuth><UpdateUserBalanceAfterWithdraw></UpdateUserBalanceAfterWithdraw></AdminRequireAuth>}></Route>
+        <Route path='/admin/dispute' element={<AdminRequireAuth><DisputeList></DisputeList></AdminRequireAuth>}></Route>
+        <Route path='/admin/dispute/:id' element={<AdminRequireAuth><DisputeSolution></DisputeSolution></AdminRequireAuth>}></Route>
         <Route path='/admin/settings' element={<AdminRequireAuth><Settings></Settings></AdminRequireAuth>}></Route>
         <Route path='/admin/setting/payment' element={<AdminRequireAuth><PaymentSetting></PaymentSetting></AdminRequireAuth>}></Route>
         <Route path='/admin/setting/payment-update/:id' element={<AdminRequireAuth><PaymentUpdate></PaymentUpdate></AdminRequireAuth>}></Route>
@@ -147,9 +171,17 @@ function App() {
         <Route path='/admin/page-setting/contact/:id' element={<AdminRequireAuth><ContactPageUpdate></ContactPageUpdate></AdminRequireAuth>}></Route>
         <Route path='/admin/page-setting/footer/' element={<AdminRequireAuth><FooterSetup></FooterSetup></AdminRequireAuth>}></Route>
         <Route path='/admin/page-setting/footer/:id' element={<AdminRequireAuth><FooterUpdate></FooterUpdate></AdminRequireAuth>}></Route>
+        <Route path='/admin/refund' element={<AdminRequireAuth><RefundRequest></RefundRequest></AdminRequireAuth>}></Route>
+        <Route path='/admin/refund/:id' element={<AdminRequireAuth><RefundedProcess></RefundedProcess></AdminRequireAuth>}></Route>
+        <Route path='/admin/setting/logo' element={<AdminRequireAuth><LogoSetting></LogoSetting></AdminRequireAuth>}></Route>
+        <Route path='/admin/setting/logo/:id' element={<AdminRequireAuth><LogoUpdate></LogoUpdate></AdminRequireAuth>}></Route>
+        <Route path='/admin/setting/banner/' element={<AdminRequireAuth><BannerSetting></BannerSetting></AdminRequireAuth>}></Route>
+        <Route path='/admin/setting/banner/:id' element={<AdminRequireAuth><UpdateBanner></UpdateBanner></AdminRequireAuth>}></Route>
+        <Route path='/admin/setting/footer' element={<AdminRequireAuth><FooterSetup></FooterSetup></AdminRequireAuth>}></Route>
  
 
         <Route path='/acceptorreject/:id' element={<RequireAuth><AcceptOrReject></AcceptOrReject></RequireAuth>}></Route>
+        <Route path='/addfundstobalance/:id' element={<RequireAuth><AddFundstoBalance></AddFundstoBalance></RequireAuth>}></Route>
         <Route path='/requirement/:id' element={<RequireAuth><Requirement></Requirement></RequireAuth>}></Route>
         <Route path='/cancelorder/:id' element={<RequireAuth><CancelOrder></CancelOrder></RequireAuth>}></Route>
         <Route path='/complete/:id' element={<RequireAuth><CompleteOrder></CompleteOrder></RequireAuth>}></Route>
@@ -165,10 +197,15 @@ function App() {
         <Route path='/providermessage/:orderId' element={<RequireAuth><ProviderSentMessageToClient></ProviderSentMessageToClient></RequireAuth>}></Route>
         <Route path='/clientmessage/:orderId' element={<RequireAuth><ClientSentMessageToProviderAfterOrder></ClientSentMessageToProviderAfterOrder></RequireAuth>}></Route>
         <Route path='/client/:clientId' element={<ClientProfile></ClientProfile>}></Route>
+        <Route path='/providerdispute' element={<RequireAuth><ProviderDispute></ProviderDispute></RequireAuth>}></Route>
+        <Route path='/clientdispute' element={<RequireAuth><ClientDispute></ClientDispute></RequireAuth>}></Route>
+        <Route path='/clientdispute/:id' element={<RequireAuth><ClientDisputeDetails></ClientDisputeDetails></RequireAuth>}></Route>
+        <Route path='/providerdispute/:id' element={<RequireAuth><ProviderDisputeDetails></ProviderDisputeDetails></RequireAuth>}></Route>
         <Route path='/updateclientprofile/:clientId' element={<UpdateClientProfile></UpdateClientProfile>}></Route>
         <Route path='/withdraw/:id' element={<RequireAuth><WithdrawFunds></WithdrawFunds></RequireAuth>}></Route>
         <Route path='/userservice/:freelancerId' element={<FreelancerProfile></FreelancerProfile>}></Route>
         <Route path='/add-service' element={<RequireAuth><AddService></AddService></RequireAuth>}></Route>
+        <Route path='/createservice/:slug' element={<RequireAuth><CreateService></CreateService></RequireAuth>}></Route>
         <Route path='/editservice/:id' element={<RequireAuth><EditService></EditService></RequireAuth>}></Route>
         <Route path='/messages' element={<RequireAuth><Messages></Messages></RequireAuth>}></Route>
         <Route path='/sentmessages' element={<RequireAuth><SentMessages></SentMessages></RequireAuth>}></Route>

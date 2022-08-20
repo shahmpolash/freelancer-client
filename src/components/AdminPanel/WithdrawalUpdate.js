@@ -9,6 +9,9 @@ const WithdrawalUpdate = () => {
     const navigate = useNavigate();
     const [admins, setAdmins] = useState([]);
     const [user] = useAuthState(auth);
+    const current = new Date();
+    const date = `${current.getDate()}/${current.getMonth() + 1}/${current.getFullYear()}`;
+
 
     useEffect(() => {
         const url = `http://localhost:5000/admin`
@@ -31,7 +34,8 @@ const WithdrawalUpdate = () => {
         const withdrawnAmount = event.target.withdrawnAmount.value;
         const note = event.target.note.value;
         const transactionId = event.target.transactionId.value;
-        const withdrawStatus = { status, withdrawnAmount, note, transactionId };
+        const processDate = event.target.processDate.value;
+        const withdrawStatus = { status, withdrawnAmount, note, transactionId, processDate };
         const url = `http://localhost:5000/withdraw/${id}`;
         fetch(url, {
             method: 'PUT',
@@ -43,15 +47,16 @@ const WithdrawalUpdate = () => {
             .then(res => res.json())
             .then(result => {
                 alert('Are You Sure?');
-                navigate('/admin/withdraws')
+                navigate(`/admin/withdraw/updatebalance/${withdrawal._id}`)
             })
     };
     const handleCancelWithdraw = event => {
         event.preventDefault();
         const status = event.target.status.value;
         const withdrawnAmount = event.target.withdrawnAmount.value;
+        const processDate = event.target.processDate.value;
         const note = event.target.note.value;
-        const withdrawStatus = { status, withdrawnAmount, note };
+        const withdrawStatus = { status, withdrawnAmount, note, processDate };
         const url = `http://localhost:5000/withdraw/${id}`;
         fetch(url, {
             method: 'PUT',
@@ -77,6 +82,7 @@ const WithdrawalUpdate = () => {
                     <h2>User Name {withdrawal.name}</h2>
                     <h2>User PayPal {withdrawal.method}</h2>
                     <form onSubmit={handleAcceptWithdraw}>
+                        <input hidden value={date} type="text" name="processDate" id="" />
                         <input value={withdrawal.amount} type="number" name="withdrawnAmount" id="" />
                         <input type="text" name="note" id="" placeholder='Note' />
                         <input type="text" name="transactionId" id="" placeholder='Transaction ID' />
@@ -85,6 +91,7 @@ const WithdrawalUpdate = () => {
                     </form>
                     <h5>Or</h5>
                     <form onSubmit={handleCancelWithdraw}>
+                        <input hidden value={date} type="text" name="processDate" id="" />
                         <input value="0" type="number" name="withdrawnAmount" id="" />
                         <input type="text" name="note" id="" placeholder='Note' />
                         <input value="cancelled" type="text" name="status" id="" />
@@ -92,7 +99,7 @@ const WithdrawalUpdate = () => {
                     </form>
                 </>
             }
-             {
+            {
                 admins.filter(admin => admin.adminEmail === user?.email).length === 0 &&
                 <>
                     <h5>You dont have permission to access Admin Panel</h5>

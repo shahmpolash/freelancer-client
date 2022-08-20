@@ -41,6 +41,7 @@ const UpdateProfile = () => {
             totalreviews: event.target.totalreviews.value,
             status: event.target.status.value,
             verifiedStatus: event.target.verifiedStatus.value,
+            currentBalance: event.target.currentBalance.value,
         }
         const url = `http://localhost:5000/freelancers/`;
         fetch(url, {
@@ -361,6 +362,7 @@ const UpdateProfile = () => {
                                 <input type="text" name="profilelink" id="" placeholder='Profile URL' />
                                 <input value="Unapproved" hidden type="text" name="status" id="" />
                                 <input value="Unverified" hidden type="text" name="verifiedStatus" id="" />
+                                <input value="0" hidden type="text" name="currentBalance" id="" />
                                 <input className='btn btn-primary' type="submit" value="Update Profile and Next" />
                             </form>
                         </div>

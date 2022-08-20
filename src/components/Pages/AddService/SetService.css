@@ -8,6 +8,10 @@
 .marketing-methods img:hover{
     border: 2px solid blue;
 }
+.categoris{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
 
 @media only screen and (min-width: 300px) and (max-width: 800px) {
     .marketing-methods{

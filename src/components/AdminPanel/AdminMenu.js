@@ -12,11 +12,14 @@ const AdminMenu = () => {
                         <Nav.Link href="/admin/providers">Providers</Nav.Link>
                         <Nav.Link href="/admin/clients">Clients</Nav.Link>
                         <Nav.Link href="/admin/orders">Orders</Nav.Link>
+                        <Nav.Link href="/admin/categoris">Categoris</Nav.Link>
                         <Nav.Link href="/admin/services">Services</Nav.Link>
                         <Nav.Link href="/admin/admin-setup">Add Admin</Nav.Link>
                         <Nav.Link href="/admin/withdraws">Withdraws</Nav.Link>
                         <Nav.Link href="/admin/settings">Settings</Nav.Link>
                         <Nav.Link href="/admin/page-settings">Page Settings</Nav.Link>
+                        <Nav.Link href="/admin/dispute">Dispute List</Nav.Link>
+                        <Nav.Link href="/admin/refund">Refund Requests</Nav.Link>
                     </Nav>
                 </Container>
             </Navbar>

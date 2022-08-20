@@ -19,7 +19,6 @@ const AdminSetup = () => {
     }, []);
 
     const handleAdmin = event => {
-
         event.preventDefault();
         const adminName = event.target.adminName.value;
         const adminEmail = event.target.adminEmail.value;
@@ -36,7 +35,7 @@ const AdminSetup = () => {
             .then(res => res.json())
             .then(result => {
 
-                navigate('/dashboard');
+                navigate('/admin/dashboard');
 
             })
     }

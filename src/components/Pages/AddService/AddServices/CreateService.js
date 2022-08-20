@@ -7,22 +7,22 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../../../../firebase.init';
 import useFreelancer from '../../../hooks/useFreelancer';
 
-const Seo = () => {
+const CreateService = () => {
 
     const [user] = useAuthState(auth);
     const { register, handleSubmit } = useForm();
     const [myDatas] = useFreelancer();
     const navigate = useNavigate();
-    const [category, setCategory] = useState([]);
-    const {id} = useParams();
+    const [categories, setCategories] = useState([]);
+    const {slug} = useParams();
 
     useEffect(() => {
-        const url = `http://localhost:5000/category/${id}`
+        const url = `http://localhost:5000/category?slug=${slug}`
         fetch(url)
             .then(res => res.json())
-            .then(data => setCategory(data));
+            .then(data => setCategories(data));
 
-    }, [category]);
+    }, []);
 
     const onSubmit = data => {
         const url = `http://localhost:5000/service/`;
@@ -46,7 +46,13 @@ const Seo = () => {
                 <div>
                     <form className='add-service' onSubmit={handleSubmit(onSubmit)}>
                         <input value={user.email} type="hidden" {...register("email")} />
-                       <input value={category.categoryName} type="text" name="category" id="" />
+                        {
+                            categories.map(category => <><input value={category.categoryName}  {...register("category")} /></>)
+                        }
+                        {
+                            categories.map(category => <><input value={category.slug}  {...register("slug")} /></>)
+                        }
+                       
                         <input value='Pending' hidden {...register("publishStatus")} />
                         {
                             myDatas.map(myData => <><input value={myData.name} hidden {...register("providerName")} /></>)
@@ -78,4 +84,4 @@ const Seo = () => {
     );
 };
 
-export default Seo;
+export default CreateService;

@@ -11,6 +11,22 @@ const Header = () => {
     const [providerMessages, setProviderMessages] = useState([]);
     const [replies, setReplies] = useState([]);
     const [myServiceOrders, setMyServiceOrders] = useState([]);
+    const [categoris, setCategoris] = useState([]);
+    const [logo, setLogo] = useState([]);
+
+    useEffect(() => {
+        const url = `http://localhost:5000/logo`
+        fetch(url)
+            .then(res => res.json())
+            .then(data => setLogo(data));
+    }, []);
+
+    useEffect(() => {
+        const url = `http://localhost:5000/categoris`
+        fetch(url)
+            .then(res => res.json())
+            .then(data => setCategoris(data));
+    }, []);
 
    
     const handleSignout = () => {
@@ -40,16 +56,21 @@ const Header = () => {
         <header>
             <Navbar className='p-3 menu-bar' collapseOnSelect expand="lg" bg="dark" variant="dark">
                 <Container>
-                    <Navbar.Brand as={Link} to="/">Freelancer</Navbar.Brand>
+                    {
+                        logo.map(l => <Navbar.Brand as={Link} to="/"><img className='logo' src={l.logoImg} alt="" /></Navbar.Brand>)
+                    }
+                    
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="me-auto">
                             <Nav.Link as={Link} to="/"><i class="fa-solid fa-house-chimney"></i></Nav.Link>
+                            
                             <NavDropdown title="Services" id="collasible-nav-dropdown">
-                                <NavDropdown.Item as={Link} to="/seo-services"><i class="fa-brands fa-searchengin"></i> SEO Services</NavDropdown.Item>
-                                <NavDropdown.Item as={Link} to="/lead-generation-services"><i class="fa-solid fa-arrows-down-to-people"></i> Lead Generation</NavDropdown.Item>
-                                <NavDropdown.Item as={Link} to="#action/3.3"><i class="fa-solid fa-user-group"></i> Social Media Marketing</NavDropdown.Item>
-                                <NavDropdown.Item as={Link} to="#action/3.4"><i class="fa-solid fa-message"></i> Email Marketing</NavDropdown.Item>
+                                {
+                                    categoris.map(category => 
+                                        <NavDropdown.Item as={Link} to={`/category/${category.slug}`}>{category.categoryName}</NavDropdown.Item>
+                                        )
+                                }
                             </NavDropdown>
                         </Nav>
                         <Nav>

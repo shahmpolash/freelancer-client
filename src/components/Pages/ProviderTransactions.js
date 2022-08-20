@@ -7,18 +7,28 @@ const ProviderTransactions = () => {
     const [user] = useAuthState(auth);
     const [releases, setreleases] = useState([]);
     const [withdraws, setWithdraws] = useState([]);
+    const [providerName, setProviderName] = useState([]);
 
-    let total = 0;
+    let currentBalance = 0;
     let totalWithdraw = 0;
+
+    for (const provider of providerName){
+        currentBalance = provider.currentBalance;
+    }
 
     for (const w of withdraws) {
         totalWithdraw = totalWithdraw + parseFloat(w.withdrawnAmount);
     }
-    for (const release of releases) {
-        total = total + parseFloat(release.releaseAmount - (release.releaseAmount * 10 / 100));
-    };
+    
+    currentBalance = currentBalance - totalWithdraw;
 
-    total = total-totalWithdraw;
+  
+
+    useEffect(() => {
+        fetch(`http://localhost:5000/freelancerprofile?email=${user.email}`)
+            .then(res => res.json())
+            .then(review => setProviderName(review))
+    }, [user]);
 
     useEffect(() => {
         const url = `http://localhost:5000/myserviceorder?email=${user.email}`
@@ -34,41 +44,26 @@ const ProviderTransactions = () => {
     }, [user]);
     return (
         <div className='container'>
-            <h5>Current Balance ${parseInt(total)} USD</h5>
+            <h5>Current Balance ${parseInt(currentBalance)} USD</h5>
             <Table striped bordered hover>
                 <thead>
                     <tr>
-                        <th>#</th>
+                        <th>Date</th>
                         <th>Debit</th>
                         <th>Credit</th>
                     </tr>
                 </thead>
                 {
-                    releases.map(release =>
+                    releases.map(release => release.paymentAccepted === 'done' &&
                         <>
                         
                         <tbody>
                             <tr>
-                                <td>1</td>
+                                <td>{release.releaseDate}</td>
                                 <td>{(release.releaseAmount)-(release.releaseAmount * 10 / 100)} <p>From {release.servicename}</p></td>
                                 <td> - {(release.releaseAmount * 10 / 100)}USD 10% TakeALancer Fee</td>
                             </tr>
-                        </tbody>
-
-                        {
-                            withdraws.map(w=> 
-                                <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>-</td>
-                                    <td> - {w.withdrawnAmount} USD<p>Withdrawn to {w.method}</p></td>
-                                    
-                                </tr>
-                            </tbody>
-                                
-                                )
-                        }
-                        
+                        </tbody>                     
                         </>
                     ).reverse()
                 }

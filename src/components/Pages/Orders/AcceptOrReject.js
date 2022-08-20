@@ -40,8 +40,9 @@ const AcceptOrReject = () => {
     const handleReject = event =>{
         event.preventDefault();
         const status = event.target.status.value;
-        const updateStatus = {status};
-        const url = `http://localhost:5000/myserviceorder/${id}`;
+        const refundStatus = event.target.refundStatus.value;
+        const updateStatus = {status, refundStatus};
+        const url = `http://localhost:5000/myserviceorderrejected/${id}`;
         fetch(url, {
             method: 'PUT',
             headers: {
@@ -68,6 +69,7 @@ const AcceptOrReject = () => {
             or
             <form onSubmit={handleReject}>
                 <input hidden value='rejected' type="text" name="status" id="" />
+                <input hidden value='pending' type="text" name="refundStatus" id="" />
                 <input type="submit" value="Reject This Order" />
             </form>
         </div>

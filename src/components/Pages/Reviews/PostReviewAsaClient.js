@@ -36,7 +36,7 @@ const PostReviewAsaClient = () => {
             .then(res => res.json())
             .then(result => {
                 console.log('Connected', result);
-                navigate('/');
+                navigate('/dashboard');
             })
     };
 
@@ -48,7 +48,13 @@ const PostReviewAsaClient = () => {
             <h5>You are Posting Review for: {myOrders.servicename}</h5>
             <h5>Provider Email: {myOrders.providerName}</h5>
             <form onSubmit={handleReviews}>
-                <input type="number" name="rate" id="" placeholder='rate out of 5' />
+                <select name="rate" id="">
+                    <option>1 Star</option>
+                    <option>2 Star </option>
+                    <option>3 Star</option>
+                    <option>4 Star</option>
+                    <option>5 Star</option>
+                </select>
                 <input hidden value='done' type="text" name="reviewdone" id="" />
                 <textarea name="review" id="" cols="30" rows="10" placeholder='write short review'></textarea>
                 <input type="submit" value="Post Now" />

@@ -92,7 +92,7 @@ const ServiceDetails = () => {
                             </div>}
                             </div>
                         </div>
-                    </div>)
+                    </div>).reverse()
                 }
             </div>
         </div>

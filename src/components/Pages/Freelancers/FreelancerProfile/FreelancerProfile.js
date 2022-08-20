@@ -152,7 +152,7 @@ const FreelancerProfile = () => {
                                                 </div>}
                                         </div>
                                     </div>
-                                </div>)
+                                </div>).reverse()
                             }
                         </div>
                     </div>

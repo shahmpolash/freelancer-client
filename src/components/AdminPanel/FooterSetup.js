@@ -22,7 +22,11 @@ const FooterSetup = () => {
         const footerText = event.target.footerText.value;
         const footerEmail = event.target.footerEmail.value;
         const footerAddress = event.target.footerAddress.value;
-        const footerUpdate = { footerLogo, footerText, footerEmail, footerAddress }
+        const facebookURL = event.target.facebookURL.value;
+        const twitterURL = event.target.twitterURL.value;
+        const youtubeURL = event.target.youtubeURL.value;
+        const liniedInURL = event.target.liniedInURL.value;
+        const footerUpdate = { footerLogo, footerText, footerEmail, footerAddress, liniedInURL, youtubeURL, twitterURL, facebookURL }
         const url = `http://localhost:5000/footer`;
         fetch(url, {
             method: 'POST',
@@ -74,10 +78,14 @@ const FooterSetup = () => {
                 footers.length === 0 &&
 
                 <form onSubmit={handleFooter}>
-                    <input type="text" name="footerLogo" id="" placeholder='Logo' />
+                    <input type="text" name="footerLogo" id="" placeholder='Logo URL' />
                     <input type="text" name="footerText" id="" placeholder='Text' />
                     <input type="email" name="footerEmail" id="" placeholder='Contact Email' />
                     <input type="text" name="footerAddress" id="" placeholder='Contact Address' />
+                    <input type="text" name="facebookURL" id="" placeholder='FB Page URL' />
+                    <input type="text" name="twitterURL" id="" placeholder='Twitter Page URL' />
+                    <input type="text" name="youtubeURL" id="" placeholder='YouTube Channel  URL' />
+                    <input type="text" name="liniedInURL" id="" placeholder='LinkedIn Profile URL' />
                     <input type="submit" value="Save Now" />
                 </form>
             }

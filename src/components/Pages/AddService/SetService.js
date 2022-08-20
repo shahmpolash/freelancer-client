@@ -1,16 +1,22 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
 import './SetService.css';
-import seo from './images/seo.png';
-import lead from './images/lead.png';
-import social from './images/social.png';
 import useFreelancer from '../../hooks/useFreelancer';
 import useClient from '../../hooks/useClient';
 
 const SetService = () => {
     const [myDatas] = useFreelancer();
     const [clients] = useClient();
+    const [categoris, setCategoris] = useState([]);
+
+    useEffect(() => {
+        const url = `http://localhost:5000/categoris`
+        fetch(url)
+            .then(res => res.json())
+            .then(data => setCategoris(data));
+
+    }, []);
     return (
         <div>
             {clients.length === 0 &&
@@ -18,16 +24,17 @@ const SetService = () => {
                     {
                         myDatas.filter(data => data.status === "Approved").length === 1 &&
                         <div className='container'>
-                            <div className='d-flex justify-content-center marketing-methods'>
-                                <div><Link to="/seo"><img src={seo} alt="" /></Link>
-                                    <p>SEO</p>
-                                </div>
-                                <div><Link to="/lead"><img src={lead} alt="" /></Link>
-                                    <p>Lead Generation</p>
-                                </div>
-                                <div><Link to="/social"><img src={social} alt="" /></Link>
-                                    <p>Social Metia Marketing</p>
-                                </div>
+                            <h5>Choose a Category</h5>
+                            <div className='categoris'>
+                                
+                                {
+                                    categoris.map(category =>
+                                        <div className='shadow p-3 mb-5 mx-5 bg-body rounded-5'>
+                                            <h5><Link className='btn' to={`/createservice/${category.slug}`}>{category.categoryName}</Link></h5>
+                                        </div>
+                                    )
+                                }
+
                             </div>
                         </div>
                     }

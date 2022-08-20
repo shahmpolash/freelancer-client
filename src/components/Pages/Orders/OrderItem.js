@@ -13,6 +13,9 @@ const OrderItem = () => {
     const [service] = useOrderItem();
     const navigate = useNavigate();
     const [iamClient, setIamClient] = useState([]);
+    const current = new Date();
+    const date = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`;
+
 
 
 
@@ -40,7 +43,10 @@ const OrderItem = () => {
         const requirement = event.target.requirement.value;
         const reqUpdated = event.target.reqUpdated.value;
         const depositStatus = event.target.depositStatus.value;
-        const order = { customeremail, servicename, serviceprice, provideremail, serviceId, status, reviewStatus, releaseAmount, providerReviewStatus, clientName, clientId, providerName, providerId, requirement,reqUpdated, depositStatus };
+        const orderDate = event.target.orderDate.value;
+        const disputeStatus = event.target.disputeStatus.value;
+        const disputedCreated = event.target.disputedCreated.value;
+        const order = { customeremail, servicename, serviceprice, provideremail, serviceId, status, reviewStatus, releaseAmount, providerReviewStatus, clientName, clientId, providerName, providerId, requirement,reqUpdated, depositStatus, orderDate, disputeStatus, disputedCreated };
 
         const url = `http://localhost:5000/orders/`;
         fetch(url, {
@@ -86,11 +92,14 @@ const OrderItem = () => {
                     {
                         iamClient.map(client => <div key={client._id}><input hidden value={client._id} type="text" name="clientId" id="" /></div>)
                     }
+                    <input hidden value={date} type="text" name="orderDate" id="" />
                     <input hidden value="none" type="text" name="providerReviewStatus" id="" />
                     <input hidden value="0" type="number" name="releaseamount" id="" />
                     <input hidden value="none" type="text" name="reviewStatus" id="" />
                     <input hidden value="requpdated" type="text" name="reqUpdated" id="" />
                     <input hidden value="notDeposit" type="text" name="depositStatus" id="" />
+                    <input hidden value="none" type="text" name="disputeStatus" id="" />
+                    <input hidden value="none" type="text" name="disputedCreated" id="" />
                     <textarea name="requirement" id="" cols="30" rows="10" placeholder='Your Requirement' required></textarea>
                     <input className='btn btn-primary' type="submit" value="Place Order" />
                 </form>
