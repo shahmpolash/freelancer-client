@@ -17,7 +17,7 @@ const Seo = () => {
     const {id} = useParams();
 
     useEffect(() => {
-        const url = `http://localhost:5000/category/${id}`
+        const url = `https://agile-forest-60392.herokuapp.com/category/${id}`
         fetch(url)
             .then(res => res.json())
             .then(data => setCategory(data));
@@ -25,7 +25,7 @@ const Seo = () => {
     }, [category]);
 
     const onSubmit = data => {
-        const url = `http://localhost:5000/service/`;
+        const url = `https://agile-forest-60392.herokuapp.com/service/`;
         fetch(url, {
             method: 'POST',
             headers: {

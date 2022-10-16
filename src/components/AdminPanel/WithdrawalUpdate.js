@@ -14,7 +14,7 @@ const WithdrawalUpdate = () => {
 
 
     useEffect(() => {
-        const url = `http://localhost:5000/admin`
+        const url = `https://agile-forest-60392.herokuapp.com/admin`
         fetch(url)
             .then(res => res.json())
             .then(data => setAdmins(data));
@@ -22,7 +22,7 @@ const WithdrawalUpdate = () => {
 
 
     useEffect(() => {
-        fetch(`http://localhost:5000/withdraw/${id}`)
+        fetch(`https://agile-forest-60392.herokuapp.com/withdraw/${id}`)
             .then(res => res.json())
             .then(data => setWithdrawal(data))
     }, [])
@@ -36,7 +36,7 @@ const WithdrawalUpdate = () => {
         const transactionId = event.target.transactionId.value;
         const processDate = event.target.processDate.value;
         const withdrawStatus = { status, withdrawnAmount, note, transactionId, processDate };
-        const url = `http://localhost:5000/withdraw/${id}`;
+        const url = `https://agile-forest-60392.herokuapp.com/withdraw/${id}`;
         fetch(url, {
             method: 'PUT',
             headers: {
@@ -57,7 +57,7 @@ const WithdrawalUpdate = () => {
         const processDate = event.target.processDate.value;
         const note = event.target.note.value;
         const withdrawStatus = { status, withdrawnAmount, note, processDate };
-        const url = `http://localhost:5000/withdraw/${id}`;
+        const url = `https://agile-forest-60392.herokuapp.com/withdraw/${id}`;
         fetch(url, {
             method: 'PUT',
             headers: {

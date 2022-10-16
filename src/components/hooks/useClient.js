@@ -6,7 +6,7 @@ const useClient = () =>{
     const [user] = useAuthState(auth);
     const [clients, setClients] = useState([]);
     useEffect( () =>{
-        const url = `http://localhost:5000/clientprofile?clientEmail=${user.email}`
+        const url = `https://agile-forest-60392.herokuapp.com/clientprofile?clientEmail=${user.email}`
         fetch(url)
         .then(res=>res.json())
         .then(data=> setClients(data));

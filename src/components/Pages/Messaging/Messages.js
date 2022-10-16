@@ -12,21 +12,21 @@ const Messages = () => {
     const [replies, setReplies] = useState([]);
 
     useEffect(() => {
-        fetch(`http://localhost:5000/replies`)
+        fetch(`https://agile-forest-60392.herokuapp.com/replies`)
             .then(res => res.json())
             .then(result => setReplies(result))
     }, []);
 
 
     useEffect(() => {
-        fetch(`http://localhost:5000/freelancerprofile?email=${user.email}`)
+        fetch(`https://agile-forest-60392.herokuapp.com/freelancerprofile?email=${user.email}`)
             .then(res => res.json())
             .then(data => setProviders(data))
     }, [user])
 
 
     useEffect(() => {
-        fetch(`http://localhost:5000/messages`)
+        fetch(`https://agile-forest-60392.herokuapp.com/messages`)
             .then(res => res.json())
             .then(result => setProviderMessages(result))
     }, [providerMessages])

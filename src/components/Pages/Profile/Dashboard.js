@@ -39,60 +39,60 @@ const Dashboard = () => {
     currentBalance = currentBalance;
 
     useEffect(() => {
-        const url = `http://localhost:5000/payment-setting`
+        const url = `https://agile-forest-60392.herokuapp.com/payment-setting`
         fetch(url)
             .then(res => res.json())
             .then(data => setPaymentSettings(data));
     }, []);
 
     useEffect(() => {
-        fetch(`http://localhost:5000/clientprofile?clientEmail=${user.email}`)
+        fetch(`https://agile-forest-60392.herokuapp.com/clientprofile?clientEmail=${user.email}`)
             .then(res => res.json())
             .then(result => setClientName(result))
     }, [user])
 
     useEffect(() => {
-        fetch(`http://localhost:5000/freelancerprofile?email=${user.email}`)
+        fetch(`https://agile-forest-60392.herokuapp.com/freelancerprofile?email=${user.email}`)
             .then(res => res.json())
             .then(review => setProviderName(review))
     }, [user]);
 
     useEffect(() => {
-        fetch(`http://localhost:5000/withdraw?email=${user.email}`)
+        fetch(`https://agile-forest-60392.herokuapp.com/withdraw?email=${user.email}`)
             .then(res => res.json())
             .then(withdraw => setWithdraws(withdraw))
     }, [user])
 
 
     useEffect(() => {
-        const url = `http://localhost:5000/myservice?email=${user.email}`
+        const url = `https://agile-forest-60392.herokuapp.com/myservice?email=${user.email}`
         fetch(url)
             .then(res => res.json())
             .then(data => setMyServices(data));
     }, [user])
 
     useEffect(() => {
-        const url = `http://localhost:5000/myorder?email=${user.email}`
+        const url = `https://agile-forest-60392.herokuapp.com/myorder?email=${user.email}`
         fetch(url)
             .then(res => res.json())
             .then(data => setmyOrders(data));
     }, [user])
 
     useEffect(() => {
-        const url = `http://localhost:5000/myserviceorder?email=${user.email}`
+        const url = `https://agile-forest-60392.herokuapp.com/myserviceorder?email=${user.email}`
         fetch(url)
             .then(res => res.json())
             .then(info => setMyServiceOrders(info));
     }, [user]);
 
     useEffect(() => {
-        fetch(`http://localhost:5000/messages`)
+        fetch(`https://agile-forest-60392.herokuapp.com/messages`)
             .then(res => res.json())
             .then(result => setMessages(result))
     }, [messages])
 
     useEffect(() => {
-        fetch(`http://localhost:5000/replies`)
+        fetch(`https://agile-forest-60392.herokuapp.com/replies`)
             .then(res => res.json())
             .then(result => setReplies(result))
     }, []);

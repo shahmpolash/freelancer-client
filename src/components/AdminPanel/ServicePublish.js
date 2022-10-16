@@ -12,14 +12,14 @@ const ServicePublish = () => {
     const [user] = useAuthState(auth);
 
     useEffect(() => {
-        const url = `http://localhost:5000/admin`
+        const url = `https://agile-forest-60392.herokuapp.com/admin`
         fetch(url)
             .then(res => res.json())
             .then(data => setAdmins(data));
     }, []);
 
     useEffect(() => {
-        fetch(`http://localhost:5000/service/${id}`)
+        fetch(`https://agile-forest-60392.herokuapp.com/service/${id}`)
             .then(res => res.json())
             .then(data => setService(data))
     }, [service])
@@ -32,7 +32,7 @@ const ServicePublish = () => {
 
         const publishStatus = { status }
 
-        const url = `http://localhost:5000/service/${id}`;
+        const url = `https://agile-forest-60392.herokuapp.com/service/${id}`;
         fetch(url, {
             method: 'PUT',
             headers: {
@@ -53,7 +53,7 @@ const ServicePublish = () => {
 
         const publishStatus = { status }
 
-        const url = `http://localhost:5000/service/${id}`;
+        const url = `https://agile-forest-60392.herokuapp.com/service/${id}`;
         fetch(url, {
             method: 'PUT',
             headers: {

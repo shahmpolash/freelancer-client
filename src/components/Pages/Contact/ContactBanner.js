@@ -5,7 +5,7 @@ const ContactBanner = () => {
     const [contacts, setContacts] = useState([]);
 
     useEffect(() => {
-        const url = `http://localhost:5000/contact`
+        const url = `https://agile-forest-60392.herokuapp.com/contact`
         fetch(url)
             .then(res => res.json())
             .then(data => setContacts(data));

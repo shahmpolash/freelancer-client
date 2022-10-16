@@ -6,7 +6,7 @@ const Freelancers = () => {
     const [freelancers, setFreelancers] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:5000/freelancers')
+        fetch('https://agile-forest-60392.herokuapp.com/freelancers')
             .then(res => res.json())
             .then(data => setFreelancers(data))
     }, [])

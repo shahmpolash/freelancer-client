@@ -8,7 +8,7 @@ const useMyServiceOrderItem = () => {
 
 
     useEffect( () =>{
-        const url = `http://localhost:5000/myserviceorder?provideremail=${serviceOrder.provideremail}`
+        const url = `https://agile-forest-60392.herokuapp.com/myserviceorder?provideremail=${serviceOrder.provideremail}`
         fetch(url)
         .then(res=>res.json())
         .then(info=> setServiceOrder(info));

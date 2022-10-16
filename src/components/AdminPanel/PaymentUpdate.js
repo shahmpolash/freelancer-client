@@ -9,7 +9,7 @@ const PaymentUpdate = () => {
 
 
     useEffect(() => {
-        fetch(`http://localhost:5000/payment-setting/${id}`)
+        fetch(`https://agile-forest-60392.herokuapp.com/payment-setting/${id}`)
             .then(res => res.json())
             .then(data => setPaymentUpdate(data))
     }, [paymentUpdate])
@@ -20,7 +20,7 @@ const PaymentUpdate = () => {
         const paypalEmail = event.target.paypalEmail.value;
         const commission = event.target.commission.value;
         const paymentSettingUpdate = { paypalEmail, commission }
-        const url = `http://localhost:5000/payment-setting/${id}`;
+        const url = `https://agile-forest-60392.herokuapp.com/payment-setting/${id}`;
         fetch(url, {
             method: 'PUT',
             headers: {

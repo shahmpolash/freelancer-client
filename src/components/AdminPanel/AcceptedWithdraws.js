@@ -12,7 +12,7 @@ const AcceptedWithdraws = () => {
     const [user] = useAuthState(auth);
 
     useEffect(() => {
-        const url = `http://localhost:5000/admin`
+        const url = `https://agile-forest-60392.herokuapp.com/admin`
         fetch(url)
             .then(res => res.json())
             .then(data => setAdmins(data));
@@ -20,7 +20,7 @@ const AcceptedWithdraws = () => {
     }, []);
     
     useEffect(() => {
-        fetch('http://localhost:5000/withdraws')
+        fetch('https://agile-forest-60392.herokuapp.com/withdraws')
             .then(res => res.json())
             .then(data => setWithdraws(data))
     }, [])

@@ -16,25 +16,25 @@ const MessageDetails = () => {
 
 
     useEffect(() => {
-        fetch(`http://localhost:5000/freelancerprofile?email=${user.email}`)
+        fetch(`https://agile-forest-60392.herokuapp.com/freelancerprofile?email=${user.email}`)
             .then(res => res.json())
             .then(data => setProviders(data))
     }, [user]);
 
     useEffect(() => {
-        fetch(`http://localhost:5000/clientprofile?clientEmail=${user.email}`)
+        fetch(`https://agile-forest-60392.herokuapp.com/clientprofile?clientEmail=${user.email}`)
             .then(res => res.json())
             .then(data => setClient(data))
     }, [user])
 
     useEffect(() => {
-        fetch(`http://localhost:5000/message/${messageId}`)
+        fetch(`https://agile-forest-60392.herokuapp.com/message/${messageId}`)
             .then(res => res.json())
             .then(data => setMessage(data))
     }, []);
 
     useEffect(() => {
-        fetch(`http://localhost:5000/replies`)
+        fetch(`https://agile-forest-60392.herokuapp.com/replies`)
             .then(res => res.json())
             .then(result => setReplies(result))
     }, []);
@@ -43,7 +43,7 @@ const MessageDetails = () => {
         event.preventDefault();
         const messageStatus = event.target.messageStatus.value;
         const status = { messageStatus };
-        const url = `http://localhost:5000/message/${messageId}`;
+        const url = `https://agile-forest-60392.herokuapp.com/message/${messageId}`;
         fetch(url, {
             method: 'PUT',
             headers: {
@@ -60,7 +60,7 @@ const MessageDetails = () => {
         event.preventDefault();
         const messageStatus = event.target.messageStatus.value;
         const status = { messageStatus };
-        const url = `http://localhost:5000/message/${messageId}`;
+        const url = `https://agile-forest-60392.herokuapp.com/message/${messageId}`;
         fetch(url, {
             method: 'PUT',
             headers: {
@@ -89,7 +89,7 @@ const MessageDetails = () => {
         const replied = event.target.replied.value;
         const messageStatus = event.target.messageStatus.value;
         const reply = { messageId, providerName, providerId, providerEmail, clientName, clientId, providerMessage, replied, messageStatus, clientEmail };
-        const url = `http://localhost:5000/reply`;
+        const url = `https://agile-forest-60392.herokuapp.com/reply`;
         fetch(url, {
             method: 'POST',
             headers: {
@@ -115,7 +115,7 @@ const MessageDetails = () => {
         const replied = event.target.replied.value;
         const messageStatus = event.target.messageStatus.value;
         const reply = { messageId, provider, providerId, providerEmail, client, clientId, clientMessage, replied, messageStatus, clientEmail };
-        const url = `http://localhost:5000/reply`;
+        const url = `https://agile-forest-60392.herokuapp.com/reply`;
         fetch(url, {
             method: 'POST',
             headers: {

@@ -12,14 +12,14 @@ const ApprovedProviders = () => {
     const [user] = useAuthState(auth);
 
     useEffect(() => {
-        const url = `http://localhost:5000/admin`
+        const url = `https://agile-forest-60392.herokuapp.com/admin`
         fetch(url)
             .then(res => res.json())
             .then(data => setAdmins(data));
     }, []);
 
     useEffect(() => {
-        fetch(`http://localhost:5000/freelancers`)
+        fetch(`https://agile-forest-60392.herokuapp.com/freelancers`)
             .then(res => res.json())
             .then(data => setProviders(data))
     }, []);

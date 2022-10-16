@@ -8,7 +8,7 @@ const useWithdraw = () => {
     const [withdraw, setWithdraw] = useState({});
 
     useEffect( () =>{
-        fetch(`http://localhost:5000/freelancer/${id}`)
+        fetch(`https://agile-forest-60392.herokuapp.com/freelancer/${id}`)
         .then(res=>res.json())
         .then(data=>setWithdraw(data))
     }, []);

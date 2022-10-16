@@ -13,13 +13,13 @@ const AddFundstoBalance = () => {
 
 
     useEffect(() => {
-        fetch(`http://localhost:5000/freelancerprofile?email=${user.email}`)
+        fetch(`https://agile-forest-60392.herokuapp.com/freelancerprofile?email=${user.email}`)
             .then(res => res.json())
             .then(review => setProviders(review))
     }, [user]);
 
     useEffect(() => {
-        const url = `http://localhost:5000/order/${id}`
+        const url = `https://agile-forest-60392.herokuapp.com/order/${id}`
         fetch(url)
             .then(res => res.json())
             .then(data => setorderReceived(data));
@@ -29,7 +29,7 @@ const AddFundstoBalance = () => {
         event.preventDefault();
         const currentBalance = event.target.currentBalance.value;
         const freelancerBalance = { currentBalance };
-        const url = `http://localhost:5000/provider/${orderReceived.providerId}`;
+        const url = `https://agile-forest-60392.herokuapp.com/provider/${orderReceived.providerId}`;
         fetch(url, {
             method: 'PUT',
             headers: {

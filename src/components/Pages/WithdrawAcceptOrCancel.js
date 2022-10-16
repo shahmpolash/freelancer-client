@@ -10,7 +10,7 @@ const WithdrawAcceptOrCancel = () => {
 
 
     useEffect(() => {
-        fetch(`http://localhost:5000/withdraw/${id}`)
+        fetch(`https://agile-forest-60392.herokuapp.com/withdraw/${id}`)
             .then(res => res.json())
             .then(data => setWithdrawal(data))
     }, [])
@@ -21,7 +21,7 @@ const WithdrawAcceptOrCancel = () => {
         const status = event.target.status.value;
         const withdrawnAmount = event.target.withdrawnAmount.value;
         const withdrawStatus = { status, withdrawnAmount };
-        const url = `http://localhost:5000/withdraw/${id}`;
+        const url = `https://agile-forest-60392.herokuapp.com/withdraw/${id}`;
         fetch(url, {
             method: 'PUT',
             headers: {

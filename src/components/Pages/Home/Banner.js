@@ -4,9 +4,17 @@ import { Link } from 'react-router-dom';
 
 const Banner = () => {
     const [banner, setBanner] = useState([]);
+    const [categoris, setCategoris] = useState([]);
 
     useEffect(() => {
-        const url = `http://localhost:5000/banner`
+        const url = `https://agile-forest-60392.herokuapp.com/categoris`
+        fetch(url)
+            .then(res => res.json())
+            .then(data => setCategoris(data));
+    }, []);
+
+    useEffect(() => {
+        const url = `https://agile-forest-60392.herokuapp.com/banner`
         fetch(url)
             .then(res => res.json())
             .then(data => setBanner(data));
@@ -25,9 +33,11 @@ const Banner = () => {
                         }
                         
                         <div className='d-flex justify-content-center'>
-                            <Link className='btn btn-success btn-sm' to={'/seo-services'}><p className='text-white'>SEO Service</p></Link>
-                            <Link className='btn btn-danger btn-sm' to={'/seo-services'}><p>Lead Generation</p></Link>
-                            <Link className='btn btn-primary btn-sm' to={'/seo-services'}><p className='text-white'>Social Media</p></Link>
+                            {
+                                categoris.map(category => 
+                                    <Link className='btn btn-danger btn-sm' to={`/category/${category.slug}`}><p className='text-white'>{category.categoryName}</p></Link>
+                                    )
+                            }
                         </div>
                     </div>
                 </div>

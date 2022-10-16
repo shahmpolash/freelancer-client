@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 const RefundRequest = () => {
     const [orders, setOrders] = useState([]);
     useEffect(() => {
-        const url = `http://localhost:5000/orders`
+        const url = `https://agile-forest-60392.herokuapp.com/orders`
         fetch(url)
             .then(res => res.json())
             .then(data => setOrders(data));

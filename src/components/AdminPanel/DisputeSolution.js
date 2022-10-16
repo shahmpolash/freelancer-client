@@ -7,7 +7,7 @@ const DisputeSolution = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        fetch(`http://localhost:5000/myorder/${id}`)
+        fetch(`https://agile-forest-60392.herokuapp.com/myorder/${id}`)
             .then(res => res.json())
             .then(result => setOrder(result))
     }, [order])
@@ -20,7 +20,7 @@ const DisputeSolution = () => {
         const status = event.target.status.value;
         const refundStatus = event.target.refundStatus.value;
         const disputeSolution = { disputeStatus, winner, adminNote, status, refundStatus };
-        const url = `http://localhost:5000/disputesolution/${id}`;
+        const url = `https://agile-forest-60392.herokuapp.com/disputesolution/${id}`;
         fetch(url, {
             method: 'PUT',
             headers: {
@@ -42,7 +42,7 @@ const DisputeSolution = () => {
         const releaseAmount = event.target.releaseAmount.value;
         const paymentAccepted = event.target.paymentAccepted.value;
         const disputeSolution = { disputeStatus, winner, adminNote, releaseStatus, releaseAmount, paymentAccepted };
-        const url = `http://localhost:5000/disputesolutionforprovider/${id}`;
+        const url = `https://agile-forest-60392.herokuapp.com/disputesolutionforprovider/${id}`;
         fetch(url, {
             method: 'PUT',
             headers: {

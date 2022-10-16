@@ -26,7 +26,7 @@ const UpdateProfileAsClient = () => {
             clientLinkedin: event.target.clientlinkedin.value,
             ClientLocation: event.target.country.value,
         }
-        const url = `http://localhost:5000/clients/`;
+        const url = `https://agile-forest-60392.herokuapp.com/clients/`;
         fetch(url, {
             method: 'POST',
             headers: {
@@ -41,7 +41,7 @@ const UpdateProfileAsClient = () => {
             })
     }
     useEffect(() => {
-        fetch(`http://localhost:5000/clientprofilereview?customeremail=${user.email}`)
+        fetch(`https://agile-forest-60392.herokuapp.com/clientprofilereview?customeremail=${user.email}`)
             .then(res => res.json())
             .then(result => setMyClient(result))
     }, []);

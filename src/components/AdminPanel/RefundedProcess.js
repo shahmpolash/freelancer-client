@@ -7,7 +7,7 @@ const RefundedProcess = () => {
     const[order, setOrder] = useState([]);
     const navigate =useNavigate();
     useEffect(() => {
-        fetch(`http://localhost:5000/order/${id}`)
+        fetch(`https://agile-forest-60392.herokuapp.com/order/${id}`)
             .then(res => res.json())
             .then(result => setOrder(result))
     }, [order])
@@ -18,7 +18,7 @@ const RefundedProcess = () => {
         const refundedTo = event.target.refundedTo.value;
         const refundNote = event.target.refundNote.value;
         const updateStatus = { refundStatus, refundedTo, refundNote };
-        const url = `http://localhost:5000/refunded/${id}`;
+        const url = `https://agile-forest-60392.herokuapp.com/refunded/${id}`;
         fetch(url, {
             method: 'PUT',
             headers: {

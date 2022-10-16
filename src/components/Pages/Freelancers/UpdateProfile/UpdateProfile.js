@@ -43,7 +43,7 @@ const UpdateProfile = () => {
             verifiedStatus: event.target.verifiedStatus.value,
             currentBalance: event.target.currentBalance.value,
         }
-        const url = `http://localhost:5000/freelancers/`;
+        const url = `https://agile-forest-60392.herokuapp.com/freelancers/`;
         fetch(url, {
             method: 'POST',
             headers: {
@@ -59,7 +59,7 @@ const UpdateProfile = () => {
             })
     }
     useEffect(() => {
-        fetch(`http://localhost:5000/freelancerprofile?email=${user.email}`)
+        fetch(`https://agile-forest-60392.herokuapp.com/freelancerprofile?email=${user.email}`)
             .then(res => res.json())
             .then(data => setMyFreelancer(data))
     }, [])
@@ -77,7 +77,7 @@ const UpdateProfile = () => {
 
                     {
                         myFreelancer.length === 0 && <div>
-                            <form className='freelancer' onSubmit={handleUpdate}>
+                            <form className='freelancer-profile' onSubmit={handleUpdate}>
                                 <input type="text" name="name" id="" placeholder='Your Full Name' required />
                                 <input type="text" name="heading" id="" placeholder='Headling Of You' required />
                                 <input type="text" name="profile" id="" placeholder='Your Profile Picture' required />

@@ -24,26 +24,26 @@ const FreelancerProfile = () => {
 
 
     useEffect(() => {
-        fetch(`http://localhost:5000/freelancer/${freelancerId}`)
+        fetch(`https://agile-forest-60392.herokuapp.com/freelancer/${freelancerId}`)
             .then(res => res.json())
             .then(data => setFreelancer(data))
     }, [freelancer]);
 
     useEffect(() => {
-        fetch(`http://localhost:5000/userservice?email=${freelancer.email}`)
+        fetch(`https://agile-forest-60392.herokuapp.com/userservice?email=${freelancer.email}`)
             .then(res => res.json())
             .then(result => setUserServices(result))
     }, [userServices]);
 
     useEffect(() => {
-        fetch(`http://localhost:5000/providerprofilereview?provideremail=${freelancer.email}`)
+        fetch(`https://agile-forest-60392.herokuapp.com/providerprofilereview?provideremail=${freelancer.email}`)
             .then(res => res.json())
             .then(review => setProviderReviews(review))
     }, [providerReviews]);
 
 
     useEffect(() => {
-        const url = `http://localhost:5000/myserviceorder?email=${freelancer.email}`
+        const url = `https://agile-forest-60392.herokuapp.com/myserviceorder?email=${freelancer.email}`
         fetch(url)
             .then(res => res.json())
             .then(data => setTotalEarns(data));
@@ -63,7 +63,7 @@ const FreelancerProfile = () => {
                     <div className='col-lg-3'>
                         <div className='profile shadow p-3 mt-5 bg-body rounded-5'>
                             <img src={freelancer.profile} alt="" />
-                            <h5>{freelancer.name}</h5>
+                            <h5 className='freelancer-name'>{freelancer.name}</h5>
                             <p>{freelancer.heading}</p>
                             <h5>Total Earned ${total} USD</h5>
                             <p><i class="fa-solid fa-location-dot"></i> {freelancer.location}</p>
@@ -71,7 +71,7 @@ const FreelancerProfile = () => {
                         </div>
                         <div>
                             <div className='marketplace shadow p-3 mb-2 bg-body rounded-5'>
-                                <div className='working'><h5>I am working on</h5></div>
+                                <div className='working'><h3>I am working on</h3></div>
                                 <Table className='verified' striped bordered hover variant="dark">
                                     <tbody>
                                         <tr>
@@ -114,7 +114,7 @@ const FreelancerProfile = () => {
                         <div className='shadow p-3 mt-5 bg-body rounded-5'>
                             <Accordion defaultActiveKey="0" flush>
                                 <Accordion.Item eventKey="0">
-                                    <Accordion.Header> <h5 className='text-center'>About Me</h5></Accordion.Header>
+                                    <Accordion.Header><h5 className='text-center'>About Me</h5></Accordion.Header>
                                     <Accordion.Body>
                                         {freelancer.about}
                                     </Accordion.Body>

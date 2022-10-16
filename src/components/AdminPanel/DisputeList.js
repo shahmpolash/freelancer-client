@@ -8,7 +8,7 @@ const DisputeList = () => {
 
 
     useEffect(() => {
-        fetch(`http://localhost:5000/orders`)
+        fetch(`https://agile-forest-60392.herokuapp.com/orders`)
             .then(res => res.json())
             .then(result => setOrders(result))
     }, [])

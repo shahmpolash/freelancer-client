@@ -11,14 +11,14 @@ const EditService = () => {
     const [service, setService] = useState([]);
     const [myServices, setMyServices] = useState([])
     useEffect(() => {
-        const url = `http://localhost:5000/myservice?email=${user?.email}`
+        const url = `https://agile-forest-60392.herokuapp.com/myservice?email=${user?.email}`
         fetch(url)
             .then(res => res.json())
             .then(data => setMyServices(data));
     }, [user])
 
     useEffect(() => {
-        fetch(`http://localhost:5000/service/${id}`)
+        fetch(`https://agile-forest-60392.herokuapp.com/service/${id}`)
             .then(res => res.json())
             .then(data => setService(data))
     }, [service])
@@ -30,7 +30,7 @@ const EditService = () => {
         const img = event.target.img.value;
         const details = event.target.details.value;
         const serviceUpdate = { title, img, details, price }
-        const url = `http://localhost:5000/service-edit/${id}`;
+        const url = `https://agile-forest-60392.herokuapp.com/service-edit/${id}`;
         fetch(url, {
             method: 'PUT',
             headers: {

@@ -8,7 +8,7 @@ const ConfirmPublishOrCancel = () => {
 
 
     useEffect(() => {
-        fetch(`http://localhost:5000/service/${serviceId}`)
+        fetch(`https://agile-forest-60392.herokuapp.com/service/${serviceId}`)
             .then(res => res.json())
             .then(data => setproviderService(data))
     }, [])
@@ -18,7 +18,7 @@ const ConfirmPublishOrCancel = () => {
         event.preventDefault();
         const status = event.target.publishStatus.value;
         const publishStatus = { status };
-        const url = `http://localhost:5000/service/${serviceId}`;
+        const url = `https://agile-forest-60392.herokuapp.com/service/${serviceId}`;
         fetch(url, {
             method: 'PUT',
             headers: {

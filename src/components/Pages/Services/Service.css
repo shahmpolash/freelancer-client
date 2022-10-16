@@ -1,13 +1,24 @@
+.service-card{
+    background-color: #283387;
+}
+.service-card p{
+    color: white;
+}
+
+.service-card{
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+.single-service-card:hover{
+    border: 2px solid skyblue;
+
+}
 .service-image{
     width: 270px;
     height: 200px;
 }
 
-.service{
-    border: 2px solid skyblue;
-    border-radius: 10px;
-    margin: 10px;
-}
+
 .service:hover{
     border: 2px solid blue;
 }

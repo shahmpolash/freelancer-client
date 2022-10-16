@@ -1,6 +1,7 @@
 .services{
     display: grid;
     grid-template-columns: repeat(4, 1fr);
+    
 }
 
 
@@ -15,6 +16,13 @@
     .services{
         display: grid;
         grid-template-columns: repeat(2, 1fr);
+    }
+    
+  }
+@media only screen and (min-width: 1001px) and (max-width: 1300px) {
+    .services{
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
     }
     
   }

@@ -10,7 +10,7 @@ const PostReviewAsaClient = () => {
 
 
         useEffect(() => {
-            const url = `http://localhost:5000/myorder/${id}`
+            const url = `https://agile-forest-60392.herokuapp.com/myorder/${id}`
             fetch(url)
                 .then(res => res.json())
                 .then(data => setmyOrders(data));
@@ -25,7 +25,7 @@ const PostReviewAsaClient = () => {
             const review = event.target.review.value;
             const reviewStatus = event.target.reviewdone.value;
             const reviewData = {rate, review, reviewStatus};
-        const url = `http://localhost:5000/myreviewfororder/${id}`
+        const url = `https://agile-forest-60392.herokuapp.com/myreviewfororder/${id}`
         fetch(url, {
             method: 'PUT',
             headers: {

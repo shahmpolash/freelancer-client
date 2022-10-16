@@ -11,7 +11,7 @@ const AcceptOrReject = () => {
 
 
     useEffect(() =>{
-        fetch(`http://localhost:5000/myserviceorder/${id}`)
+        fetch(`https://agile-forest-60392.herokuapp.com/myserviceorder/${id}`)
         .then(res=> res.json())
         .then(result=>setmyServiceOrder(result))
 
@@ -23,7 +23,7 @@ const AcceptOrReject = () => {
         const runningOrFinished = event.target.runningorfinished.value;
         const release = event.target.release.value;
         const updateStatus = {status, release, runningOrFinished};
-        const url = `http://localhost:5000/myserviceorder/${id}`;
+        const url = `https://agile-forest-60392.herokuapp.com/myserviceorder/${id}`;
         fetch(url, {
             method: 'PUT',
             headers: {
@@ -42,7 +42,7 @@ const AcceptOrReject = () => {
         const status = event.target.status.value;
         const refundStatus = event.target.refundStatus.value;
         const updateStatus = {status, refundStatus};
-        const url = `http://localhost:5000/myserviceorderrejected/${id}`;
+        const url = `https://agile-forest-60392.herokuapp.com/myserviceorderrejected/${id}`;
         fetch(url, {
             method: 'PUT',
             headers: {
@@ -58,7 +58,7 @@ const AcceptOrReject = () => {
     };
 
     return (
-        <div>
+        <div className='container'>
             <h2>{myServiceorder.servicename}</h2>
             <form onSubmit={handleAccept}>
                 <input hidden value='accepted' type="text" name="status" id="" />

@@ -8,14 +8,14 @@ const Footer = () => {
     const [categoris, setCategoris] = useState([]);
 
     useEffect(() => {
-        const url = `http://localhost:5000/categoris`
+        const url = `https://agile-forest-60392.herokuapp.com/categoris`
         fetch(url)
             .then(res => res.json())
             .then(data => setCategoris(data));
     }, []);
 
     useEffect(() => {
-        const url = `http://localhost:5000/footer`
+        const url = `https://agile-forest-60392.herokuapp.com/footer`
         fetch(url)
             .then(res => res.json())
             .then(data => setFooters(data));
@@ -49,6 +49,7 @@ const Footer = () => {
                                 <a href={f.liniedInURL}><i class="fa-brands fa-linkedin"></i></a>
                             </div>
                         </div>
+                        <p className='text-white mt-5'>{f.copyRight}</p>
                     </>
                 )
             }

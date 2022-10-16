@@ -8,7 +8,7 @@ const ContactPageUpdate = () => {
     const [contact, setContact] = useState([]);
 
     useEffect(() => {
-        fetch(`http://localhost:5000/contact/${id}`)
+        fetch(`https://agile-forest-60392.herokuapp.com/contact/${id}`)
             .then(res => res.json())
             .then(data => setContact(data))
     }, [contact])
@@ -21,7 +21,7 @@ const ContactPageUpdate = () => {
         const contactEmail = event.target.contactEmail.value;
         const contactAddress = event.target.contactAddress.value;
         const contactPageUpdate = { contactBanner, contactText, contactEmail, contactAddress }
-        const url = `http://localhost:5000/contact/${id}`;
+        const url = `https://agile-forest-60392.herokuapp.com/contact/${id}`;
         fetch(url, {
             method: 'PUT',
             headers: {

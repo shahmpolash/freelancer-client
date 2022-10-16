@@ -12,7 +12,7 @@ const ClientDisputeDetails = () => {
 
 
     useEffect(() => {
-        fetch(`http://localhost:5000/myorder/${id}`)
+        fetch(`https://agile-forest-60392.herokuapp.com/myorder/${id}`)
             .then(res => res.json())
             .then(result => setOrder(result))
     }, [order])
@@ -25,7 +25,7 @@ const ClientDisputeDetails = () => {
         const clientName = event.target.clientName.value;
         const disputeCreatedDate = event.target.disputeCreatedDate.value;
         const dispute = { disputeStatus, disputedCreated, clientMessage, clientName, disputeCreatedDate };
-        const url = `http://localhost:5000/myorderdispute/${id}`;
+        const url = `https://agile-forest-60392.herokuapp.com/myorderdispute/${id}`;
         fetch(url, {
             method: 'PUT',
             headers: {
@@ -45,7 +45,7 @@ const ClientDisputeDetails = () => {
        
         const clientMessage = event.target.providerMessage.value;
         const clientDisputeReply = { clientMessage };
-        const url = `http://localhost:5000/clientdisputereply/${id}`;
+        const url = `https://agile-forest-60392.herokuapp.com/clientdisputereply/${id}`;
         fetch(url, {
             method: 'PUT',
             headers: {

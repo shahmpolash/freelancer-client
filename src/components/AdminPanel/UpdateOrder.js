@@ -13,14 +13,14 @@ const UpdateOrder = () => {
     const [user] = useAuthState(auth);
 
     useEffect(() => {
-        const url = `http://localhost:5000/admin`
+        const url = `https://agile-forest-60392.herokuapp.com/admin`
         fetch(url)
             .then(res => res.json())
             .then(data => setAdmins(data));
     }, []);
 
     useEffect(() => {
-        fetch(`http://localhost:5000/myorder/${id}`)
+        fetch(`https://agile-forest-60392.herokuapp.com/myorder/${id}`)
             .then(res => res.json())
             .then(result => setOrder(result))
     }, [order])
@@ -31,7 +31,7 @@ const UpdateOrder = () => {
         const runningOrFinished = event.target.runningorfinished.value;
         const release = event.target.release.value;
         const updateStatus = { status, runningOrFinished, release };
-        const url = `http://localhost:5000/order/${id}`;
+        const url = `https://agile-forest-60392.herokuapp.com/order/${id}`;
         fetch(url, {
             method: 'PUT',
             headers: {
@@ -51,7 +51,7 @@ const UpdateOrder = () => {
         const status = event.target.status.value;
         const runningorfinished = event.target.runningorfinished.value;
         const updateStatus = { status, runningorfinished };
-        const url = `http://localhost:5000/order/${id}`;
+        const url = `https://agile-forest-60392.herokuapp.com/order/${id}`;
         fetch(url, {
             method: 'PUT',
             headers: {
@@ -68,7 +68,7 @@ const UpdateOrder = () => {
         event.preventDefault();
         const status = event.target.status.value;
         const updateStatus = { status };
-        const url = `http://localhost:5000/order/${id}`;
+        const url = `https://agile-forest-60392.herokuapp.com/order/${id}`;
         fetch(url, {
             method: 'PUT',
             headers: {

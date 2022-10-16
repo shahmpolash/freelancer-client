@@ -10,7 +10,7 @@ const SentMessages = () => {
     const [sentMessages, setSentMessages] = useState([]);
 
     useEffect(() => {
-        fetch(`http://localhost:5000/messages`)
+        fetch(`https://agile-forest-60392.herokuapp.com/messages`)
             .then(res => res.json())
             .then(result => setSentMessages(result))
     }, [sentMessages])

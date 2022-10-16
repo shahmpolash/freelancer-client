@@ -1,5 +1,6 @@
 {
   "name": "freelancer-client",
+  "homepage": "https://takealancer.com",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -16,6 +17,7 @@
     "react-bootstrap": "^2.4.0",
     "react-dom": "^18.1.0",
     "react-firebase-hooks": "^5.0.3",
+    "react-helmet": "^6.1.0",
     "react-hook-form": "^7.32.0",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",

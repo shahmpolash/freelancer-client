@@ -25,20 +25,20 @@ const ProviderTransactions = () => {
   
 
     useEffect(() => {
-        fetch(`http://localhost:5000/freelancerprofile?email=${user.email}`)
+        fetch(`https://agile-forest-60392.herokuapp.com/freelancerprofile?email=${user.email}`)
             .then(res => res.json())
             .then(review => setProviderName(review))
     }, [user]);
 
     useEffect(() => {
-        const url = `http://localhost:5000/myserviceorder?email=${user.email}`
+        const url = `https://agile-forest-60392.herokuapp.com/myserviceorder?email=${user.email}`
         fetch(url)
             .then(res => res.json())
             .then(data => setreleases(data))
     }, [user]);
 
     useEffect(() => {
-        fetch(`http://localhost:5000/withdraw?email=${user.email}`)
+        fetch(`https://agile-forest-60392.herokuapp.com/withdraw?email=${user.email}`)
             .then(res => res.json())
             .then(result => setWithdraws(result))
     }, [user]);

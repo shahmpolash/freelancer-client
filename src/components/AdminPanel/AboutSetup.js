@@ -7,7 +7,7 @@ const AboutSetup = () => {
     const navigate = useNavigate();
     const [about, setAbout] = useState([]);
     useEffect(() => {
-        const url = `http://localhost:5000/about`
+        const url = `https://agile-forest-60392.herokuapp.com/about`
         fetch(url)
             .then(res => res.json())
             .then(data => setAbout(data));
@@ -20,7 +20,7 @@ const AboutSetup = () => {
         const aboutBannerText = event.target.aboutBannerText.value;
         const aboutContent = event.target.aboutContent.value;
         const aboutUpdate = { aboutBannerImg, aboutBannerText, aboutContent }
-        const url = `http://localhost:5000/about`;
+        const url = `https://agile-forest-60392.herokuapp.com/about`;
         fetch(url, {
             method: 'POST',
             headers: {

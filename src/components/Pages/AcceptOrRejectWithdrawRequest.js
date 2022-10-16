@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 const AcceptOrRejectWithdrawRequest = () => {
     const [allWithdraws, setAllWithdraws] = useState([]);
     useEffect(() => {
-        fetch('http://localhost:5000/withdraws')
+        fetch('https://agile-forest-60392.herokuapp.com/withdraws')
             .then(res => res.json())
             .then(data => setAllWithdraws(data))
     }, [])

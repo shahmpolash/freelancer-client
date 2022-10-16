@@ -8,7 +8,7 @@ const AcceptPayment = () => {
 
 
     useEffect(() => {
-        const url = `http://localhost:5000/order/${id}`
+        const url = `https://agile-forest-60392.herokuapp.com/order/${id}`
         fetch(url)
             .then(res => res.json())
             .then(data => setorderReceived(data));
@@ -18,7 +18,7 @@ const AcceptPayment = () => {
         event.preventDefault();
         const paymentAccepted = event.target.paymentAccepted.value;
         const payment = { paymentAccepted };
-        const url = `http://localhost:5000/acceptpaymentfromorder/${id}`;
+        const url = `https://agile-forest-60392.herokuapp.com/acceptpaymentfromorder/${id}`;
         fetch(url, {
             method: 'PUT',
             headers: {

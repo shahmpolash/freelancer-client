@@ -2,6 +2,7 @@
 .provider-profile{
     background-color:antiquewhite;
 }
+
 .profile img{
     width: 200px;
     height: 220px;
@@ -19,6 +20,12 @@
     grid-template-columns: repeat(2, 1fr);
     column-gap: 5px;
 }
+.freelancer-name{
+    background-color: #283387;
+    padding: 10px;
+    color: white;
+}
+
 
 .portfolio img{
     width: 450px;
@@ -36,6 +43,7 @@
 .profile-service-img:hover{
     border: 3px solid green;
 }
+
 .marketplace{
     
     margin-top: 20px;
@@ -45,14 +53,20 @@
     margin-left: 15px;
     margin-top: -20px;
 }
-.marketplace h5{
+.marketplace h3{
     color: white;
     font-size: 17px;
+
+    
+}
+.marketplace h5{
+    color: white;
+    font-size: 14px;
     text-align: left;
     
 }
 .working{
-    background-color: skyblue;
+    background-color: #283387;
     padding: 15px;
 }
 .working h5{

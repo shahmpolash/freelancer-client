@@ -1,6 +1,14 @@
 .service-details-page{
     background-color: antiquewhite;
 }
+.service-title{
+    border-radius: 15px;
+    padding: 15px;
+    background-color: #283387;
+}
+.service-title h5{
+    color: white;
+}
 .service-details {
 
     margin: 10px;
@@ -60,14 +68,21 @@
 }
 
 .buy-service{
-    background-color: aquamarine;
+    background-color:#f9f8c0;
     padding: 30px;
     position: fixed;
 
 }
 .buy-service Button{
-   
+   background-color: #283387;
     padding: 15px;
+}
+.price-btn{
+    background-color:#283387;
+}
+.user-btn{
+    background-color: #283387;
+    color: white;
 }
 
 .review {

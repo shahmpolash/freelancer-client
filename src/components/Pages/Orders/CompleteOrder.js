@@ -8,7 +8,7 @@ const CompleteOrder = () => {
     const [cancel, setCancel] = useState([]);
     const navigate = useNavigate();
     useEffect(() => {
-        fetch(`http://localhost:5000/myorder/${id}`)
+        fetch(`https://agile-forest-60392.herokuapp.com/myorder/${id}`)
             .then(res => res.json())
             .then(result => setCancel(result))
     }, [])
@@ -17,7 +17,7 @@ const CompleteOrder = () => {
         event.preventDefault();
         const runningOrFinished = event.target.runningorfinished.value;
         const updateStatus = { runningOrFinished };
-        const url = `http://localhost:5000/myorder/${id}`;
+        const url = `https://agile-forest-60392.herokuapp.com/myorder/${id}`;
         fetch(url, {
             method: 'PUT',
             headers: {

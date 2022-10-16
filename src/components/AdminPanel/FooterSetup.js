@@ -9,7 +9,7 @@ const FooterSetup = () => {
     const [footers, setFooters] = useState([]);
 
     useEffect(() => {
-        const url = `http://localhost:5000/footer`
+        const url = `https://agile-forest-60392.herokuapp.com/footer`
         fetch(url)
             .then(res => res.json())
             .then(data => setFooters(data));
@@ -26,8 +26,9 @@ const FooterSetup = () => {
         const twitterURL = event.target.twitterURL.value;
         const youtubeURL = event.target.youtubeURL.value;
         const liniedInURL = event.target.liniedInURL.value;
-        const footerUpdate = { footerLogo, footerText, footerEmail, footerAddress, liniedInURL, youtubeURL, twitterURL, facebookURL }
-        const url = `http://localhost:5000/footer`;
+        const copyRight = event.target.copyRight.value;
+        const footerUpdate = { footerLogo, footerText, footerEmail, footerAddress, liniedInURL, youtubeURL, twitterURL, facebookURL, copyRight }
+        const url = `https://agile-forest-60392.herokuapp.com/footer`;
         fetch(url, {
             method: 'POST',
             headers: {
@@ -86,6 +87,7 @@ const FooterSetup = () => {
                     <input type="text" name="twitterURL" id="" placeholder='Twitter Page URL' />
                     <input type="text" name="youtubeURL" id="" placeholder='YouTube Channel  URL' />
                     <input type="text" name="liniedInURL" id="" placeholder='LinkedIn Profile URL' />
+                    <input type="text" name="copyRight" id="" placeholder='Copyright Text' />
                     <input type="submit" value="Save Now" />
                 </form>
             }

@@ -7,7 +7,7 @@ const UpdateBanner = () => {
     const [banner, setBanner] = useState([]);
 
     useEffect(() => {
-        const url = `http://localhost:5000/banner/${id}`
+        const url = `https://agile-forest-60392.herokuapp.com/banner/${id}`
         fetch(url)
             .then(res => res.json())
             .then(data => setBanner(data));
@@ -19,7 +19,7 @@ const UpdateBanner = () => {
         const bannerSubHeading = event.target.bannerSubHeading.value;
         const bannerImg = event.target.bannerImg.value;
         const banner = { bannerHeading, bannerSubHeading, bannerImg }
-        const url = `http://localhost:5000/banner/${id}`;
+        const url = `https://agile-forest-60392.herokuapp.com/banner/${id}`;
         fetch(url, {
             method: 'PUT',
             headers: {

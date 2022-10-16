@@ -8,7 +8,7 @@ const useOrderItem = () => {
     const [service, setService] = useState({});
 
     useEffect( () =>{
-        fetch(`http://localhost:5000/service/${serviceId}`)
+        fetch(`https://agile-forest-60392.herokuapp.com/service/${serviceId}`)
         .then(res=>res.json())
         .then(data=>setService(data))
     }, []);

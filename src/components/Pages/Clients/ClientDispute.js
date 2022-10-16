@@ -9,7 +9,7 @@ const ClientDispute = () => {
     const [user] = useAuthState(auth);
     const [runningOrders, setRunningOrders] = useState([]);
     useEffect(() => {
-        const url = `http://localhost:5000/myorder?email=${user.email}`
+        const url = `https://agile-forest-60392.herokuapp.com/myorder?email=${user.email}`
         fetch(url)
             .then(res => res.json())
             .then(data => setRunningOrders(data));

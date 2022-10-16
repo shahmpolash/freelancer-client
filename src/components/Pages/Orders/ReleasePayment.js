@@ -12,7 +12,7 @@ const ReleasePayment = () => {
 
 
     useEffect(() => {
-        const url = `http://localhost:5000/myorder/${id}`
+        const url = `https://agile-forest-60392.herokuapp.com/myorder/${id}`
         fetch(url)
             .then(res => res.json())
             .then(data => setMyRelease(data));
@@ -27,7 +27,7 @@ const ReleasePayment = () => {
         const paymentAccepted = event.target.paymentAccepted.value;
         const releaseDate = event.target.releaseDate.value;
         const releaseStatus = { release, releaseAmount, paymentAccepted, releaseDate };
-        const url = `http://localhost:5000/releasepayment/${id}`
+        const url = `https://agile-forest-60392.herokuapp.com/releasepayment/${id}`
         fetch(url, {
             method: 'PUT',
             headers: {
@@ -43,7 +43,7 @@ const ReleasePayment = () => {
     };
 
     return (
-        <div>
+        <div className='container'>
             <h2>You are Releaseing : {myRelease.serviceprice}</h2>
             <h2>Provider Email: {myRelease.provideremail}</h2>
             <form onSubmit={handleReviews}>

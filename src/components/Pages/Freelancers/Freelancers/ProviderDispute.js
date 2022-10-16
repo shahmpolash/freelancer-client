@@ -9,7 +9,7 @@ const ProviderDispute = () => {
     const [user] = useAuthState(auth);
     const [runningOrders, setRunningOrders] = useState([]);
     useEffect(() => {
-        const url = `http://localhost:5000/myserviceorder?email=${user.email}`
+        const url = `https://agile-forest-60392.herokuapp.com/myserviceorder?email=${user.email}`
         fetch(url)
             .then(res => res.json())
             .then(data => setRunningOrders(data));

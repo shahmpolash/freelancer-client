@@ -20,7 +20,7 @@ const OrderItem = () => {
 
 
     useEffect(() => {
-        fetch(`http://localhost:5000/clientprofile?clientEmail=${user.email}`)
+        fetch(`https://agile-forest-60392.herokuapp.com/clientprofile?clientEmail=${user.email}`)
             .then(res => res.json())
             .then(data => setIamClient(data))
     }, [user])
@@ -48,7 +48,7 @@ const OrderItem = () => {
         const disputedCreated = event.target.disputedCreated.value;
         const order = { customeremail, servicename, serviceprice, provideremail, serviceId, status, reviewStatus, releaseAmount, providerReviewStatus, clientName, clientId, providerName, providerId, requirement,reqUpdated, depositStatus, orderDate, disputeStatus, disputedCreated };
 
-        const url = `http://localhost:5000/orders/`;
+        const url = `https://agile-forest-60392.herokuapp.com/orders/`;
         fetch(url, {
             method: 'POST',
             headers: {

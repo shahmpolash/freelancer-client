@@ -12,14 +12,14 @@ const ProviderUnapprove = () => {
     const [user] = useAuthState(auth);
 
     useEffect(() => {
-        const url = `http://localhost:5000/admin`
+        const url = `https://agile-forest-60392.herokuapp.com/admin`
         fetch(url)
             .then(res => res.json())
             .then(data => setAdmins(data));
     }, []);
 
     useEffect(() => {
-        fetch(`http://localhost:5000/freelancer/${id}`)
+        fetch(`https://agile-forest-60392.herokuapp.com/freelancer/${id}`)
             .then(res => res.json())
             .then(data => setProvider(data))
     }, [provider])
@@ -32,7 +32,7 @@ const ProviderUnapprove = () => {
 
         const freelancer = { status }
 
-        const url = `http://localhost:5000/freelancer/${id}`;
+        const url = `https://agile-forest-60392.herokuapp.com/freelancer/${id}`;
         fetch(url, {
             method: 'PUT',
             headers: {

@@ -8,7 +8,7 @@ const useServiceDetails = () => {
 
     useEffect(() =>{
         if(user){
-            const url = `http://localhost:5000/userservice?email=${user?.email}`
+            const url = `https://agile-forest-60392.herokuapp.com/userservice?email=${user?.email}`
         fetch(url)
         .then(res=>res.json())
         .then(data=> setUserServices(data))

@@ -17,7 +17,7 @@ const CreateService = () => {
     const {slug} = useParams();
 
     useEffect(() => {
-        const url = `http://localhost:5000/category?slug=${slug}`
+        const url = `https://agile-forest-60392.herokuapp.com/category?slug=${slug}`
         fetch(url)
             .then(res => res.json())
             .then(data => setCategories(data));
@@ -25,7 +25,7 @@ const CreateService = () => {
     }, []);
 
     const onSubmit = data => {
-        const url = `http://localhost:5000/service/`;
+        const url = `https://agile-forest-60392.herokuapp.com/service/`;
         fetch(url, {
             method: 'POST',
             headers: {
@@ -50,7 +50,7 @@ const CreateService = () => {
                             categories.map(category => <><input value={category.categoryName}  {...register("category")} /></>)
                         }
                         {
-                            categories.map(category => <><input value={category.slug}  {...register("slug")} /></>)
+                            categories.map(category => <><input value={category.slug} hidden {...register("slug")} /></>)
                         }
                        
                         <input value='Pending' hidden {...register("publishStatus")} />

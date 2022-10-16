@@ -8,7 +8,7 @@ const Categories = () => {
     const [categoris, setCategoris] = useState([]);
 
     useEffect(() => {
-        const url = `http://localhost:5000/categoris`
+        const url = `https://agile-forest-60392.herokuapp.com/categoris`
         fetch(url)
             .then(res => res.json())
             .then(data => setCategoris(data));
@@ -23,7 +23,7 @@ const Categories = () => {
         const categoryDescription = event.target.categoryDescription.value;
         const adminDetails = { categoryName, slug, categoryDescription }
 
-        const url = `http://localhost:5000/categoris`;
+        const url = `https://agile-forest-60392.herokuapp.com/categoris`;
         fetch(url, {
             method: 'POST',
             headers: {

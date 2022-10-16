@@ -15,7 +15,7 @@ const ProviderMessages = () => {
 
 
     useEffect(() => {
-        fetch(`http://localhost:5000/clientprofile?clientEmail=${user.email}`)
+        fetch(`https://agile-forest-60392.herokuapp.com/clientprofile?clientEmail=${user.email}`)
             .then(res => res.json())
             .then(data => setClient(data))
     }, [user])
@@ -35,7 +35,7 @@ const ProviderMessages = () => {
         const whoSent = event.target.whoSent.value;
         const clientSentMessage = { serviceName, providerName, providerEmail, providerId, clientName, clientEmail, clientId, messageStatus, clientMessage, whoSent };
 
-        const url = `http://localhost:5000/message/`;
+        const url = `https://agile-forest-60392.herokuapp.com/message/`;
         fetch(url, {
             method: 'POST',
             headers: {

@@ -17,7 +17,7 @@ const UpdateClientProfile = () => {
     const {clientId} = useParams();
 
     useEffect(() => {
-        fetch(`http://localhost:5000/client/${clientId}`)
+        fetch(`https://agile-forest-60392.herokuapp.com/client/${clientId}`)
             .then(res => res.json())
             .then(result => setClient(result))
     }, [client]);
@@ -35,7 +35,7 @@ const UpdateClientProfile = () => {
         const clientLinkedin = event.target.clientlinkedin.value;
         const client = {clientName, clientLocation, clientAbout, clientProfile, clientFB, clientTwitter, clientLinkedin}
         
-        const url = `http://localhost:5000/client/${clientId}`;
+        const url = `https://agile-forest-60392.herokuapp.com/client/${clientId}`;
         fetch(url, {
             method: 'PUT',
             headers: {
@@ -50,7 +50,7 @@ const UpdateClientProfile = () => {
             })
     }
     useEffect(() => {
-        fetch(`http://localhost:5000/clientprofilereview?customeremail=${user?.email}`)
+        fetch(`https://agile-forest-60392.herokuapp.com/clientprofilereview?customeremail=${user?.email}`)
             .then(res => res.json())
             .then(result => setMyClient(result))
     }, []);

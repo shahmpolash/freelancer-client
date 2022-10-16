@@ -9,7 +9,7 @@ const AboutPageUpdate = () => {
         const [about, setAbout] = useState([]);
 
         useEffect(() => {
-            const url = `http://localhost:5000/about/${id}`
+            const url = `https://agile-forest-60392.herokuapp.com/about/${id}`
             fetch(url)
                 .then(res => res.json())
                 .then(data => setAbout(data));
@@ -22,7 +22,7 @@ const AboutPageUpdate = () => {
         const aboutBannerText = event.target.aboutBannerText.value;
         const aboutContent = event.target.aboutContent.value;
         const aboutUpdate = { aboutBannerImg, aboutBannerText, aboutContent }
-        const url = `http://localhost:5000/about/${id}`;
+        const url = `https://agile-forest-60392.herokuapp.com/about/${id}`;
         fetch(url, {
             method: 'PUT',
             headers: {

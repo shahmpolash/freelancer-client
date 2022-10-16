@@ -15,7 +15,7 @@ const CheckoutForm = ({order}) => {
 
     useEffect( () => {
 
-        fetch('http://localhost:5000/create-payment-intent', {
+        fetch('https://agile-forest-60392.herokuapp.com/create-payment-intent', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

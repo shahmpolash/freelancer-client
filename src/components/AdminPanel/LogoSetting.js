@@ -8,7 +8,7 @@ const LogoSetting = () => {
     const [logo, setLogo] = useState([]);
 
     useEffect(() => {
-        const url = `http://localhost:5000/logo`
+        const url = `https://agile-forest-60392.herokuapp.com/logo`
         fetch(url)
             .then(res => res.json())
             .then(data => setLogo(data));
@@ -19,7 +19,7 @@ const LogoSetting = () => {
         event.preventDefault();
         const logoImg = event.target.logoImg.value;
         const logo = { logoImg }
-        const url = `http://localhost:5000/logo`;
+        const url = `https://agile-forest-60392.herokuapp.com/logo`;
         fetch(url, {
             method: 'POST',
             headers: {

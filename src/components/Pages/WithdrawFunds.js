@@ -27,7 +27,7 @@ const WithdrawFunds = () => {
     total = total - totalWithdraw;
 
     useEffect(() => {
-        const url = `http://localhost:5000/myserviceorder?email=${user.email}`
+        const url = `https://agile-forest-60392.herokuapp.com/myserviceorder?email=${user.email}`
         fetch(url)
             .then(res => res.json())
             .then(info => setMyServiceOrders(info));
@@ -35,7 +35,7 @@ const WithdrawFunds = () => {
 
 
     useEffect(() => {
-        fetch(`http://localhost:5000/withdraw?email=${user.email}`)
+        fetch(`https://agile-forest-60392.herokuapp.com/withdraw?email=${user.email}`)
             .then(res => res.json())
             .then(withdraw => setWithdraws(withdraw))
     }, [user])
@@ -53,7 +53,7 @@ const WithdrawFunds = () => {
 
         const order = { userId, status, name, email, amount, method, withdrawnAmount, withdrawalDate };
 
-        const url = `http://localhost:5000/withdraw/`;
+        const url = `https://agile-forest-60392.herokuapp.com/withdraw/`;
         fetch(url, {
             method: 'POST',
             headers: {

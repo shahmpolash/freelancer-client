@@ -29,38 +29,38 @@ const AdminDashboard = () => {
     sales = sales;
 
     useEffect(() => {
-        const url = `http://localhost:5000/admin`
+        const url = `https://agile-forest-60392.herokuapp.com/admin`
         fetch(url)
             .then(res => res.json())
             .then(data => setAdmins(data));
     }, []);
 
     useEffect(() => {
-        fetch(`http://localhost:5000/orders`)
+        fetch(`https://agile-forest-60392.herokuapp.com/orders`)
             .then(res => res.json())
             .then(result => setOrders(result))
     }, [])
 
     useEffect(() => {
-        fetch(`http://localhost:5000/freelancers`)
+        fetch(`https://agile-forest-60392.herokuapp.com/freelancers`)
             .then(res => res.json())
             .then(data => setProviders(data))
     }, []);
 
     useEffect(() => {
-        fetch(`http://localhost:5000/service`)
+        fetch(`https://agile-forest-60392.herokuapp.com/service`)
             .then(res => res.json())
             .then(data => setServices(data))
     }, [])
 
     useEffect(() => {
-        fetch(`http://localhost:5000/clients`)
+        fetch(`https://agile-forest-60392.herokuapp.com/clients`)
             .then(res => res.json())
             .then(data => setClients(data))
     }, []);
 
     useEffect(() => {
-        fetch('http://localhost:5000/withdraws')
+        fetch('https://agile-forest-60392.herokuapp.com/withdraws')
             .then(res => res.json())
             .then(data => setWithdraws(data))
     }, [])

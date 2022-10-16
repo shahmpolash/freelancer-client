@@ -12,14 +12,14 @@ const PaymentSetting = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        const url = `http://localhost:5000/payment-setting`
+        const url = `https://agile-forest-60392.herokuapp.com/payment-setting`
         fetch(url)
             .then(res => res.json())
             .then(data => setPaymentSettings(data));
     }, []);
     
     useEffect(() => {
-        const url = `http://localhost:5000/admin`
+        const url = `https://agile-forest-60392.herokuapp.com/admin`
         fetch(url)
             .then(res => res.json())
             .then(data => setAdmins(data));
@@ -31,7 +31,7 @@ const PaymentSetting = () => {
         const paypalEmail = event.target.paypalEmail.value;
         const commission = event.target.commission.value;
         const paymentSettingUpdate = { paypalEmail, commission }
-        const url = `http://localhost:5000/payment-setting`;
+        const url = `https://agile-forest-60392.herokuapp.com/payment-setting`;
         fetch(url, {
             method: 'POST',
             headers: {

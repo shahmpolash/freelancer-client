@@ -1,8 +1,23 @@
+.menu-bar{
+    background-color: #283387;
+}
+.menu-bar p{
+    color: white;
+}
+.menu-bar .fa-solid{
+    color: white;
+}
 .logo{
     width: 200px;
 }
 header{
     background-color: #3F3F3F;
+}
+#collasible-nav-dropdown{
+    color: white;
+}
+#dropdown-menu{
+    color: black;
 }
 .unread-message{
     margin-left: -10px;

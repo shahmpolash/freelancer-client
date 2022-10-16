@@ -8,7 +8,7 @@ const CancelOrder = () => {
     const [cancel, setCancel] = useState([]);
     const navigate = useNavigate();
     useEffect(() => {
-        fetch(`http://localhost:5000/myorder/${id}`)
+        fetch(`https://agile-forest-60392.herokuapp.com/myorder/${id}`)
             .then(res => res.json())
             .then(result => setCancel(result))
     }, [])
@@ -19,7 +19,7 @@ const CancelOrder = () => {
         const cancelledBy = event.target.cancelledBy.value;
         const refundStatus = event.target.refundStatus.value;
         const updateStatus = { status, cancelledBy, refundStatus };
-        const url = `http://localhost:5000/myorder/${id}`;
+        const url = `https://agile-forest-60392.herokuapp.com/myorder/${id}`;
         fetch(url, {
             method: 'PUT',
             headers: {

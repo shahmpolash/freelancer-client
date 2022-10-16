@@ -9,7 +9,7 @@ const FooterUpdate = () => {
     const [footer, setFooter] = useState([]);
 
     useEffect(() => {
-        fetch(`http://localhost:5000/footer/${id}`)
+        fetch(`https://agile-forest-60392.herokuapp.com/footer/${id}`)
             .then(res => res.json())
             .then(data => setFooter(data))
     }, [footer])
@@ -25,8 +25,9 @@ const FooterUpdate = () => {
         const twitterURL = event.target.twitterURL.value;
         const youtubeURL = event.target.youtubeURL.value;
         const liniedInURL = event.target.liniedInURL.value;
-        const footerUpdate = { footerLogo, footerText, footerEmail, footerAddress, facebookURL, twitterURL, youtubeURL, liniedInURL }
-        const url = `http://localhost:5000/footer/${id}`;
+        const copyRight = event.target.copyRight.value;
+        const footerUpdate = { footerLogo, footerText, footerEmail, footerAddress, facebookURL, twitterURL, youtubeURL, liniedInURL, copyRight }
+        const url = `https://agile-forest-60392.herokuapp.com/footer/${id}`;
         fetch(url, {
             method: 'PUT',
             headers: {
@@ -52,6 +53,7 @@ const FooterUpdate = () => {
                     <input defaultValue={footer.twitterURL} type="text" name="twitterURL" id="" placeholder='Twitter Page URL' />
                     <input defaultValue={footer.youtubeURL} type="text" name="youtubeURL" id="" placeholder='YouTube Channel  URL' />
                     <input defaultValue={footer.liniedInURL} type="text" name="liniedInURL" id="" placeholder='LinkedIn Profile URL' />
+                    <input defaultValue={footer.copyRight} type="text" name="copyRight" id="" placeholder='Copyright Text' />
                     <input type="submit" value="Update Now" />
                 </form>
             

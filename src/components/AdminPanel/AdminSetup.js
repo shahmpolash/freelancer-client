@@ -11,7 +11,7 @@ const AdminSetup = () => {
     const [user] = useAuthState(auth);
 
     useEffect(() => {
-        const url = `http://localhost:5000/admin`
+        const url = `https://agile-forest-60392.herokuapp.com/admin`
         fetch(url)
             .then(res => res.json())
             .then(data => setAdmins(data));
@@ -24,7 +24,7 @@ const AdminSetup = () => {
         const adminEmail = event.target.adminEmail.value;
         const adminDetails = { adminName, adminEmail }
 
-        const url = `http://localhost:5000/admin`;
+        const url = `https://agile-forest-60392.herokuapp.com/admin`;
         fetch(url, {
             method: 'POST',
             headers: {

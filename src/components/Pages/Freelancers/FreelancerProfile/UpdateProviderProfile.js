@@ -18,7 +18,7 @@ const UpdateProviderProfile = () => {
     const [provider, setProvider] = useState([]);
 
     useEffect(() => {
-        fetch(`http://localhost:5000/freelancer/${id}`)
+        fetch(`https://agile-forest-60392.herokuapp.com/freelancer/${id}`)
             .then(res => res.json())
             .then(result => setProvider(result))
     }, [provider])
@@ -50,7 +50,7 @@ const UpdateProviderProfile = () => {
         const verifiedStatus = event.target.verifiedStatus.value;
         const freelancer = {name, heading, profile, about, location, onpageseo, offpageseo, technicalseo, lead, social, experience, available, fb, twitter, linkedin, marketplace, projectcompleted, totalreviews, profilelink, status, verifiedStatus }
 
-        const url = `http://localhost:5000/freelancer/${id}`;
+        const url = `https://agile-forest-60392.herokuapp.com/freelancer/${id}`;
         fetch(url, {
             method: 'PUT',
             headers: {
@@ -67,7 +67,7 @@ const UpdateProviderProfile = () => {
     }
 
     useEffect(() => {
-        fetch(`http://localhost:5000/freelancerprofile?email=${user.email}`)
+        fetch(`https://agile-forest-60392.herokuapp.com/freelancerprofile?email=${user.email}`)
             .then(res => res.json())
             .then(data => setMyFreelancer(data))
     }, [])

@@ -8,13 +8,13 @@ const UpdateUserBalanceAfterWithdraw = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        fetch(`http://localhost:5000/withdraw/${id}`)
+        fetch(`https://agile-forest-60392.herokuapp.com/withdraw/${id}`)
             .then(res => res.json())
             .then(data => setWithdrawal(data))
     }, [withdrawal])
 
     useEffect(() => {
-        fetch(`http://localhost:5000/freelancerprofile?email=${withdrawal.email}`)
+        fetch(`https://agile-forest-60392.herokuapp.com/freelancerprofile?email=${withdrawal.email}`)
             .then(res => res.json())
             .then(data => setProvider(data))
     }, [provider])
@@ -23,7 +23,7 @@ const UpdateUserBalanceAfterWithdraw = () => {
         event.preventDefault();
         const currentBalance = event.target.currentBalance.value;
         const balance = { currentBalance };
-        const url = `http://localhost:5000/userbalance/${withdrawal.userId}`;
+        const url = `https://agile-forest-60392.herokuapp.com/userbalance/${withdrawal.userId}`;
         fetch(url, {
             method: 'PUT',
             headers: {

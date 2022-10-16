@@ -12,7 +12,7 @@ const ProviderSentMessageToClient = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        fetch(`http://localhost:5000/myserviceorder/${orderId}`)
+        fetch(`https://agile-forest-60392.herokuapp.com/myserviceorder/${orderId}`)
             .then(res => res.json())
             .then(result => setServiceOrders(result))
     }, [])
@@ -33,7 +33,7 @@ const ProviderSentMessageToClient = () => {
         const whoSent = event.target.whoSent.value;
         const providerSentMessage = { serviceName, serviceId, providerName, providerEmail, providerId, clientName, clientEmail, clientId, messageStatus, providerMessage, whoSent, orderId };
 
-        const url = `http://localhost:5000/message/`;
+        const url = `https://agile-forest-60392.herokuapp.com/message/`;
         fetch(url, {
             method: 'POST',
             headers: {

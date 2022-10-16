@@ -9,7 +9,7 @@ const PostReviewAsaProvider = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        const url = `http://localhost:5000/myserviceorder/${id}`
+        const url = `https://agile-forest-60392.herokuapp.com/myserviceorder/${id}`
         fetch(url)
             .then(res => res.json())
             .then(data => setMyServiceOrders(data));
@@ -23,7 +23,7 @@ const PostReviewAsaProvider = () => {
         const providerrate = event.target.providerrate.value;
         const providerreview = event.target.providerreview.value;
         const review = { providerrate, providerreview, providerReviewStatus };
-        const url = `http://localhost:5000/myreviewformyservice/${id}`
+        const url = `https://agile-forest-60392.herokuapp.com/myreviewformyservice/${id}`
         fetch(url, {
             method: 'PUT',
             headers: {

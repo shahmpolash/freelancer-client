@@ -15,14 +15,14 @@ const Header = () => {
     const [logo, setLogo] = useState([]);
 
     useEffect(() => {
-        const url = `http://localhost:5000/logo`
+        const url = `https://agile-forest-60392.herokuapp.com/logo`
         fetch(url)
             .then(res => res.json())
             .then(data => setLogo(data));
     }, []);
 
     useEffect(() => {
-        const url = `http://localhost:5000/categoris`
+        const url = `https://agile-forest-60392.herokuapp.com/categoris`
         fetch(url)
             .then(res => res.json())
             .then(data => setCategoris(data));
@@ -34,19 +34,19 @@ const Header = () => {
     }
 
     useEffect(() => {
-        fetch(`http://localhost:5000/messages`)
+        fetch(`https://agile-forest-60392.herokuapp.com/messages`)
             .then(res => res.json())
             .then(result => setProviderMessages(result))
     }, [providerMessages])
 
     useEffect(() => {
-        fetch(`http://localhost:5000/replies`)
+        fetch(`https://agile-forest-60392.herokuapp.com/replies`)
             .then(res => res.json())
             .then(result => setReplies(result))
     }, []);
 
     useEffect(() => {
-        const url = `http://localhost:5000/myserviceorder?email=${user?.email}`
+        const url = `https://agile-forest-60392.herokuapp.com/myserviceorder?email=${user?.email}`
         fetch(url)
             .then(res => res.json())
             .then(info => setMyServiceOrders(info));
@@ -54,7 +54,7 @@ const Header = () => {
 
     return (
         <header>
-            <Navbar className='p-3 menu-bar' collapseOnSelect expand="lg" bg="dark" variant="dark">
+            <Navbar className='p-3 menu-bar' collapseOnSelect expand="lg">
                 <Container>
                     {
                         logo.map(l => <Navbar.Brand as={Link} to="/"><img className='logo' src={l.logoImg} alt="" /></Navbar.Brand>)
@@ -68,7 +68,7 @@ const Header = () => {
                             <NavDropdown title="Services" id="collasible-nav-dropdown">
                                 {
                                     categoris.map(category => 
-                                        <NavDropdown.Item as={Link} to={`/category/${category.slug}`}>{category.categoryName}</NavDropdown.Item>
+                                        <NavDropdown.Item as={Link} to={`/category/${category.slug}`} id="dropdown-menu">{category.categoryName}</NavDropdown.Item>
                                         )
                                 }
                             </NavDropdown>
@@ -142,7 +142,7 @@ const Header = () => {
                            
                             {
                                 user ?
-                                    <Nav.Link as={Link} to="/set-service"><i class="fa-solid fa-plus"></i> Add Service</Nav.Link>
+                                    <Nav.Link as={Link} to="/set-service" id="collasible-nav-dropdown"><i class="fa-solid fa-plus"></i>Add Service</Nav.Link>
                                     :
                                     <></>
                             }
@@ -150,10 +150,10 @@ const Header = () => {
                         <Nav>
                             {
                                 user ?
-                                    <Nav.Link onClick={handleSignout}><i class="fa-solid fa-right-from-bracket"></i> Signout</Nav.Link>
+                                    <Nav.Link onClick={handleSignout} id="collasible-nav-dropdown"><i class="fa-solid fa-right-from-bracket"></i> Signout</Nav.Link>
 
                                     :
-                                    <Nav.Link as={Link} to="/login"><i class="fa-solid fa-right-to-bracket"></i> Login</Nav.Link>
+                                    <Nav.Link as={Link} to="/login" id="collasible-nav-dropdown"><i class="fa-solid fa-right-to-bracket"></i> Login</Nav.Link>
                             }
 
                         </Nav>

@@ -16,13 +16,13 @@ const Requirement = () => {
 
 
     useEffect(() => {
-        fetch(`http://localhost:5000/freelancerprofile?email=${myServiceorder.provideremail}`)
+        fetch(`https://agile-forest-60392.herokuapp.com/freelancerprofile?email=${myServiceorder.provideremail}`)
             .then(res => res.json())
             .then(review => setproviders(review))
     }, [providers]);
 
     useEffect(() => {
-        fetch(`http://localhost:5000/myserviceorder/${id}`)
+        fetch(`https://agile-forest-60392.herokuapp.com/myserviceorder/${id}`)
             .then(res => res.json())
             .then(result => setmyServiceOrder(result))
 
@@ -33,7 +33,7 @@ const Requirement = () => {
         const requirement = event.target.updateRequirement.value;
         const providerReq = event.target.reqUpdated.value;
         const requirementStatus = { requirement, providerReq };
-        const url = `http://localhost:5000/myserviceorderrequirement/${id}`;
+        const url = `https://agile-forest-60392.herokuapp.com/myserviceorderrequirement/${id}`;
         fetch(url, {
             method: 'PUT',
             headers: {
@@ -52,7 +52,7 @@ const Requirement = () => {
         const requirement = event.target.updateRequirement.value;
         const providerReq = event.target.reqUpdated.value;
         const requirementStatus = { requirement, providerReq };
-        const url = `http://localhost:5000/myserviceorderrequirement/${id}`;
+        const url = `https://agile-forest-60392.herokuapp.com/myserviceorderrequirement/${id}`;
         fetch(url, {
             method: 'PUT',
             headers: {
@@ -71,7 +71,7 @@ const Requirement = () => {
         const requirement = event.target.requirement.value;
         const reqUpdated = event.target.reqUpdated.value;
         const clientRequirementStatus = { requirement, reqUpdated };
-        const url = `http://localhost:5000/clientorderrequirement/${id}`;
+        const url = `https://agile-forest-60392.herokuapp.com/clientorderrequirement/${id}`;
         fetch(url, {
             method: 'PUT',
             headers: {

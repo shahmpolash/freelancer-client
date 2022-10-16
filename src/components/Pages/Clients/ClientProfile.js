@@ -8,13 +8,13 @@ const ClientProfile = () => {
     const [client, setClient] = useState([]);
     const [clientReviews, setClientReviews] = useState([]);
     useEffect(() => {
-        fetch(`http://localhost:5000/client/${clientId}`)
+        fetch(`https://agile-forest-60392.herokuapp.com/client/${clientId}`)
             .then(res => res.json())
             .then(data => setClient(data))
     }, [client]);
 
     useEffect(() => {
-        fetch(`http://localhost:5000/clientprofilereview?customeremail=${client.clientEmail}`)
+        fetch(`https://agile-forest-60392.herokuapp.com/clientprofilereview?customeremail=${client.clientEmail}`)
             .then(res => res.json())
             .then(result => setClientReviews(result))
     }, [clientReviews]);
